@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-01-18T15:41:09.052376",
+  "tests": [
+    {
+      "spins": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "description": "uniform integer",
+      "implementations": {
+        "sympy": "1/6",
+        "generating_functional": "1/6",
+        "closed_form": "1/6"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "description": "sequential integer",
+      "implementations": {
+        "sympy": "sqrt(1430)/2145",
+        "generating_functional": "sqrt(1430)/2145",
+        "closed_form": "sqrt(1430)/2145"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      "description": "uniform j=2",
+      "implementations": {
+        "sympy": "-3/70",
+        "generating_functional": "-3/70",
+        "closed_form": "-3/70"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1/2",
+        "1",
+        "1/2",
+        "1/2",
+        "1"
+      ],
+      "description": "half-integer",
+      "implementations": {
+        "sympy": "1/6",
+        "generating_functional": "1/6",
+        "closed_form": "1/6"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "1",
+        "1/2",
+        "3/2",
+        "1",
+        "1/2",
+        "3/2"
+      ],
+      "description": "mixed",
+      "implementations": {
+        "sympy": "-1/12",
+        "generating_functional": "-1/12",
+        "closed_form": "-1/12"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "description": "recursion vs generate",
+      "implementations": {
+        "recursion_3nj": "31*sqrt(13)/2730",
+        "generate_3nj": "31*sqrt(13)/2730"
+      },
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  }
+}
