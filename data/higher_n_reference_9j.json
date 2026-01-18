@@ -1,0 +1,176 @@
+{
+  "timestamp": "2026-01-18T15:42:00.236424",
+  "precision_dps": 50,
+  "symbol_type": "9j",
+  "results": [
+    {
+      "spins": [
+        [
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "exact": "0",
+      "numeric_50dps": "0.0",
+      "status": "success",
+      "description": "uniform j=1"
+    },
+    {
+      "spins": [
+        [
+          "2",
+          "2",
+          "2"
+        ],
+        [
+          "2",
+          "2",
+          "2"
+        ],
+        [
+          "2",
+          "2",
+          "2"
+        ]
+      ],
+      "exact": "41/2450",
+      "numeric_50dps": "0.016734693877551019836058543433",
+      "status": "success",
+      "description": "uniform j=2"
+    },
+    {
+      "spins": [
+        [
+          "1",
+          "2",
+          "3"
+        ],
+        [
+          "2",
+          "3",
+          "4"
+        ],
+        [
+          "3",
+          "4",
+          "5"
+        ]
+      ],
+      "exact": "-61/66150",
+      "numeric_50dps": "-0.000922146636432350712102301582007",
+      "status": "success",
+      "description": "sequential ladder"
+    },
+    {
+      "spins": [
+        [
+          "1/2",
+          "1/2",
+          "1"
+        ],
+        [
+          "1/2",
+          "1/2",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "0"
+        ]
+      ],
+      "exact": "-1/18",
+      "numeric_50dps": "-0.0555555555555555524716027093746",
+      "status": "success",
+      "description": "half-integer basic"
+    },
+    {
+      "spins": [
+        [
+          "1",
+          "1/2",
+          "3/2"
+        ],
+        [
+          "1/2",
+          "1",
+          "3/2"
+        ],
+        [
+          "3/2",
+          "3/2",
+          "0"
+        ]
+      ],
+      "exact": "-1/48",
+      "numeric_50dps": "-0.0208333333333333321768510160155",
+      "status": "success",
+      "description": "mixed spin configuration"
+    },
+    {
+      "spins": [
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "exact": "1",
+      "numeric_50dps": "1.0",
+      "status": "success",
+      "description": "all zeros"
+    },
+    {
+      "spins": [
+        [
+          "1",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "exact": "1/3",
+      "numeric_50dps": "0.333333333333333314829616256247",
+      "status": "success",
+      "description": "partial zeros"
+    }
+  ],
+  "stability_analysis": {
+    "total_cases": 7,
+    "successful": 7,
+    "failed": 0,
+    "notes": [
+      "Found 1 cases that evaluate to exactly zero (likely triangle violations)"
+    ]
+  }
+}
