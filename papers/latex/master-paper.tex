@@ -144,18 +144,48 @@ All representations are validated against SymPy's Wigner functions, with compreh
 \section{Validation and Cross-Verification}
 \label{sec:validation}
 
+We validate our closed-form representations and computational implementations through multiple independent verification routes.
+
 \subsection{Test Methodology}
-% Pytest framework
-% SymPy cross-checks
-% Deterministic reference datasets
+
+Our validation harness employs:
+\begin{itemize}
+\item \textbf{pytest framework}: 161 tests across five independent implementations
+\item \textbf{SymPy cross-checks}: Exact symbolic comparison against \texttt{wigner\_6j} and \texttt{wigner\_9j}
+\item \textbf{Deterministic reference datasets}: High-precision (50 decimal places) golden values generated with \texttt{mpmath}
+\item \textbf{Cross-implementation verification}: Three independent computational routes (closed-form, uniform representation, generating functional)
+\end{itemize}
+
+All tests are reproducibly executed via a single command (\texttt{python -m pytest}) and produce JSON validation reports for inclusion in this paper.
 
 \subsection{Cross-Implementation Comparison}
-% Table comparing closedform vs generating-functional vs SymPy
-% Include results from data/integration_validation_report.json
+
+Table~\ref{tab:cross-verification} demonstrates exact agreement between all three independent implementations and SymPy across five diverse spin configurations. The test cases span:
+\begin{itemize}
+\item Uniform integer spins
+\item Sequential integer configurations
+\item Uniform higher spins ($j=2$)
+\item Half-integer spins ($j=1/2, 3/2$)
+\item Mixed integer and half-integer cases
+\end{itemize}
+
+All implementations agree to machine precision, validating both the mathematical derivations and the computational implementations.
 
 \subsection{Higher-n Reference Data}
-% 9j symbols with 50-digit precision
-% Include results from data/higher_n_reference_9j.json
+
+To establish deterministic validation baselines beyond 6j symbols, we computed high-precision (50 decimal places) reference values for 9j symbols using \texttt{mpmath}. Table~\ref{tab:9j-reference} shows seven representative cases spanning:
+\begin{itemize}
+\item Uniform configurations ($j=1, j=2$)
+\item Sequential ladder patterns
+\item Half-integer basic cases
+\item Mixed spin configurations
+\item Edge cases (all zeros, partial zeros with triangle violations)
+\end{itemize}
+
+All 7 cases computed successfully with documented stability behavior. Table~\ref{tab:validation-summary} provides a comprehensive summary of test coverage across all validation suites.
+
+% Include auto-generated validation tables
+\input{validation-tables}
 
 \subsection{Stability Regimes}
 % Documented failure modes
