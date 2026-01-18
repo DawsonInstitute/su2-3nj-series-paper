@@ -330,10 +330,12 @@ Acceptance criteria:
    - **Output**: `data/higher_n_reference_9j.json`
 
 ### Short-term (next 2 weeks)
-3. **Task P2**: Begin merging LaTeX sources
-   - Identify master .tex files from each repo
-   - Create initial paper structure in `papers/latex/`
-   - Link shared macros and bibliography
+3. **Task P2**: 🔄 Begin merging LaTeX sources
+   - ✅ Identify master .tex files from each repo
+   - ✅ Create initial paper structure in `papers/latex/`
+   - ✅ Link shared macros and bibliography
+   - ⚠️  Import actual content from individual repos (next step)
+   - **Output**: `papers/latex/master-paper.tex` (scaffold complete)
 
 4. **Task P3**: Integrate literature priors
    - Extract BibTeX from `papers/related/` PDFs
