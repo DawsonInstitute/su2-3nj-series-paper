@@ -282,10 +282,61 @@ Acceptance criteria:
 
 ## 5) “Start here” checklist (fastest path to momentum)
 
-1) Run pytest in `su2-3nj-generating-functional` and fix any failures.
-2) Add half-integer regression tests for 6j.
-3) Convert the most important `su2-3nj-uniform-closed-form/scripts/test_*.py` into pytest tests.
-4) Create/refresh reference datasets and pin them.
-5) Start a master LaTeX bundle (new repo) once validations are stable.
+1) ✅ Run pytest in `su2-3nj-generating-functional` and fix any failures.
+   - Fixed import path (project → su2_3nj_gen)
+   - All 43 tests passing
+2) ✅ Add half-integer regression tests for 6j.
+   - Already present in `tests/test_spin_validation.py`
+   - Covers half-integer, mixed, and zero cases
+3) ✅ Convert the most important `su2-3nj-uniform-closed-form/scripts/test_*.py` into pytest tests.
+   - Created `tests/test_domain_validation.py` (11 tests)
+   - Created `tests/test_symmetry.py` (20 tests)
+   - Total: 45 tests passing (vs 14 before)
+4) ✅ Create/refresh reference datasets and pin them.
+   - All repos have deterministic reference generation scripts
+   - closedform: `data/reference/3nj_reference_values.json`
+   - generating-functional: `tests/reference_3nj.json`
+   - uniform-closed-form: `tests/reference_3nj_closed_form.json`
+   - recurrences: `data/recurrence_stability_report.json`
+   - node-matrix: `data/reference/node_matrix_reference.json`
+5) ✅ Start a master LaTeX bundle (new repo) once validations are stable.
+   - Hub repo created at `su2-3nj-series-paper/`
+   - Shared macros: `papers/shared/shared-macros.tex`
+   - Shared bibliography: `papers/shared/shared-bibliography.bib`
+   - Integration script scaffold: `scripts/run_integration_tests.py`
 
-6) Create a unified public hub repo (code + papers) and move SU2 planning docs there.
+6) 🔄 Create a unified public hub repo (code + papers) and move SU2 planning docs there.
+   - ✅ Hub repo created and pushed to GitHub
+   - ✅ SU2-TODO.md moved to hub `docs/`
+   - ✅ Literature folder moved to hub `papers/related/` (ignored)
+   - ⚠️  Integration harness (T5) pending implementation
+
+---
+
+## Next Steps (Priority Order)
+
+### Immediate (this week)
+1. **Task T5**: Implement cross-repo integration harness
+   - Create unified test runner that imports from all 5 repos
+   - Add cross-verification matrix (e.g., closedform vs generating-functional)
+   - Generate integration validation report (CSV/JSON)
+
+2. **Task T2**: Extend golden reference datasets with higher-n cases
+   - Add 12j/15j spot checks (high precision via mpmath)
+   - Document stability regimes and failure modes
+
+### Short-term (next 2 weeks)
+3. **Task P2**: Begin merging LaTeX sources
+   - Identify master .tex files from each repo
+   - Create initial paper structure in `papers/latex/`
+   - Link shared macros and bibliography
+
+4. **Task P3**: Integrate literature priors
+   - Extract BibTeX from `papers/related/` PDFs
+   - Add to shared bibliography with positioning notes
+
+### Medium-term (Q1 2026)
+5. **Task P4**: Write validation section for papers
+   - Generate reproducible tables/figures from reference datasets
+   - Document cross-verification results
+   - Add stability analysis summaries
