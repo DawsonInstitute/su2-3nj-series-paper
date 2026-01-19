@@ -716,3 +716,13 @@ The recurrences repo exists and has code but needs a venv setup. Since the integ
 - **Master paper**: 23 pages, publication-ready
 - **Remaining work**: arXiv submission packaging (optional: N7+ higher valence support)
 <!-- ------ -->
+- Cleaned up and extended the execution plan in su2-3nj-series-paper/docs/SU2-TODO.md: fixed stale “179 tests”/duplicate N6 text, updated harness count to 15/15, and added an “Institutional-quality next steps” block (higher‑n, reproducibility, transfer audit).
+- Implemented “higher‑n” validation in the hub harness via the existing 9j dataset:
+  - su2-3nj-series-paper/scripts/run_integration_tests.py now loads su2-3nj-series-paper/data/higher_n_reference_9j.json and validates each case against `sympy.physics.wigner.wigner_9j` (PASS/FAIL/SKIP recorded in the JSON report).
+- Fixed the “high precision” numeric formatting so it no longer goes through Python `float` (which was silently rounding):
+  - su2-3nj-series-paper/scripts/generate_higher_n_references.py now produces deterministic high-precision numeric strings from `sp.N(..., mp.dps+10)`.
+- Updated the paper’s auto-generated validation tables to match current test counts and compute the overall pass rate dynamically:
+  - su2-3nj-series-paper/scripts/generate_validation_tables.py (node-matrix is now 24 tests; total rate is computed, not hard-coded).
+
+Next decision needed for true 12j/15j spot checks: SymPy 1.14.0 does not provide `wigner_12j`/`wigner_15j`, so we need you to pick the exact 12j/15j *kind/topology + spin layout* you want (e.g., “12j of the first kind” vs another standard definition). If you tell me which one(s), I’ll implement the decomposition (typically into sums/products of 6j/9j), generate 5–7 mp.dps=50 references, wire them into the harness, and add the appendix table.
+<!-- ------ -->

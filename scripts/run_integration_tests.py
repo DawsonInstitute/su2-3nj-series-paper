@@ -79,7 +79,7 @@ def run_cross_verification():
         # Import packages
         print("\nImporting packages...")
         import sympy as sp
-        from sympy.physics.wigner import wigner_6j
+        from sympy.physics.wigner import wigner_6j, wigner_9j
         
         from su2_3nj_gen.su2_3nj import generate_3nj, recursion_3nj
         from project.su2_3nj_closed_form import closed_form_3nj
@@ -231,6 +231,101 @@ def run_cross_verification():
         except Exception as e:
             print(f"  ⚠ node-matrix-elements checks failed: {e}")
             results["summary"]["skipped"] += 2
+
+        # Higher-n (currently 9j) deterministic reference checks
+        print("\nHigher-n reference checks (9j)...")
+
+        def _parse_spin(text: str):
+            # SymPy-friendly parsing for ints and half-integers like "1/2".
+            # We intentionally keep parsing minimal/deterministic.
+            return sp.Rational(text) if "/" in text else sp.Integer(text)
+
+        try:
+            data_dir = Path(__file__).parent.parent / "data"
+            ref_9j_path = data_dir / "higher_n_reference_9j.json"
+
+            if not ref_9j_path.exists():
+                print("  ⚠ higher_n_reference_9j.json not found — skipping")
+                results["summary"]["skipped"] += 1
+                results["tests"].append(
+                    {
+                        "description": "9j reference dataset present",
+                        "status": "SKIP",
+                        "reason": "data/higher_n_reference_9j.json missing",
+                    }
+                )
+            else:
+                with open(ref_9j_path) as f:
+                    ref_9j = json.load(f)
+
+                ref_results = ref_9j.get("results", [])
+                passed = 0
+                failed = 0
+                skipped = 0
+
+                for case in ref_results:
+                    desc = case.get("description", "9j reference")
+                    status = case.get("status", "unknown")
+                    spins = case.get("spins")
+
+                    test_result = {
+                        "description": f"9j reference: {desc}",
+                        "symbol": "9j",
+                        "spins": spins,
+                        "status": "unknown",
+                    }
+
+                    if status != "success":
+                        test_result["status"] = "SKIP"
+                        test_result["reason"] = f"reference status={status}"
+                        results["tests"].append(test_result)
+                        skipped += 1
+                        continue
+
+                    try:
+                        flat = [v for row in spins for v in row]
+                        j1, j2, j3, j4, j5, j6, j7, j8, j9 = [_parse_spin(x) for x in flat]
+                        sympy_val = wigner_9j(j1, j2, j3, j4, j5, j6, j7, j8, j9)
+                        expected = sp.sympify(case.get("exact", "0"))
+                        diff = sp.simplify(sympy_val - expected)
+
+                        test_result["implementations"] = {
+                            "sympy": str(sympy_val),
+                            "reference_exact": str(expected),
+                        }
+
+                        if diff == 0:
+                            test_result["status"] = "PASS"
+                            passed += 1
+                        else:
+                            test_result["status"] = "FAIL"
+                            test_result["discrepancy"] = str(diff)
+                            failed += 1
+
+                        results["tests"].append(test_result)
+
+                    except Exception as e:
+                        test_result["status"] = "ERROR"
+                        test_result["error"] = str(e)
+                        results["tests"].append(test_result)
+                        skipped += 1
+
+                print(f"  ✓ loaded {len(ref_results)} cases")
+                print(f"    PASS={passed} FAIL={failed} SKIP={skipped}")
+                results["summary"]["passed"] += passed
+                results["summary"]["failed"] += failed
+                results["summary"]["skipped"] += skipped
+
+        except Exception as e:
+            print(f"  ⚠ 9j reference checks failed: {e}")
+            results["summary"]["skipped"] += 1
+            results["tests"].append(
+                {
+                    "description": "9j reference checks",
+                    "status": "ERROR",
+                    "error": str(e),
+                }
+            )
         
     except ImportError as e:
         print(f"\n⚠️  Import failed: {e}")

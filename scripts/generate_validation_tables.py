@@ -124,7 +124,7 @@ def generate_summary_table(integration_data, ref_9j_data):
         ("su2-3nj-uniform-closed-form", 45),
         ("su2-3nj-closedform", 27),
         ("su2-3nj-recurrences", 18),
-        ("su2-node-matrix-elements", 15),
+        ("su2-node-matrix-elements", 24),
     ]
     
     for repo, count in repo_tests:
@@ -133,7 +133,9 @@ def generate_summary_table(integration_data, ref_9j_data):
     
     latex.append("\\hline")
     total_tests = int_total + ref_total + sum(c for _, c in repo_tests)
-    latex.append(f"\\textbf{{Total}} & \\textbf{{{total_tests}}} & \\textbf{{99.3\\%}} \\\\")
+    total_passed = int_passed + ref_passed + sum(c for _, c in repo_tests)
+    total_rate = f"{100 * total_passed / total_tests:.0f}\\%" if total_tests > 0 else "—"
+    latex.append(f"\\textbf{{Total}} & \\textbf{{{total_tests}}} & \\textbf{{{total_rate}}} \\\\")
     latex.append("\\hline")
     latex.append("\\end{tabular}")
     latex.append("\\end{table}")

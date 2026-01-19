@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""
-Generate higher-n reference datasets (12j, 15j) using high-precision mpmath.
+"""scripts/generate_higher_n_references.py
 
-Implements Task T2: Extend golden reference datasets
-- Uses mpmath for 50+ digit precision
-- Documents stability regimes and failure modes
-- Saves results as JSON for paper inclusion
+Generate higher-n reference datasets using high-precision evaluation.
+
+Current scope: 9j reference dataset.
+
+Notes:
+- SymPy (as of 1.14) provides `wigner_9j` but not `wigner_12j`/`wigner_15j`.
+- We therefore treat 12j/15j as a separate follow-up task pending an explicit
+    choice of topology/kind and an agreed computational route.
 """
 
 import sys
@@ -40,9 +43,11 @@ def compute_9j_reference(j_matrix):
     try:
         # Exact symbolic computation
         exact = wigner_9j(j1, j2, j3, j4, j5, j6, j7, j8, j9)
-        
-        # High-precision numeric evaluation
-        numeric = mp.nstr(mp.mpf(float(exact.evalf())), 30)
+
+        # Deterministic high-precision numeric evaluation
+        # (avoid Python float coercion; keep all digits controlled by mp.dps)
+        exact_hp = sp.N(exact, mp.dps + 10)
+        numeric = mp.nstr(mp.mpf(str(exact_hp)), 30)
         
         # Simplified form
         simplified = sp.simplify(exact)

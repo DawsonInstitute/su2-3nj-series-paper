@@ -6,7 +6,7 @@ Date: 2026-01-18
 
 - **Repos with pytest**: 5/5  
   Progress: `██████████` (100%) — **188 tests** passing total
-- **Hub integration harness**: 8/8 checks passing  
+- **Hub integration harness**: 15/15 checks passing (includes 9j reference checks)  
   Progress: `██████████` (100%)
 - **Node-matrix baseline parity (N0–N5)**: ✅ complete (15 tests + scripts + artifacts)
   Progress: `██████████` (100%)
@@ -142,6 +142,9 @@ Actions:
   - import from `su2-3nj-closedform`, `su2-3nj-uniform-closed-form`, `su2-3nj-recurrences`, `su2-3nj-generating-functional`, `su2-node-matrix-elements`
   - run an end-to-end validation command (single entrypoint)
 - Add higher-n spot checks (e.g., 12j/15j) using high precision (mpmath 50 dps) where applicable.
+- Add higher-n spot checks:
+  - ✅ 9j: deterministic reference dataset + harness checks
+  - 🔄 12j/15j: add once a specific topology/kind is chosen (see Institutional plan below)
 
 Acceptance criteria:
 - One command runs the full validation suite + produces a summary report.
@@ -296,9 +299,8 @@ Acceptance criteria: ✅ MET
 - **N7** (optional enhancement): Extend to k=5, k=6 (higher valence)
 - **N8** (optional enhancement): Automatic differentiation (replace finite differences)
 
-
 Next (recommended):
-- N6: Add an explicit derivative-based API path (finite-difference “source derivative” prototype for valence k=4) and validate it against the determinant placeholder for small cases.
+- N7: Extend derivative API support to k=5, k=6 (higher valence) and add a stability sweep.
 
 ---
 
@@ -370,21 +372,60 @@ This checklist is intentionally end-to-end: it gets a fresh checkout from “wor
    - Include reproducibility instructions
 
 3. **Optional Enhancements**
-   - 12j/15j spot checks (requires specialized implementations)
+  - 12j/15j spot checks (requires explicit topology/kind + implementation)
    - 9j recurrence relations (extend recurrences repo)
    - N7+: Higher valence derivative support (k=5, k=6)
+
+---
+
+## Institutional-quality next steps (DawsonInstitute spotlight)
+
+These are the next tasks to upgrade this work from “publication-ready” to “transfer-ready + rigor-forward.”
+
+### I1 — Higher-n validations (12j/15j) integrated end-to-end
+Goal: add 5–7 curated 12j and 15j spot checks at high precision and surface them in both the harness JSON and the paper appendix.
+
+Actions:
+- Choose and document the exact 12j/15j definition(s): kind/topology + spin layout.
+- Add deterministic JSON references under `data/` with:
+  - `mp.dps = 50`
+  - exact expression string (when available)
+  - high-precision numeric string
+- Extend `scripts/run_integration_tests.py` to read and validate those references.
+- Extend `scripts/generate_validation_tables.py` to add an appendix table for 12j/15j.
+
+Acceptance criteria:
+- Harness report includes a “higher-n” section with explicit PASS/FAIL/SKIP.
+- Paper appendix includes a clearly hedged higher-n table ("spot checks", not full coverage).
+
+### I2 — Paper polish for reproducibility
+Actions:
+- Add a short reproducibility appendix (exact commands + expected artifact paths).
+- Add a glossary/notation table for spins/selection rules/graph conventions.
+- Verify all cross-references compile cleanly and tables are generated from `data/`.
+
+### I3 — Node-matrix stability/UQ follow-up (higher valence)
+Actions:
+- Extend the derivative-based stability sweep to valence $k>4$ once N7 exists.
+- Record regimes where finite differences become ill-conditioned and recommend safe step sizes.
+
+### I4 — Transfer readiness audit
+Actions:
+- Remove local absolute paths (e.g. `/home/...`) from docs/scripts.
+- Check LICENSE + README consistency across repos.
+- Ensure every repo has a one-command “regenerate artifacts” path.
 
 ---
 
 ## Deliverable Status
 
 ### D0.1 — Reproducible validation harness: ✅ COMPLETE
-- All 5 repos operational with 179 total tests passing
-- Integration harness: 8/8 tests passing
+- All 5 repos operational with 188 total tests passing
+- Integration harness: 15/15 checks passing (incl. 9j reference dataset)
 
 ### D0.2 — Paper-ready master draft: ✅ COMPLETE  
 - 23-page unified paper with all 5 frameworks
 - Bibliography resolved (16 citations)
 
 ### D0.3 — Q2 2026 submission readiness: 🔄 ON TRACK
-- Remaining: arXiv packaging + optional N6 implementation
+- Remaining: arXiv packaging + optional higher-n spot checks (12j/15j) + transfer audit
