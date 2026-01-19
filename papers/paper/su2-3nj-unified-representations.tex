@@ -121,66 +121,272 @@ We advance beyond prior work through:
 \section{Closed-Form Hypergeometric Formulas}
 \label{sec:closed-form}
 
-% Import content from:
-% su2-3nj-closedform/A Closed-Form Hypergeometric Product Formula...tex
+We present a fully closed-form expression for the SU(2) 3nj recoupling coefficients associated with any trivalent graph. This unifying formula employs hypergeometric functions and matching number ratios derived from graph decomposition.
 
 \subsection{Product Formula for General 3nj}
-% Main theorem + proof sketch
+
+\begin{theorem}[Hypergeometric Product Formula]
+\label{thm:product}
+Let $G$ be a connected trivalent graph with edge set $E$. Label each edge $e \in E$ by a spin $j_e$. For each edge $e$, delete $e$ from $G$, obtaining two disjoint subgraphs $G_e^+$ and $G_e^-$. Let $M_e^+$ and $M_e^-$ be the number of perfect matchings of $G_e^+$ and $G_e^-$, respectively. Define the matching ratio
+\[
+\rho_e = \frac{M_e^+}{M_e^-}.
+\]
+Then the SU(2) 3nj recoupling coefficient is
+\[
+\{3nj\}(\{j_e\})
+= \prod_{e \in E} \frac{1}{(2j_e)!} \, {}_2F_1\!\left(-2j_e, \tfrac{1}{2}; 1; -\rho_e\right).
+\]
+\end{theorem}
+
+This is the first truly closed-form, general expression for SU(2) 3nj recoupling coefficients, unifying all graph topologies under a single hypergeometric product formula.
+
+\begin{example}[15j-Chain]
+For the 15j-chain on 8 vertices (7 edges), cutting edge $e$ splits the chain into two paths whose matching counts are consecutive Fibonacci numbers, giving
+\[
+\rho_e = \frac{F_{n-1}}{F_n},
+\]
+where $F_k$ denotes the $k$-th Fibonacci number.
+\end{example}
 
 \subsection{Computational Complexity}
-% Comparison: product vs summation
+
+The hypergeometric product formula offers significant computational advantages over traditional summation methods:
+
+\begin{itemize}
+\item \textbf{Summation approach}: For general 3nj symbols, nested summations scale exponentially with the number of vertices, with worst-case complexity $O(j^{|V|})$ where $j$ is the maximum angular momentum.
+\item \textbf{Product formula}: Computing $|E|$ hypergeometric functions ${}_2F_1$ with standard methods requires $O(|E| \cdot j^2)$ operations, polynomial in graph size.
+\item \textbf{Matching numbers}: Graph matching can be computed in polynomial time using Pfaffian techniques for planar graphs.
+\end{itemize}
+
+For sparse graphs (constant valence), the product formula achieves near-linear complexity in the number of edges, dramatically outperforming summation-based approaches for large coupling networks.
 
 \section{Uniform Hypergeometric Representation}
 \label{sec:uniform}
 
-% Import content from:
-% su2-3nj-uniform-closed-form/Universal Closed-Form Hypergeometric...tex
+We develop a uniform single-sum hypergeometric representation valid for general 12j symbols and extensible to higher-order 3nj coefficients. This approach employs algebraic reindexing of the generating functional expansion.
 
-\subsection{4F3 Representation for 6j Symbols}
-% Explicit formula
+\subsection{Single-Sum Formula for 12j Symbols}
 
-\subsection{Extension to 9j Symbols}
-% Generalization strategy
+\begin{theorem}[Uniform 12j Representation]
+\label{thm:uniform-12j}
+For the SU(2) 12j symbol
+\[
+\begin{Bmatrix}
+j_1 & j_2 & j_{12}\\
+j_3 & j_4 & j_{23}\\
+j_5 & j_6 & j_{34}\\
+j_7 & j_8 & j_{45}
+\end{Bmatrix},
+\]
+we have the single-sum hypergeometric form
+\[
+\begin{Bmatrix}
+j_1 & j_2 & j_{12}\\
+j_3 & j_4 & j_{23}\\
+j_5 & j_6 & j_{34}\\
+j_7 & j_8 & j_{45}
+\end{Bmatrix}
+= \Delta \sum_{m=0}^{\infty} (-1)^m 
+\frac{(\tfrac{1}{2})_m(-j_{12})_m(j_{12}+1)_m(-j_{23})_m(j_{23}+1)_m}
+{(j_1+j_2 - j_{12} +1)_m(j_3+j_4 - j_{23} +1)_m(j_5+j_6 - j_{34} +1)_m(j_7+j_8 - j_{45} +1)_m \, m!},
+\]
+where $(a)_m$ denotes the Pochhammer symbol and $\Delta$ is the normalization prefactor
+\[
+\Delta = \sqrt{
+\prod_{(a,b,c) \in \{(j_1,j_2,j_{12}), (j_3,j_4,j_{23}), (j_5,j_6,j_{34}), (j_7,j_8,j_{45})\}}
+\frac{(-a+b+c)!(a-b+c)!(a+b-c)!}{(a+b+c+1)!}
+}.
+\]
+\end{theorem}
+
+\subsection{Algebraic Derivation Strategy}
+
+The uniform representation is obtained through systematic algebraic reindexing:
+\begin{enumerate}
+\item Express the 12j generating functional as $G_{12j} = \det(I-K)^{-1/2} = (1-P)^{-1/2}$, where $P = E_1 - E_2 + E_3 - E_4$ comprises contiguous-block sums in edge variables.
+\item Expand via the generalized binomial theorem:
+\[
+(1-P)^{-1/2} = \sum_{m=0}^{\infty} \binom{-\tfrac{1}{2}}{m} (-1)^m P^m.
+\]
+\item Apply multinomial expansion on $P^m$ and expand each block power $E_k^r$ into monomials.
+\item Collect exponents $\{2j_{12}, 2j_{23}, 2j_{34}, 2j_{45}\}$ and observe that combinatorial sums collapse to a single free index $m$, yielding the ${}_5F_4$ series above.
+\end{enumerate}
+
+This technique generalizes to arbitrary 3nj symbols by identifying the appropriate edge-variable polynomial structure in the determinant expansion.
 
 \section{Finite Recurrence Relations}
 \label{sec:recurrences}
 
-% Import content from:
-% su2-3nj-recurrences/Closed-Form Finite Recurrences...tex
+Building on the universal closed-form hypergeometric representations, we present a finite set of algebraic three-term recurrence relations in the spin labels that uniquely determine any SU(2) 3nj recoupling coefficient from minimal boundary data.
 
-\subsection{Three-Term Recurrences}
-% Explicit coefficient formulas
+\subsection{Three-Term Recurrence System}
+
+For each edge $k$ in the coupling tree with Schwinger variable $x_k$, define the edge-removal determinants:
+\[
+\Delta_0^{(k)} = \det(I - K(\mathbf{x}))\big|_{x_k=0}, \quad
+\Delta_1^{(k)} = \det(I - K(\mathbf{x}))\big|_{\substack{\text{rows/cols of edge } k \\ \text{removed}}},
+\]
+where $K(\mathbf{x})$ is the antisymmetric adjacency matrix from the generating functional.
+
+Let the generating functional expansion be
+\[
+G(\mathbf{x}) = \sum_{\{j\}} T(j_1, \ldots, j_E) \prod_{\ell=1}^E x_\ell^{2j_\ell},
+\]
+where $T(j_1, \ldots, j_E)$ denotes the 3nj coefficient for spins $\{j_\ell\}$.
+
+\begin{theorem}[Finite Recurrence]
+\label{thm:recurrence}
+The 3nj coefficients satisfy the closed three-term recurrence relation
+\[
+\Delta_0^{(k)}(\mathbf{x}_{\ne k}) \, G(\mathbf{x}) = x_k^2 \, \Delta_1^{(k)}(\mathbf{x}_{\ne k}) \, G(\mathbf{x}).
+\]
+Equating coefficients of $\prod_\ell x_\ell^{2j_\ell}$ yields
+\[
+\sum_{\mu} a_{\mu} \, T(j_k, \mathbf{j}_{\ne k} - \mu) = \sum_{\nu} b_{\nu} \, T(j_k - 1, \mathbf{j}_{\ne k} - \nu),
+\]
+where $a_{\mu}, b_{\nu}$ are the expansion coefficients of $\Delta_0^{(k)}$ and $\Delta_1^{(k)}$ in the other edge variables.
+\end{theorem}
+
+\subsection{Boundary Data and Initialization}
+
+For each edge $k$, the seed values
+\[
+T(0, \mathbf{j}_{\ne k})
+\]
+are given by the SU(2) $3(n-1)j$ symbol on the tree with edge $k$ removed. This recursive reduction bottoms out at the Racah 6j case, for which explicit closed forms exist. The seeds, together with the recurrences, uniquely determine every 3nj coefficient.
 
 \subsection{Stability Analysis}
-% Forward vs backward recursion
-% Condition numbers and error propagation
+
+The finite recurrence relations enable computational strategies with distinct stability properties:
+
+\paragraph{Forward vs. backward recursion:}
+\begin{itemize}
+\item \textbf{Forward}: Starting from $j_k = 0$ and incrementing. Numerically stable when coefficients $a_\mu$ dominate $b_\nu$.
+\item \textbf{Backward}: Starting from large $j_k$ and decrementing. Preferred when coefficient ratios grow with $j_k$.
+\end{itemize}
+
+\paragraph{Condition numbers:}
+The ratio $\kappa_k = \|\Delta_1^{(k)}\| / \|\Delta_0^{(k)}\|$ provides a measure of recurrence stability. Large $\kappa_k$ indicates potential amplification of rounding errors.
+
+\paragraph{Normalization strategies:}
+Rescaling intermediate values by factorials or triangle coefficient prefactors can mitigate overflow/underflow in high-spin regimes.
 
 \section{Generating Functionals}
 \label{sec:generating-functional}
 
-% Import content from:
-% su2-3nj-generating-functional/A Universal Generating Functional...tex
+We introduce a universal generating functional framework based on Schwinger-boson Gaussian integrals over spinors. This approach unifies all 3nj symbols through a single determinant formula.
 
 \subsection{Graph-Theoretic Formulation}
-% Coupling graphs, vertex/edge notation
 
-\subsection{Determinant Representation}
-% $G(x_e) = 1/\det(I-K(x_e))$
+\begin{definition}[Coupling Graph]
+A \emph{coupling graph} $G = (V, E)$ is a trivalent graph where:
+\begin{itemize}
+\item Each vertex $v \in V$ represents an angular momentum coupling point.
+\item Each edge $e \in E$ is labeled by an edge variable $x_e$ (which will correspond to spin $j_e$).
+\item The graph topology encodes the coupling scheme.
+\end{itemize}
+\end{definition}
 
-\subsection{Series Expansion}
-% Coefficients as 3nj symbols
+\subsection{Master Generating Functional}
+
+\begin{theorem}[Universal Generating Functional]
+\label{thm:generating-functional}
+Let $G$ be a trivalent coupling tree with $n$ vertices and edges labeled by variables $\{x_e\}$. Associate to each vertex $v$ a Schwinger-boson spinor $w_v \in \mathbb{C}^2$. The generating functional is
+\[
+G(\{x_e\}) = \int \prod_{v=1}^n \frac{d^2 w_v}{\pi} 
+\exp\left(-\sum_v \|w_v\|^2\right) \prod_{e = \langle i,j \rangle} \exp(x_e \, \epsilon(w_i, w_j))
+= \frac{1}{\sqrt{\det(I - K(\{x_e\}))}},
+\]
+where $K$ is the antisymmetric adjacency matrix with entries $K_{ij} = \pm x_e$ when edge $e$ connects vertices $i$ and $j$, and $\epsilon(w_i, w_j) = w_i^T \sigma_2 w_j$ is the symplectic pairing.
+\end{theorem}
+
+\begin{corollary}[3nj Coefficients from Series Expansion]
+The Taylor expansion coefficient of $\prod_e x_e^{2j_e}$ in $G(\{x_e\})$ equals the Wigner 3nj symbol for the given coupling tree:
+\[
+\{3nj\}(\{j_e\}) = \frac{1}{\prod_e (2j_e)!} \left[\prod_e x_e^{2j_e}\right] G(\{x_e\}).
+\]
+\end{corollary}
+
+\subsection{Explicit Examples}
+
+\paragraph{6j symbols ($n=4$, two edge variables):}
+With edge variables $x, y$, the generating function becomes
+\[
+G(x,y) = \frac{1}{\sqrt{(1 - xy - x - y)(1 + xy - x + y)(1 + xy + x - y)(1 - xy + x + y)}}.
+\]
+
+\paragraph{9j symbols ($n=6$, three edge variables):}
+For edge variables $x, y, z$, we obtain
+\[
+G(x,y,z) = \frac{1}{\sqrt{\det(I_6 - K(x,y,z))}},
+\]
+where $K(x,y,z)$ is the $6 \times 6$ antisymmetric adjacency matrix encoding the 9j coupling topology.
+
+\paragraph{15j symbols ($n=8$, seven edge variables):}
+For a chain tree with variables $x_1, \ldots, x_7$, the determinant structure extends naturally to $8 \times 8$ matrices.
 
 \section{Arbitrary-Valence Node Matrix Elements}
 \label{sec:node-matrix}
 
-% Import content from:
-% su2-node-matrix-elements/Closed-Form Matrix Elements...tex
+We extend the generating functional framework to compute SU(2) operator matrix elements on arbitrary-valence nodes by introducing source terms encoding group-element dependence. This yields truly closed-form expressions for matrix elements beyond standard recoupling coefficients.
+
+\subsection{Generating Functional with Sources}
+
+Introduce source spinors $J_v(g)$ for each vertex $v$ to encode group-element $g \in SU(2)$ dependence:
+\[
+G(\{x_e\}, g) = \int \prod_v \frac{d^2 w_v}{\pi} 
+\exp\left[
+-\sum_v \bar{w}_v w_v 
++ \sum_{e=(i,j)} x_e \, \epsilon(w_i, w_j) 
++ \sum_v (\bar{w}_v J_v + \bar{J}_v w_v)
+\right].
+\]
+
+\subsection{Gaussian Integration and Determinant Form}
+
+Writing $W = (w_v)$, $J = (J_v)$, and $M = I - K(\{x_e\})$, the Gaussian integral evaluates to
+\[
+\int dW \, \exp\left(-\tfrac{1}{2} W^\dagger M W + W^\dagger J + J^\dagger W\right)
+= \frac{(2\pi)^n}{\sqrt{\det M}} \exp\left(\tfrac{1}{2} J^\dagger M^{-1} J\right).
+\]
+Thus the generating functional with sources becomes
+\[
+G(\{x_e\}, g) = \frac{1}{\sqrt{\det(I - K(\{x_e\}))}} 
+\exp\left(\tfrac{1}{2} J(g)^\dagger [I - K(\{x_e\})]^{-1} J(g)\right).
+\]
 
 \subsection{Functional Derivative Approach}
-% $M_v = \partial^k G / \partial s_1 \cdots \partial s_k |_{s=0}$
 
-\subsection{Determinant Stability}
-% Regularization, condition numbers
+\begin{theorem}[Matrix Element Extraction]
+\label{thm:matrix-element}
+The coefficient of $\prod_e x_e^{2j_e} \prod_v J_v^{j_v + m_v} \bar{J}_v^{j_v + m'_v}$ in the Taylor expansion of $G(\{x_e\}, g)$ yields the SU(2) Wigner $D$-function matrix element:
+\[
+\langle \{j_v, m'_v\} | D(g) | \{j_v, m_v\} \rangle.
+\]
+\end{theorem}
+
+Equivalently, matrix elements can be extracted via functional derivatives:
+\[
+M_v = \left.\frac{\partial^k G(\{x_e\}, g)}{\partial s_1 \cdots \partial s_k}\right|_{s=0},
+\]
+where $s_i$ are auxiliary source parameters and $k$ is the valence of the node.
+
+\subsection{Determinant Stability and Regularization}
+
+For arbitrary-valence nodes, the antisymmetric matrix $K$ can become ill-conditioned at certain parameter values:
+
+\paragraph{Regularization strategy:}
+Replace $\det(I - K)$ with $\det(I - K + \epsilon I)$ for small $\epsilon > 0$, smoothing singularities while preserving physical matrix elements in the $\epsilon \to 0$ limit.
+
+\paragraph{Condition number analysis:}
+The ratio $\kappa = \|K\| / \min_i |\lambda_i(I - K)|$ quantifies numerical stability. Large $\kappa$ indicates near-singular configurations requiring higher-precision arithmetic or alternative computational routes.
+
+\paragraph{Operator kernel charting:}
+Assemble the matrix
+\[
+K_{(\{j,m\}), (\{j',m'\})}(g) = \langle \{j', m'\} | D(g) | \{j, m\} \rangle
+\]
+for fixed valence and spins, enabling visualization and analysis of operator kernels in spin networks and related quantum gravity models.
 
 \section{Validation and Cross-Verification}
 \label{sec:validation}
