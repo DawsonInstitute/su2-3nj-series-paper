@@ -820,3 +820,76 @@ Completed 6/6 critical tasks (A1–A4, A8) for arXiv readiness. The paper is now
 1. **For Zenodo**: Can submit immediately (low barrier, suitable for preprints)
 2. **For arXiv**: A5-A7 are optional enhancements; current state is submission-ready
 <!-- ------ -->
+## ✅ arXiv Polish Complete: All Tasks A1-A8 Finished
+
+Successfully completed all optional arXiv polish tasks (A5-A7). The paper is now **100% arXiv-ready** with all endorsement-level enhancements.
+
+### Phase 3 Completion Summary
+
+**✅ A5: Algorithm Pseudocode**
+- **Algorithm 1** (Matching-number computation): Added Pfaffian-based method for planar graphs with exponential fallback for non-planar cases
+- **Algorithm 2** (Adaptive recurrence solver): Condition-number-based direction selection ($\kappa_k < 10^3$ → forward; else backward with normalization)
+- Implementation-neutral pseudocode enables reader reproduction without reverse-engineering code
+
+**✅ A6: Failure Examples with Diagnostics**
+- **Example 1**: Recurrence instability at $j=50$
+  - Condition number $\kappa \approx 10^{12}$ causes 30% error in forward mode
+  - Backward recursion recovers to <1% error
+  - Shows explicit computed vs reference values
+- **Example 2**: Near-singular determinant
+  - $\det(I-K) \approx 10^{-14}$ triggers LU singularity warning
+  - Unphysical result ($-3.2 \times 10^6$) exposed via arbitrary-precision check
+  - Mitigation: verify triangle constraints a priori
+
+**✅ A7: Stability Figures**
+- Created generate_stability_figures.py
+- Generated 2 figures from existing CSV data:
+  - **Figure 1**: Recurrence stability (forward/backward error comparison + condition numbers vs configuration)
+  - **Figure 2**: Determinant stability (parameter sweep + numeric precision at machine epsilon)
+- Figures saved as PDF in figures
+- Updated arXiv bundle script to include figures directory
+
+### Final Paper Status
+
+- **Pages**: 21 (up from 18; added algorithms + figures + failure examples)
+- **PDF size**: 366 KB
+- **Completeness**: All A1-A8 tasks complete
+  - ✅ Test counts reconciled (178 total)
+  - ✅ Validation tables hardened (SymPy→LaTeX rendering)
+  - ✅ Half-integer example with proof
+  - ✅ GitHub URLs fixed (DawsonInstitute)
+  - ✅ Algorithm pseudocode (2 blocks)
+  - ✅ Failure examples with diagnostics (2 cases)
+  - ✅ Stability figures (2 plots)
+  - ✅ arXiv bundle script with figures
+
+### arXiv Bundle Contents
+
+```
+arxiv-submission-2026-01-18.tar.gz:
+  - su2-3nj-unified-representations.tex (main file)
+  - su2-3nj-unified-representations.bbl (bibliography)
+  - validation-tables.tex (auto-generated)
+  - shared-macros.tex (theorems + macros)
+  - author_config.tex (optional metadata)
+  - figures/recurrence_stability.pdf
+  - figures/determinant_stability.pdf
+```
+
+**Tested**: Clean build from extracted bundle (2 pdflatex passes → 366 KB PDF)
+
+### Next Steps
+
+**For immediate submission**:
+1. **Zenodo**: Ready as-is (preprint-friendly)
+2. **arXiv**: Upload `arxiv-submission-2026-01-18.tar.gz` to https://arxiv.org/submit
+   - Primary: math-ph (Mathematical Physics) or quant-ph (Quantum Physics)
+   - All dependencies bundled; no manual fixes needed
+
+**Optional future enhancements** (not required for arXiv):
+- Additional figure types (9j reference visualization, higher-n topology diagrams)
+- Extended pseudocode for 9j/12j-specific optimizations
+- Appendix with complete recurrence coefficient tables
+
+The paper is publication-ready at the arXiv endorsement standard. All critical consistency, reproducibility, and reader-facing completeness items are addressed.
+<!-- ------ -->
