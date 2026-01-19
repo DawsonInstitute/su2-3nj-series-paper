@@ -80,6 +80,7 @@ def run_cross_verification():
         
         from su2_3nj_gen.su2_3nj import generate_3nj, recursion_3nj
         from project.su2_3nj_closed_form import closed_form_3nj
+        from su2_node_matrix_elements.model import node_matrix_element
         
         print("  ✓ All imports successful")
         
@@ -173,6 +174,60 @@ def run_cross_verification():
         except Exception as e:
             print(f"  ⚠ recursion check failed: {e}")
             results["summary"]["skipped"] += 1
+
+        # Node matrix elements: backend consistency + permutation invariance
+        print("\nNode-matrix-elements spot checks...")
+        try:
+            node_spins = [sp.Rational(1, 2), 1, sp.Rational(3, 2), 2]
+            val_np = node_matrix_element(spins=node_spins, epsilon=1e-10, backend="numpy")
+            val_sp = node_matrix_element(spins=node_spins, epsilon=1e-10, backend="sympy")
+
+            backend_test = {
+                "spins": [str(s) for s in node_spins],
+                "description": "node-matrix backend consistency",
+                "implementations": {"numpy": str(val_np), "sympy": str(val_sp)},
+                "status": "PASS" if abs(val_np - val_sp) < 1e-7 else "FAIL",
+            }
+
+            if backend_test["status"] == "PASS":
+                print("  ✓ numpy backend agrees with sympy backend")
+                results["summary"]["passed"] += 1
+            else:
+                print(f"  ✗ backend mismatch: |numpy-sympy|={abs(val_np - val_sp)}")
+                results["summary"]["failed"] += 1
+
+            results["tests"].append(backend_test)
+
+            base = val_np
+            perm_spins = [
+                [node_spins[1], node_spins[0], node_spins[2], node_spins[3]],
+                [node_spins[2], node_spins[1], node_spins[0], node_spins[3]],
+                [node_spins[3], node_spins[2], node_spins[1], node_spins[0]],
+            ]
+            max_diff = 0.0
+            for spins in perm_spins:
+                v = node_matrix_element(spins=spins, epsilon=1e-10, backend="numpy")
+                max_diff = max(max_diff, abs(v - base))
+
+            perm_test = {
+                "spins": [str(s) for s in node_spins],
+                "description": "node-matrix permutation invariance (sample)",
+                "max_abs_diff": max_diff,
+                "status": "PASS" if max_diff < 1e-9 else "FAIL",
+            }
+
+            if perm_test["status"] == "PASS":
+                print("  ✓ permutation invariance (sample) holds")
+                results["summary"]["passed"] += 1
+            else:
+                print(f"  ✗ permutation invariance max diff={max_diff}")
+                results["summary"]["failed"] += 1
+
+            results["tests"].append(perm_test)
+
+        except Exception as e:
+            print(f"  ⚠ node-matrix-elements checks failed: {e}")
+            results["summary"]["skipped"] += 2
         
     except ImportError as e:
         print(f"\n⚠️  Import failed: {e}")

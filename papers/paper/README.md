@@ -4,7 +4,7 @@ This directory contains the master LaTeX sources for the SU(2) 3nj series paper(
 
 ## Structure
 
-- `master-paper.tex` — Main comprehensive paper (single-paper option)
+- `su2-3nj-unified-representations.tex` — Main comprehensive paper (single-paper option)
 - `../shared/shared-macros.tex` — Common LaTeX macros
 - `../shared/shared-bibliography.bib` — Unified bibliography
 
@@ -23,16 +23,16 @@ brew install --cask mactex          # macOS
 
 ```bash
 # Quick build
-pdflatex master-paper.tex
+pdflatex su2-3nj-unified-representations.tex
 
 # Full build with bibliography
-pdflatex master-paper.tex
-bibtex master-paper
-pdflatex master-paper.tex
-pdflatex master-paper.tex
+pdflatex su2-3nj-unified-representations.tex
+bibtex su2-3nj-unified-representations
+pdflatex su2-3nj-unified-representations.tex
+pdflatex su2-3nj-unified-representations.tex
 
 # Or use latexmk (recommended)
-latexmk -pdf master-paper.tex
+latexmk -pdf su2-3nj-unified-representations.tex
 ```
 
 ### Clean

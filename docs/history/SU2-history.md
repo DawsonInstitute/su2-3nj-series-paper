@@ -266,7 +266,7 @@ Current session accomplishments:
 - **Pending**: 12j/15j symbols (require specialized implementations)
 
 ### 🔄 Task P2 — Master LaTeX Bundle (SCAFFOLD COMPLETE)
-- Created comprehensive paper structure (papers/latex/master-paper.tex)
+- Created comprehensive paper structure (papers/paper/su2-3nj-unified-representations.tex)
 - 9 main sections + 3 appendices
 - Integrated with shared macros and bibliography
 - Added Makefile build system with latexmk
@@ -277,7 +277,8 @@ Current session accomplishments:
 - **Completed**: Task T5 (integration harness)
 - **In progress**: Task T2 (9j done, 12j/15j pending)
 - **In progress**: Task P2 (scaffold done, content import pending)
-- **Pending**: Tasks P3, P4, T1-T4 details
+- **Completed**: Tasks P3, P4
+- **Pending**: T1-T4 details
 
 **Test coverage across all repos: 148 passing tests**
 - generating-functional: 43 tests

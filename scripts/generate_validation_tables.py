@@ -175,7 +175,7 @@ def main():
     summary_table = generate_summary_table(integration_data, ref_9j_data)
     
     # Save to output file
-    output_dir = Path(__file__).parent.parent / "papers" / "latex"
+    output_dir = Path(__file__).parent.parent / "papers" / "paper"
     output_file = output_dir / "validation-tables.tex"
     
     with open(output_file, "w") as f:

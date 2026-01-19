@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-18T15:41:09.052376",
+  "timestamp": "2026-01-18T16:24:27.651884",
   "tests": [
     {
       "spins": [
@@ -106,10 +106,35 @@
         "generate_3nj": "31*sqrt(13)/2730"
       },
       "status": "PASS"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1",
+        "3/2",
+        "2"
+      ],
+      "description": "node-matrix backend consistency",
+      "implementations": {
+        "numpy": "0.04923076922152896",
+        "sympy": "0.049230769221529"
+      },
+      "status": "PASS"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1",
+        "3/2",
+        "2"
+      ],
+      "description": "node-matrix permutation invariance (sample)",
+      "max_abs_diff": 4.163336342344337e-17,
+      "status": "PASS"
     }
   ],
   "summary": {
-    "passed": 6,
+    "passed": 8,
     "failed": 0,
     "skipped": 0
   }

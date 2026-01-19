@@ -9,6 +9,13 @@ __pycache__/
 *.log
 *.out
 *.synctex.gz
+*.toc
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.bcf
+*.run.xml
 
 # Local papers (do not commit PDFs)
 papers/related/

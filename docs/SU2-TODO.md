@@ -319,8 +319,9 @@ Acceptance criteria:
 1. **Task T5**: ✅ Implement cross-repo integration harness
    - ✅ Create unified test runner that imports from all 5 repos
    - ✅ Add cross-verification matrix (closedform vs generating-functional vs SymPy)
+  - ✅ Add node-matrix-elements spot checks (backend consistency + permutation invariance sample)
    - ✅ Generate integration validation report (JSON)
-   - **Results**: 6/6 tests passing — all implementations agree!
+  - **Results**: 8/8 tests passing — all checks agree!
    - **Output**: `data/integration_validation_report.json`
 
 2. **Task T2**: 🔄 Extend golden reference datasets with higher-n cases
@@ -332,10 +333,11 @@ Acceptance criteria:
 ### Short-term (next 2 weeks)
 3. **Task P2**: 🔄 Begin merging LaTeX sources
    - ✅ Identify master .tex files from each repo
-   - ✅ Create initial paper structure in `papers/latex/`
+  - ✅ Create initial paper structure in `papers/paper/`
    - ✅ Link shared macros and bibliography
+  - ✅ Rename paper file to `su2-3nj-unified-representations.tex`
    - ⚠️  Import actual content from individual repos (next step)
-   - **Output**: `papers/latex/master-paper.tex` (scaffold complete)
+  - **Output**: `papers/paper/su2-3nj-unified-representations.tex` (scaffold complete)
 
 4. **Task P3**: ✅ Integrate literature priors
    - ✅ Added 10 key SU(2)/3nj references to shared bibliography
@@ -347,7 +349,7 @@ Acceptance criteria:
    - ✅ Generate reproducible tables/figures from reference datasets
    - ✅ Document cross-verification results
    - ✅ Add validation methodology and test coverage summary
-   - **Output**: `papers/latex/validation-tables.tex` + updated master paper
+  - **Output**: `papers/paper/validation-tables.tex` + updated master paper
    - **Results**: 161 tests, 3 auto-generated LaTeX tables, 10-page compiled PDF
 
 ### Medium-term (next month)

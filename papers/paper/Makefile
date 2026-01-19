@@ -3,19 +3,19 @@
 .PHONY: all clean cleanall view help
 
 # Default target
-all: master-paper.pdf
+all: su2-3nj-unified-representations.pdf
 
 # Master comprehensive paper
-master-paper.pdf: master-paper.tex ../shared/shared-macros.tex ../shared/shared-bibliography.bib
-	latexmk -pdf master-paper.tex
+su2-3nj-unified-representations.pdf: su2-3nj-unified-representations.tex ../shared/shared-macros.tex ../shared/shared-bibliography.bib
+	latexmk -pdf su2-3nj-unified-representations.tex
 
 # Quick build (no bibliography)
 quick:
-	pdflatex master-paper.tex
+	-pdflatex su2-3nj-unified-representations.tex
 
 # View PDF
-view: master-paper.pdf
-	xdg-open master-paper.pdf || open master-paper.pdf || start master-paper.pdf
+view: su2-3nj-unified-representations.pdf
+	xdg-open su2-3nj-unified-representations.pdf || open su2-3nj-unified-representations.pdf || start su2-3nj-unified-representations.pdf
 
 # Clean intermediate files
 clean:
@@ -32,7 +32,7 @@ help:
 	@echo "SU(2) 3nj Series Paper Build System"
 	@echo ""
 	@echo "Targets:"
-	@echo "  all       - Build master-paper.pdf (default)"
+	@echo "  all       - Build su2-3nj-unified-representations.pdf (default)"
 	@echo "  quick     - Quick build without bibliography"
 	@echo "  view      - Open PDF in default viewer"
 	@echo "  clean     - Remove intermediate files"
