@@ -71,6 +71,9 @@ def run_cross_verification():
         "tests": [],
         "summary": {"passed": 0, "failed": 0, "skipped": 0}
     }
+
+    # Ensure this exists even if imports fail early.
+    test_cases = []
     
     try:
         # Import packages
@@ -231,9 +234,12 @@ def run_cross_verification():
         
     except ImportError as e:
         print(f"\n⚠️  Import failed: {e}")
-        print("   Some repos may need to be installed in editable mode:")
-        print("   cd <repo> && pip install -e .")
-        results["summary"]["skipped"] = len(test_cases) + 1
+        print("   Fix options:")
+        print("   - Install hub dependencies (sympy/numpy/mpmath) into this venv")
+        print("   - Or install each repo editable: cd <repo> && pip install -e .")
+        # If we failed before populating cases, report a safe skipped count.
+        # (We intentionally avoid crashing here so the harness always emits JSON.)
+        results["summary"]["skipped"] = len(test_cases)
         results["error"] = str(e)
         return results
     

@@ -2,6 +2,19 @@
 
 Date: 2026-01-18
 
+## At-a-glance status
+
+- **Repos with pytest**: 5/5  
+  Progress: `██████████` (100%)
+- **Hub integration harness**: 8/8 checks passing  
+  Progress: `██████████` (100%)
+- **Node-matrix baseline parity (N0–N5)**: complete (tests + scripts + artifacts present)
+  Progress: `██████████` (100%)
+- **Node-matrix physics parity (N6+)**: pending (derivative-based API path + deeper stability sweeps)
+  Progress: `██░░░░░░░░` (20%)
+- **Master paper**: PUBLICATION READY (compiled + BibTeX-resolved)
+- **Main remaining engineering gap**: deepen `su2-node-matrix-elements` beyond the current deterministic placeholder model (N6+: derivative-based API path + richer stability sweeps)
+
 This TODO is the cross-repository execution plan for the SU(2) 3n-j series:
 
 - `su2-3nj-closedform`
@@ -24,10 +37,10 @@ The goal is to turn the existing (already substantial) derivations + scripts int
 With core implementations and validations in place for most repos, shift to **integration, advanced testing, and publication prep**.
 
 Priority order:
-1. **Lagging repo**: `su2-node-matrix-elements` (tests, stability, reference tables)
-2. **Cross-repo integration**: new unified hub repo for code + papers
-3. **Higher-n validations**: 12j/15j sampling + UQ/stability sweeps
-4. **Paper bundling**: master LaTeX + shared bib + reproducible tables/figures
+1. **Close remaining parity gaps**: `su2-node-matrix-elements` (upgrade placeholder API; expand tests; expand stability sweeps)
+2. **Cross-repo integration**: keep `scripts/run_integration_tests.py` authoritative; extend summary + higher-n spot checks
+3. **Higher-n validations**: 12j/15j sampling + UQ/stability sweeps (where implementations exist)
+4. **Packaging**: arXiv-ready LaTeX bundle + reproducible artifact regeneration
 
 Scope note: for `su2-node-matrix-elements`, implement a *minimal, deterministic* computational entrypoint first (even if initially a placeholder), with clear hedging and tests that verify invariants, stability reporting, and cross-checks against independent numeric/symbolic backends.
 
@@ -53,6 +66,18 @@ Acceptance criteria:
 Acceptance criteria:
 - All claims in the abstract/introduction have corresponding lemmas/propositions and at least one validation route.
 - Limitations are explicit (numerical instability regimes, unsupported topologies, etc.).
+
+---
+
+## Dependencies (what blocks what)
+
+Use this as the “critical path” map when choosing the next task.
+
+- **T5 (integration harness)** depends on: repo installability + stable public APIs across all repos (especially node-matrix N0–N5).
+- **T4 (stability/UQ sweeps)** depends on: deterministic reference generation (T2) + stable evaluation entrypoints.
+- **P2 (master LaTeX merge)** is complete; future paper updates that rely on **node-matrix numerical claims** should depend on: N6+ (derivative-based API path) and T5 (so the paper can cite a single authoritative validation report).
+- **P4 (validation section + tables)** depends on: T2 (goldens) + T4 (stability CSV/JSON) + T5 (integration report).
+- **D0.3 (submission readiness)** depends on: P2–P4 + a clean “build from scratch” workflow (arXiv packaging).
 
 ---
 
@@ -234,7 +259,7 @@ Tasks:
 ### 3.5 `su2-node-matrix-elements`
 Current assets:
 - LaTeX masters + docs
-- No Python entrypoint found yet
+- Python package + pytest + deterministic artifact scripts
 
 Tasks:
 - N0: Add pytest + package skeleton (mirrors other repos)
@@ -263,6 +288,9 @@ Acceptance criteria:
 - Reference JSON tables are regenerated deterministically
 - Stability report exists (CSV/JSON) with clear caveats
 
+Next (recommended):
+- N6: Add an explicit derivative-based API path (finite-difference “source derivative” prototype for valence k=4) and validate it against the determinant placeholder for small cases.
+
 ---
 
 ## 4) Execution schedule (Q1–Q2 2026)
@@ -282,34 +310,39 @@ Acceptance criteria:
 
 ## 5) “Start here” checklist (fastest path to momentum)
 
-1) ✅ Run pytest in `su2-3nj-generating-functional` and fix any failures.
-   - Fixed import path (project → su2_3nj_gen)
-   - All 43 tests passing
-2) ✅ Add half-integer regression tests for 6j.
-   - Already present in `tests/test_spin_validation.py`
-   - Covers half-integer, mixed, and zero cases
-3) ✅ Convert the most important `su2-3nj-uniform-closed-form/scripts/test_*.py` into pytest tests.
-   - Created `tests/test_domain_validation.py` (11 tests)
-   - Created `tests/test_symmetry.py` (20 tests)
-   - Total: 45 tests passing (vs 14 before)
-4) ✅ Create/refresh reference datasets and pin them.
-   - All repos have deterministic reference generation scripts
-   - closedform: `data/reference/3nj_reference_values.json`
-   - generating-functional: `tests/reference_3nj.json`
-   - uniform-closed-form: `tests/reference_3nj_closed_form.json`
-   - recurrences: `data/recurrence_stability_report.json`
-   - node-matrix: `data/reference/node_matrix_reference.json`
-5) ✅ Start a master LaTeX bundle (new repo) once validations are stable.
-   - Hub repo created at `su2-3nj-series-paper/`
-   - Shared macros: `papers/shared/shared-macros.tex`
-   - Shared bibliography: `papers/shared/shared-bibliography.bib`
-   - Integration script scaffold: `scripts/run_integration_tests.py`
+This checklist is intentionally end-to-end: it gets a fresh checkout from “works locally” → “validated” → “paper artifacts build” without guessing what’s missing.
 
-6) 🔄 Create a unified public hub repo (code + papers) and move SU2 planning docs there.
-   - ✅ Hub repo created and pushed to GitHub
-   - ✅ SU2-TODO.md moved to hub `docs/`
-   - ✅ Literature folder moved to hub `papers/related/` (ignored)
-   - ⚠️  Integration harness (T5) pending implementation
+1) Run unit tests in all 5 repos (local parity check).
+  - Goal: `python -m pytest` passes everywhere (no skipped critical suites).
+
+2) Run the hub integration harness.
+  - Goal: `scripts/run_integration_tests.py` passes and regenerates `data/integration_validation_report.json`.
+
+3) Regenerate deterministic reference artifacts (goldens + stability reports).
+  - Goal: reference JSON/CSV regeneration scripts run cleanly and match committed outputs (or match up to explicitly-allowed metadata fields).
+
+4) Close the remaining “fifth repo parity” gap (`su2-node-matrix-elements`).
+  - If N0–N5 are complete: implement N6 (finite-difference derivative prototype for k=4) + add tests + add a stability sweep.
+  - If any of N0–N5 are incomplete in your working tree: complete them first (package layout, minimal API, tests, reference JSON, stability JSON, one-command workflow).
+  - Quick sanity commands (inside that repo): `python -m pytest`, then run `scripts/generate_reference_tables.py` and `scripts/generate_stability_report.py`.
+
+5) Expand T5 reporting (visibility).
+  - Add repo-level rollups to the integration report (counts, versions, artifact paths).
+
+6) Advance T2 higher-n spot checks (12j/15j).
+  - Goal: small curated cases at high precision (mpmath 50 dps) with explicit “not supported yet” handling if a route is missing.
+
+7) Build the paper from scratch (clean LaTeX build).
+  - Goal: one-command build that runs BibTeX and yields the final PDF.
+
+8) Ensure the paper’s validation section is sourced from artifacts.
+  - Goal: tables/figures are generated from `data/` outputs with pinned scripts.
+
+9) Create an arXiv submission bundle.
+  - Goal: a minimal `.tar.gz` that compiles on arXiv’s TeX stack without manual steps.
+
+10) Update this TODO immediately after each milestone.
+  - Keep the “At-a-glance status” block accurate.
 
 ---
 

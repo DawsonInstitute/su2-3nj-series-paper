@@ -653,3 +653,7 @@ Excellent! Let me create a final comprehensive summary document:
 ✅ **Open-source release** with all code, data, and scripts publicly available
 ✅ **23-page paper** ready for peer review and publication
 <!-- ------ -->
+- Updated the top “At-a-glance status” in su2-3nj-series-paper/docs/SU2-TODO.md to include explicit progress bars for **Node-matrix baseline parity (N0–N5)** vs **physics parity (N6+)**, and clarified the main remaining gap as N6+ work.
+- Adjusted the dependency map to remove the confusing “P2 depends on N0–N5” (since P2 is already complete) and instead state that **future node-matrix numerical-claim upgrades** should depend on N6+ + T5.
+- Expanded the “Start here” checklist with concrete command pointers for the node-matrix repo scripts.
+<!-- ------ -->
