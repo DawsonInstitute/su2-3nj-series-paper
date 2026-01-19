@@ -290,3 +290,25 @@ Current session accomplishments:
 
 All work committed and pushed to [su2-3nj-series-paper](https://github.com/arcticoder/su2-3nj-series-paper) main branch.
 <!-- ------ -->
+- Renamed the main draft from master-paper.tex to the descriptive filename you suggested and moved paper build assets into a dedicated folder: su2-3nj-unified-representations.tex.
+- Updated the build + table pipeline to match the new structure:
+  - Makefile now targets `su2-3nj-unified-representations.pdf`
+  - generate_validation_tables.py now writes to validation-tables.tex
+  - Expanded .gitignore to ignore common LaTeX artifacts (`*.toc`, `*.fls`, `*.fdb_latexmk`, etc.)
+- Updated SU2-TODO.md to reflect:
+  - The new paper filename/location
+  - The new paper structure
+  - Integration harness now at **8/8** passing checks (see next bullet)
+- Strengthened cross-repo unification by extending the hub integration harness to actually exercise `su2-node-matrix-elements`:
+  - run_integration_tests.py now runs node-matrix backend consistency + a permutation-invariance sample
+  - Refreshed integration_validation_report.json (now includes those checks; summary is 8 passed)
+  - Verified `su2-node-matrix-elements` itself is solid: `pytest -q` passes (15 tests)
+
+- Started the “paper assembly” work by staging upstream LaTeX masters directly into the hub for merging:
+  - README.md
+  - closedform.tex
+  - uniform-closed-form.tex
+  - recurrences.tex
+  - generating-functional.tex
+  - node-matrix-elements.tex
+<!-- ------ -->
