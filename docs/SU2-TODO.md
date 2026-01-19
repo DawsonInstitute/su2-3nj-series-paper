@@ -337,12 +337,21 @@ Acceptance criteria:
    - ⚠️  Import actual content from individual repos (next step)
    - **Output**: `papers/latex/master-paper.tex` (scaffold complete)
 
-4. **Task P3**: Integrate literature priors
-   - Extract BibTeX from `papers/related/` PDFs
-   - Add to shared bibliography with positioning notes
+4. **Task P3**: ✅ Integrate literature priors
+   - ✅ Added 10 key SU(2)/3nj references to shared bibliography
+   - ✅ Expanded Background section with historical context and positioning
+   - ✅ Surveyed computational approaches and applications
+   - **Output**: 10-page master paper with comprehensive literature review
 
-### Medium-term (Q1 2026)
-5. **Task P4**: Write validation section for papers
-   - Generate reproducible tables/figures from reference datasets
-   - Document cross-verification results
-   - Add stability analysis summaries
+5. **Task P4**: ✅ Write validation section for papers
+   - ✅ Generate reproducible tables/figures from reference datasets
+   - ✅ Document cross-verification results
+   - ✅ Add validation methodology and test coverage summary
+   - **Output**: `papers/latex/validation-tables.tex` + updated master paper
+   - **Results**: 161 tests, 3 auto-generated LaTeX tables, 10-page compiled PDF
+
+### Medium-term (next month)
+6. **Task P2 (continued)**: Import content from individual repo .tex files
+   - Extract relevant sections from 5 repository LaTeX masters
+   - Harmonize notation across sections
+   - Ensure proper cross-references
