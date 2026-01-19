@@ -331,13 +331,15 @@ Acceptance criteria:
    - **Output**: `data/higher_n_reference_9j.json`
 
 ### Short-term (next 2 weeks)
-3. **Task P2**: 🔄 Begin merging LaTeX sources
+3. **Task P2**: ✅ Merge LaTeX sources into unified paper
    - ✅ Identify master .tex files from each repo
-  - ✅ Create initial paper structure in `papers/paper/`
+   - ✅ Create initial paper structure in `papers/paper/`
    - ✅ Link shared macros and bibliography
-  - ✅ Rename paper file to `su2-3nj-unified-representations.tex`
-   - ⚠️  Import actual content from individual repos (next step)
-  - **Output**: `papers/paper/su2-3nj-unified-representations.tex` (scaffold complete)
+   - ✅ Rename paper file to `su2-3nj-unified-representations.tex`
+   - ✅ Import actual content from individual repos
+   - ✅ Extract core theorems, definitions, and examples
+   - ✅ Harmonize notation and unify mathematical presentation
+   - **Output**: Complete 15-page unified paper with all 5 frameworks integrated
 
 4. **Task P3**: ✅ Integrate literature priors
    - ✅ Added 10 key SU(2)/3nj references to shared bibliography
@@ -353,8 +355,15 @@ Acceptance criteria:
    - **Results**: 161 tests, 3 auto-generated LaTeX tables, 10-page compiled PDF
 
 ### Medium-term (next month)
-6. **Task P2 (continued)**: Import content from individual repo .tex files
-  - ✅ Copied upstream LaTeX masters into `papers/sources/` for merge work
-   - Extract relevant sections from 5 repository LaTeX masters
-   - Harmonize notation across sections
-   - Ensure proper cross-references
+6. **Task P1**: 🔄 Finalize paper bundling decision
+   - Review current 15-page unified structure
+   - Assess whether to split into 2-3 papers or keep as single JMP-style draft
+   - Recommended: keep unified given strong cross-connections between sections
+   - Add cross-references between sections (closed-form ↔ generating functional, etc.)
+
+7. **Task T1-T4**: 🔄 Cross-repo standardization refinements
+   - T1: Spin domain validation (already largely complete)
+   - T3: Document cross-verification matrix in paper appendix
+   - T4: Add UQ protocol documentation
+
+8. **Task N0-N5**: ⚠️ Complete su2-node-matrix-elements computational implementation
