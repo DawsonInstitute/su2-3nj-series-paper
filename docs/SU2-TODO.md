@@ -428,4 +428,4 @@ Actions:
 - Bibliography resolved (16 citations)
 
 ### D0.3 — Q2 2026 submission readiness: 🔄 ON TRACK
-- Remaining: arXiv packaging + optional higher-n spot checks (12j/15j) + transfer audit
+- Remaining: higher-n spot checks (12j/15j) + transfer audit
