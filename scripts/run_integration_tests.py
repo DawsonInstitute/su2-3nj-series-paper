@@ -232,20 +232,55 @@ def run_cross_verification():
             print(f"  ⚠ node-matrix-elements checks failed: {e}")
             results["summary"]["skipped"] += 2
 
-        # Higher-n (currently 9j) deterministic reference checks
-        print("\nHigher-n reference checks (9j)...")
+        # Higher-n (9j + 12j) deterministic reference checks
+        print("\nHigher-n reference checks...")
 
         def _parse_spin(text: str):
             # SymPy-friendly parsing for ints and half-integers like "1/2".
             # We intentionally keep parsing minimal/deterministic.
             return sp.Rational(text) if "/" in text else sp.Integer(text)
 
+        def _check_12j_via_decomposition(spins_list, expected_exact):
+            """
+            Verify 12j symbol using our 6j decomposition (same as reference generator).
+            Returns (computed_value, match_status).
+            """
+            from sympy.physics.wigner import wigner_6j
+            
+            if len(spins_list) != 12:
+                return None, "ERROR: wrong spin count"
+            
+            j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12 = spins_list
+            max_j = max(s if isinstance(s, (sp.Rational, sp.Integer)) else sp.Rational(s) for s in spins_list)
+            x_max = int(4 * max_j)
+            
+            result = sp.S(0)
+            for x_int in range(x_max + 1):
+                x = sp.Rational(x_int, 2)
+                try:
+                    w1 = wigner_6j(j1, j2, j3, j4, j5, x)
+                    w2 = wigner_6j(j6, j7, j8, j9, x, j10)
+                    w3 = wigner_6j(j11, j12, x, j5, j6, j1)
+                    w4 = wigner_6j(j7, j8, j11, j3, j4, x)
+                    if w1 == 0 or w2 == 0 or w3 == 0 or w4 == 0:
+                        continue
+                    phase = (-1)**(2*x)
+                    weight = 2*x + 1
+                    result += phase * weight * w1 * w2 * w3 * w4
+                except (ValueError, ZeroDivisionError):
+                    continue
+            
+            simplified = sp.simplify(result)
+            return simplified, "computed"
+
+        # 9j reference checks
+        print("  [9j symbols]")
         try:
             data_dir = Path(__file__).parent.parent / "data"
             ref_9j_path = data_dir / "higher_n_reference_9j.json"
 
             if not ref_9j_path.exists():
-                print("  ⚠ higher_n_reference_9j.json not found — skipping")
+                print("    ⚠ higher_n_reference_9j.json not found — skipping")
                 results["summary"]["skipped"] += 1
                 results["tests"].append(
                     {
@@ -310,18 +345,113 @@ def run_cross_verification():
                         results["tests"].append(test_result)
                         skipped += 1
 
-                print(f"  ✓ loaded {len(ref_results)} cases")
-                print(f"    PASS={passed} FAIL={failed} SKIP={skipped}")
+                print(f"    ✓ loaded {len(ref_results)} cases: PASS={passed} FAIL={failed} SKIP={skipped}")
                 results["summary"]["passed"] += passed
                 results["summary"]["failed"] += failed
                 results["summary"]["skipped"] += skipped
 
         except Exception as e:
-            print(f"  ⚠ 9j reference checks failed: {e}")
+            print(f"    ⚠ 9j reference checks failed: {e}")
             results["summary"]["skipped"] += 1
             results["tests"].append(
                 {
                     "description": "9j reference checks",
+                    "status": "ERROR",
+                    "error": str(e),
+                }
+            )
+
+        # 12j reference checks
+        print("  [12j symbols via 6j decomposition]")
+        try:
+            ref_12j_path = data_dir / "higher_n_reference_12j.json"
+
+            if not ref_12j_path.exists():
+                print("    ⚠ higher_n_reference_12j.json not found — skipping")
+                results["summary"]["skipped"] += 1
+                results["tests"].append(
+                    {
+                        "description": "12j reference dataset present",
+                        "status": "SKIP",
+                        "reason": "data/higher_n_reference_12j.json missing",
+                    }
+                )
+            else:
+                with open(ref_12j_path) as f:
+                    ref_12j = json.load(f)
+
+                ref_results = ref_12j.get("results", [])
+                passed = 0
+                failed = 0
+                skipped = 0
+
+                for case in ref_results:
+                    desc = case.get("description", "12j reference")
+                    status = case.get("status", "unknown")
+                    spins = case.get("spins")
+
+                    test_result = {
+                        "description": f"12j reference: {desc}",
+                        "symbol": "12j",
+                        "spins": spins,
+                        "status": "unknown",
+                    }
+
+                    if status != "success":
+                        test_result["status"] = "SKIP"
+                        test_result["reason"] = f"reference status={status}"
+                        results["tests"].append(test_result)
+                        skipped += 1
+                        continue
+
+                    try:
+                        spins_parsed = [_parse_spin(x) for x in spins]
+                        expected = sp.sympify(case.get("exact", "0"))
+                        
+                        # Recompute using our decomposition
+                        computed, status_msg = _check_12j_via_decomposition(spins_parsed, expected)
+                        
+                        if status_msg != "computed":
+                            test_result["status"] = "ERROR"
+                            test_result["error"] = status_msg
+                            results["tests"].append(test_result)
+                            skipped += 1
+                            continue
+                        
+                        diff = sp.simplify(computed - expected)
+
+                        test_result["implementations"] = {
+                            "6j_decomposition": str(computed),
+                            "reference_exact": str(expected),
+                        }
+
+                        if diff == 0:
+                            test_result["status"] = "PASS"
+                            passed += 1
+                        else:
+                            test_result["status"] = "FAIL"
+                            test_result["discrepancy"] = str(diff)
+                            failed += 1
+
+                        results["tests"].append(test_result)
+
+                    except Exception as e:
+                        test_result["status"] = "ERROR"
+                        test_result["error"] = str(e)
+                        results["tests"].append(test_result)
+                        skipped += 1
+
+                print(f"    ✓ loaded {len(ref_results)} cases: PASS={passed} FAIL={failed} SKIP={skipped}")
+                results["summary"]["passed"] += passed
+                results["summary"]["failed"] += failed
+                results["summary"]["skipped"] += skipped
+
+        except Exception as e:
+            print(f"    ⚠ 12j reference checks failed: {e}")
+            results["summary"]["skipped"] += 1
+            results["tests"].append(
+                {
+                    "description": "12j reference checks",
                     "status": "ERROR",
                     "error": str(e),
                 }

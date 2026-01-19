@@ -92,7 +92,47 @@ def generate_9j_reference_table(ref_data):
     return "\n".join(latex)
 
 
-def generate_summary_table(integration_data, ref_9j_data):
+def generate_12j_reference_table(ref_data):
+    """Generate LaTeX table from 12j reference dataset."""
+    
+    latex = []
+    latex.append("% Auto-generated from data/higher_n_reference_12j.json")
+    latex.append("\\begin{table}[htbp]")
+    latex.append("\\centering")
+    latex.append("\\caption{High-Precision 12j Symbol Reference Dataset (50 decimal places)}")
+    latex.append("\\label{tab:12j-reference}")
+    latex.append("\\begin{tabular}{lcc}")
+    latex.append("\\hline")
+    latex.append("Configuration & Exact Value & Status \\\\")
+    latex.append("\\hline")
+    
+    for result in ref_data["results"]:
+        desc = result.get("description", "unknown")
+        exact = result.get("exact", "N/A")
+        status = result.get("status", "unknown")
+        
+        # Truncate very long expressions
+        if len(exact) > 40:
+            exact_display = exact[:37] + "..."
+        else:
+            exact_display = exact
+        
+        # Format for LaTeX
+        exact_latex = f"${exact_display}$" if exact != "N/A" else exact_display
+        status_mark = "\\checkmark" if status == "success" else "\\times"
+        
+        latex.append(f"{desc} & {exact_latex} & {status_mark} \\\\")
+    
+    latex.append("\\hline")
+    latex.append(f"\\multicolumn{{3}}{{l}}{{Method: {ref_data.get('method', 'N/A')}, Precision: {ref_data['precision_dps']} dps}} \\\\")
+    latex.append("\\hline")
+    latex.append("\\end{tabular}")
+    latex.append("\\end{table}")
+    
+    return "\n".join(latex)
+
+
+def generate_summary_table(integration_data, ref_9j_data, ref_12j_data):
     """Generate summary statistics table."""
     
     latex = []
@@ -113,10 +153,16 @@ def generate_summary_table(integration_data, ref_9j_data):
     latex.append(f"Cross-implementation & {int_total} & {int_rate} \\\\")
     
     # 9j reference tests
-    ref_passed = ref_9j_data["stability_analysis"]["successful"]
-    ref_total = ref_9j_data["stability_analysis"]["total_cases"]
-    ref_rate = f"{100 * ref_passed / ref_total:.0f}\\%" if ref_total > 0 else "—"
-    latex.append(f"9j high-precision & {ref_total} & {ref_rate} \\\\")
+    ref_9j_passed = ref_9j_data["stability_analysis"]["successful"]
+    ref_9j_total = ref_9j_data["stability_analysis"]["total_cases"]
+    ref_9j_rate = f"{100 * ref_9j_passed / ref_9j_total:.0f}\\%" if ref_9j_total > 0 else "—"
+    latex.append(f"9j high-precision & {ref_9j_total} & {ref_9j_rate} \\\\")
+    
+    # 12j reference tests
+    ref_12j_passed = ref_12j_data["stability_analysis"]["successful"]
+    ref_12j_total = ref_12j_data["stability_analysis"]["total_cases"]
+    ref_12j_rate = f"{100 * ref_12j_passed / ref_12j_total:.0f}\\%" if ref_12j_total > 0 else "—"
+    latex.append(f"12j high-precision & {ref_12j_total} & {ref_12j_rate} \\\\")
     
     # Per-repo tests (from session data)
     repo_tests = [
@@ -132,8 +178,8 @@ def generate_summary_table(integration_data, ref_9j_data):
         latex.append(f"{repo_short} unit tests & {count} & 100\\% \\\\")
     
     latex.append("\\hline")
-    total_tests = int_total + ref_total + sum(c for _, c in repo_tests)
-    total_passed = int_passed + ref_passed + sum(c for _, c in repo_tests)
+    total_tests = int_total + ref_9j_total + ref_12j_total + sum(c for _, c in repo_tests)
+    total_passed = int_passed + ref_9j_passed + ref_12j_passed + sum(c for _, c in repo_tests)
     total_rate = f"{100 * total_passed / total_tests:.0f}\\%" if total_tests > 0 else "—"
     latex.append(f"\\textbf{{Total}} & \\textbf{{{total_tests}}} & \\textbf{{{total_rate}}} \\\\")
     latex.append("\\hline")
@@ -146,7 +192,7 @@ def generate_summary_table(integration_data, ref_9j_data):
 def main():
     """Generate all validation tables."""
     print("=" * 70)
-    print("Validation Table Generator (Task P4)")
+    print("Validation Table Generator (Task P4 + I1)")
     print("=" * 70)
     
     # Load JSON data
@@ -154,6 +200,7 @@ def main():
     
     integration_file = data_dir / "integration_validation_report.json"
     ref_9j_file = data_dir / "higher_n_reference_9j.json"
+    ref_12j_file = data_dir / "higher_n_reference_12j.json"
     
     if not integration_file.exists():
         print(f"Error: {integration_file} not found")
@@ -162,6 +209,13 @@ def main():
     if not ref_9j_file.exists():
         print(f"Error: {ref_9j_file} not found")
         return 1
+    
+    if not ref_12j_file.exists():
+        print(f"Warning: {ref_12j_file} not found — 12j table will be skipped")
+        ref_12j_data = None
+    else:
+        with open(ref_12j_file) as f:
+            ref_12j_data = json.load(f)
     
     with open(integration_file) as f:
         integration_data = json.load(f)
@@ -174,7 +228,15 @@ def main():
     
     integration_table = generate_integration_table(integration_data)
     ref_9j_table = generate_9j_reference_table(ref_9j_data)
-    summary_table = generate_summary_table(integration_data, ref_9j_data)
+    
+    if ref_12j_data:
+        ref_12j_table = generate_12j_reference_table(ref_12j_data)
+        summary_table = generate_summary_table(integration_data, ref_9j_data, ref_12j_data)
+    else:
+        ref_12j_table = None
+        # Fallback: use a dummy 12j data structure with 0 tests
+        dummy_12j = {"stability_analysis": {"successful": 0, "total_cases": 0}}
+        summary_table = generate_summary_table(integration_data, ref_9j_data, dummy_12j)
     
     # Save to output file
     output_dir = Path(__file__).parent.parent / "papers" / "paper"
@@ -186,11 +248,16 @@ def main():
         f.write(integration_table)
         f.write("\n\n")
         f.write(ref_9j_table)
+        if ref_12j_table:
+            f.write("\n\n")
+            f.write(ref_12j_table)
         f.write("\n\n")
         f.write(summary_table)
     
     print(f"  ✓ Cross-implementation table")
     print(f"  ✓ 9j reference table")
+    if ref_12j_table:
+        print(f"  ✓ 12j reference table")
     print(f"  ✓ Summary statistics table")
     print(f"\nTables saved to: {output_file}")
     print("\nUsage in LaTeX:")

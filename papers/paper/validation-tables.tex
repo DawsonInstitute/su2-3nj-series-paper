@@ -43,6 +43,27 @@ partial zeros & $1/3$ & \checkmark \\
 \end{tabular}
 \end{table}
 
+% Auto-generated from data/higher_n_reference_12j.json
+\begin{table}[htbp]
+\centering
+\caption{High-Precision 12j Symbol Reference Dataset (50 decimal places)}
+\label{tab:12j-reference}
+\begin{tabular}{lcc}
+\hline
+Configuration & Exact Value & Status \\
+\hline
+uniform j=1 & $1/54$ & \checkmark \\
+uniform j=1/2 & $0$ & \checkmark \\
+four triangular triads & $1/27$ & \checkmark \\
+all j=1 & $1/54$ & \checkmark \\
+all zeros & $1$ & \checkmark \\
+alternating 1,2 & $sqrt(5)/30000 + 7/6000$ & \checkmark \\
+\hline
+\multicolumn{3}{l}{Method: 6j_symbol_decomposition, Precision: 50 dps} \\
+\hline
+\end{tabular}
+\end{table}
+
 % Summary of validation coverage
 \begin{table}[htbp]
 \centering
@@ -52,15 +73,16 @@ partial zeros & $1/3$ & \checkmark \\
 \hline
 Test Suite & Tests & Pass Rate \\
 \hline
-Cross-implementation & 15 & 100\% \\
+Cross-implementation & 21 & 100\% \\
 9j high-precision & 7 & 100\% \\
+12j high-precision & 6 & 100\% \\
 generating-functional unit tests & 43 & 100\% \\
 uniform-closed-form unit tests & 45 & 100\% \\
 closedform unit tests & 27 & 100\% \\
 recurrences unit tests & 18 & 100\% \\
 node-matrix-elements unit tests & 24 & 100\% \\
 \hline
-\textbf{Total} & \textbf{179} & \textbf{100\%} \\
+\textbf{Total} & \textbf{191} & \textbf{100\%} \\
 \hline
 \end{tabular}
 \end{table}

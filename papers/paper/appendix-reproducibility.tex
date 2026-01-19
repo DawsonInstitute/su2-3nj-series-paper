@@ -1,0 +1,174 @@
+% Reproducibility Appendix
+% Auto-generated skeleton for institutional-quality reproducibility documentation
+
+\section*{Appendix: Reproducibility}
+\label{app:reproducibility}
+
+This appendix documents the exact computational environment, commands, and artifact paths required to reproduce all validation results presented in this work.
+
+\subsection*{Computational Environment}
+
+\begin{itemize}
+\item \textbf{Python version}: 3.12+ (tested with 3.12.3)
+\item \textbf{Key dependencies}:
+  \begin{itemize}
+  \item \texttt{sympy} $\geq$ 1.14 (for symbolic Wigner symbols and simplification)
+  \item \texttt{mpmath} $\geq$ 1.3 (for high-precision arithmetic at 50 decimal places)
+  \item \texttt{numpy} $\geq$ 1.26 (for numerical backends)
+  \item \texttt{pytest} $\geq$ 8.0 (for unit test execution)
+  \end{itemize}
+\item \textbf{Operating system}: Linux, macOS, or WSL2 (POSIX-compliant shell required)
+\end{itemize}
+
+\subsection*{Repository Structure}
+
+All code is organized into five sibling repositories plus one hub repository:
+
+\begin{itemize}
+\item \texttt{su2-3nj-closedform} — Closed-form hypergeometric product formulas
+\item \texttt{su2-3nj-uniform-closed-form} — Uniform hypergeometric representations
+\item \texttt{su2-3nj-recurrences} — Finite recurrence relations
+\item \texttt{su2-3nj-generating-functional} — Generating functional approach
+\item \texttt{su2-node-matrix-elements} — Arbitrary-valence node matrix elements
+\item \texttt{su2-3nj-series-paper} — Hub repository (this paper + integration harness)
+\end{itemize}
+
+\subsection*{Installation and Setup}
+
+\paragraph{Step 1: Clone repositories}
+Clone all six repositories into a common parent directory:
+\begin{verbatim}
+git clone https://github.com/<org>/su2-3nj-closedform.git
+git clone https://github.com/<org>/su2-3nj-uniform-closed-form.git
+git clone https://github.com/<org>/su2-3nj-recurrences.git
+git clone https://github.com/<org>/su2-3nj-generating-functional.git
+git clone https://github.com/<org>/su2-node-matrix-elements.git
+git clone https://github.com/<org>/su2-3nj-series-paper.git
+\end{verbatim}
+
+\paragraph{Step 2: Install each package}
+Navigate into each of the five implementation repos and install in editable mode:
+\begin{verbatim}
+cd su2-3nj-closedform && pip install -e . && cd ..
+cd su2-3nj-uniform-closed-form && pip install -e . && cd ..
+cd su2-3nj-recurrences && pip install -e . && cd ..
+cd su2-3nj-generating-functional && pip install -e . && cd ..
+cd su2-node-matrix-elements && pip install -e . && cd ..
+\end{verbatim}
+
+\paragraph{Step 3: Install hub dependencies}
+\begin{verbatim}
+cd su2-3nj-series-paper
+pip install sympy mpmath numpy pytest
+\end{verbatim}
+
+\subsection*{Running Validation Tests}
+
+\paragraph{Per-Repo Unit Tests}
+Each repository has its own pytest suite. To run all unit tests:
+\begin{verbatim}
+# In each repo directory:
+python -m pytest
+\end{verbatim}
+
+Expected results (as of 2026-01-18):
+\begin{itemize}
+\item \texttt{su2-3nj-generating-functional}: 43 passed
+\item \texttt{su2-3nj-uniform-closed-form}: 45 passed
+\item \texttt{su2-3nj-closedform}: 27 passed
+\item \texttt{su2-3nj-recurrences}: 18 passed
+\item \texttt{su2-node-matrix-elements}: 24 passed
+\end{itemize}
+
+\paragraph{Cross-Repo Integration Harness}
+The hub repo includes a comprehensive cross-verification harness:
+\begin{verbatim}
+cd su2-3nj-series-paper
+python scripts/run_integration_tests.py
+\end{verbatim}
+
+Expected output: \texttt{Passed: 21, Failed: 0, Skipped: 0}
+
+This harness validates:
+\begin{itemize}
+\item Cross-implementation agreement (5 cases)
+\item Recursion vs direct evaluation consistency
+\item Node-matrix backend consistency + permutation invariance
+\item High-precision 9j symbol references (7 cases)
+\item High-precision 12j symbol references (6 cases, via 6j decomposition)
+\end{itemize}
+
+Report saved to: \texttt{data/integration\_validation\_report.json}
+
+\subsection*{Regenerating Reference Datasets}
+
+\paragraph{High-Precision 9j and 12j References}
+\begin{verbatim}
+cd su2-3nj-series-paper
+python scripts/generate_higher_n_references.py
+\end{verbatim}
+
+Outputs:
+\begin{itemize}
+\item \texttt{data/higher\_n\_reference\_9j.json}
+\item \texttt{data/higher\_n\_reference\_12j.json}
+\end{itemize}
+
+Precision: 50 decimal places (configurable via \texttt{mp.dps}).
+
+\paragraph{Validation Tables for Paper}
+\begin{verbatim}
+python scripts/generate_validation_tables.py
+\end{verbatim}
+
+Output: \texttt{papers/paper/validation-tables.tex}
+
+This file is automatically included in the main LaTeX build via \texttt{\textbackslash input\{validation-tables\}}.
+
+\paragraph{Stability Reports (Per-Repo)}
+Each implementation repo includes stability analysis scripts:
+\begin{verbatim}
+# In su2-3nj-recurrences:
+python scripts/generate_stability_report.py
+
+# In su2-node-matrix-elements:
+python scripts/generate_stability_report.py
+python scripts/generate_derivative_stability_report.py
+\end{verbatim}
+
+Outputs deterministic CSV/JSON summaries for inclusion in the paper.
+
+\subsection*{Building the Paper}
+
+\paragraph{LaTeX Compilation}
+\begin{verbatim}
+cd su2-3nj-series-paper/papers/paper
+latexmk -pdf su2-3nj-unified-representations.tex
+\end{verbatim}
+
+Expected output: \texttt{su2-3nj-unified-representations.pdf} (23 pages as of 2026-01-18)
+
+\subsection*{Artifact Versioning and Determinism}
+
+\begin{itemize}
+\item \textbf{Exact symbolic results}: All symbolic computations are deterministic up to simplification order (SymPy $\geq$ 1.14).
+\item \textbf{Numeric precision}: All high-precision computations use \texttt{mpmath} with explicit \texttt{dps=50}.
+\item \textbf{Metadata fields}: JSON outputs include timestamps; these are the only non-deterministic fields.
+\item \textbf{Validation tolerance}: Numeric comparisons use simplification-based equality (\texttt{sp.simplify(a - b) == 0}) for robustness.
+\end{itemize}
+
+\subsection*{Contact and Support}
+
+For questions about reproducing these results, please open an issue in the hub repository or contact the corresponding author.
+
+\subsection*{Notation and Glossary}
+
+\begin{description}
+\item[3nj symbol] Generic recoupling coefficient for $n$ angular momenta (includes 3j, 6j, 9j, 12j, etc.).
+\item[Triangle inequality] For angular momenta $j_1, j_2, j_3$: $|j_1 - j_2| \leq j_3 \leq j_1 + j_2$ and $j_1 + j_2 + j_3 \in \mathbb{Z}$.
+\item[Parity constraint] Sum of angular momenta in certain triads must be integer-valued.
+\item[Half-integer spins] Spins $j$ such that $2j \in \mathbb{Z}$ but $j \notin \mathbb{Z}$ (e.g., $j = 1/2, 3/2, \ldots$).
+\item[6j decomposition] Standard method for computing higher-$n$ symbols as sums over products of 6j symbols.
+\item[Generating functional] Formal power series encoding all recoupling coefficients for a given graph topology.
+\item[Node matrix element] Matrix element associated with a vertex (node) in a spin network or recoupling graph.
+\end{description}

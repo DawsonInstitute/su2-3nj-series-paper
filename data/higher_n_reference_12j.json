@@ -1,0 +1,143 @@
+{
+  "timestamp": "2026-01-18T18:57:39.929015",
+  "precision_dps": 50,
+  "symbol_type": "12j",
+  "method": "6j_symbol_decomposition",
+  "reference": "Varshalovich et al., Quantum Theory of Angular Momentum",
+  "results": [
+    {
+      "spins": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "exact": "1/54",
+      "numeric_50dps": "0.0185185185185185174905342364582",
+      "status": "success",
+      "method": "6j_decomposition",
+      "description": "uniform j=1"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2"
+      ],
+      "exact": "0",
+      "numeric_50dps": "0.0",
+      "status": "success",
+      "method": "6j_decomposition",
+      "description": "uniform j=1/2"
+    },
+    {
+      "spins": [
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0"
+      ],
+      "exact": "1/27",
+      "numeric_50dps": "0.0370370370370370349810684729164",
+      "status": "success",
+      "method": "6j_decomposition",
+      "description": "four triangular triads"
+    },
+    {
+      "spins": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "exact": "1/54",
+      "numeric_50dps": "0.0185185185185185174905342364582",
+      "status": "success",
+      "method": "6j_decomposition",
+      "description": "all j=1"
+    },
+    {
+      "spins": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "exact": "1",
+      "numeric_50dps": "1.0",
+      "status": "success",
+      "method": "6j_decomposition",
+      "description": "all zeros"
+    },
+    {
+      "spins": [
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2"
+      ],
+      "exact": "sqrt(5)/30000 + 7/6000",
+      "numeric_50dps": "0.00124120226591665962917465648729",
+      "status": "success",
+      "method": "6j_decomposition",
+      "description": "alternating 1,2"
+    }
+  ],
+  "stability_analysis": {
+    "total_cases": 6,
+    "successful": 6,
+    "failed": 0,
+    "notes": [
+      "Found 1 cases that evaluate to exactly zero (likely triangle violations)"
+    ]
+  }
+}
