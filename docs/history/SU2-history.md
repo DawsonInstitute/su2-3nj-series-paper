@@ -312,3 +312,54 @@ All work committed and pushed to [su2-3nj-series-paper](https://github.com/arcti
   - generating-functional.tex
   - node-matrix-elements.tex
 <!-- ------ -->
+## ✅ Task P2 Complete: Unified Paper Integration
+
+Successfully extracted and integrated core mathematical content from all 5 upstream repositories into su2-3nj-unified-representations.tex:
+
+### **Sections Completed:**
+
+**Section 3: Closed-Form Hypergeometric Formulas**
+- Theorem: Hypergeometric product formula with matching ratios $\rho_e = M_e^+/M_e^-$
+- Example: 15j-chain with Fibonacci numbers
+- Computational complexity analysis: $O(|E| \cdot j^2)$ vs exponential summation
+
+**Section 4: Uniform Hypergeometric Representation**
+- Theorem: Single-sum ${}_5F_4$ formula for 12j symbols
+- Algebraic derivation via binomial/multinomial expansion
+- Normalization prefactor $\Delta$ with Pochhammer symbols
+
+**Section 5: Finite Recurrence Relations**
+- Theorem: Three-term recurrences from edge-removal determinants $\Delta_0^{(k)}, \Delta_1^{(k)}$
+- Boundary data reduction to 6j base case
+- Stability analysis: forward/backward recursion, condition numbers
+
+**Section 6: Generating Functionals**
+- Theorem: Universal generating functional $G(\{x_e\}) = 1/\sqrt{\det(I-K)}$
+- Schwinger-boson Gaussian integral formulation
+- Corollary: 3nj coefficients via Taylor expansion
+- Examples: 6j, 9j, 15j determinant forms
+
+**Section 7: Arbitrary-Valence Node Matrix Elements**
+- Theorem: Matrix element extraction via functional derivatives
+- Gaussian integration with sources: $J(g)^\dagger M^{-1} J(g)$ form
+- Determinant stability: regularization strategies and condition number analysis
+
+### **Build Status:**
+- ✅ Paper compiles successfully: **15 pages, 271 KB**
+- ✅ All theorems, definitions, and examples properly LaTeX-formatted
+- ✅ Notation harmonized across all sections
+- ✅ Validation tables auto-generated and included
+- ✅ Shared macros and bibliography integrated
+
+### **Commits:**
+- `90d34f5`: Import core mathematical content from all 5 upstream repos
+- `a77e068`: Mark Task P2 complete in SU2-TODO.md
+
+### **Next Steps (from TODO):**
+1. **Task P1**: Finalize bundling decision (single vs 2-3 paper split)
+2. **Polish cross-references** between sections
+3. **Task T3**: Document cross-verification matrix in appendix
+4. **Task N0-N5**: Complete node-matrix-elements computational implementation
+
+The unified paper now provides a complete, rigorous mathematical exposition connecting all five SU(2) 3nj frameworks under one coherent narrative. All source material has been successfully merged with proper theorem environments and consistent notation.
+<!-- ------ -->
