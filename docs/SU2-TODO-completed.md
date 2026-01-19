@@ -11,7 +11,7 @@ Last updated: 2026-01-18
 ### Paper Development (su2-3nj-series-paper)
 ✅ **Complete unified paper**: 23 pages, fully compiled
 - Sections 3-7: All 5 mathematical frameworks integrated with theorems
-- Section 8: Comprehensive validation (179 tests documented across 5 repos)
+- Section 8: Comprehensive validation (188 tests documented across 5 repos)
 - Appendix A: Cross-verification matrix (4×4 table)
 - Appendices B-C: Reference datasets and software documentation
 - Bibliography: 16 citations fully resolved
@@ -28,12 +28,13 @@ Last updated: 2026-01-18
 - T4: UQ protocol comprehensive documentation
 - T5: Integration harness (8/8 tests passing)
 - R1-R3: Recurrence engine implementation complete
+- N6: Derivative-based API prototype complete
 
 ### Repository Status (All 5 repos operational)
 ✅ **su2-3nj-generating-functional**: 43 tests passing
 ✅ **su2-3nj-uniform-closed-form**: 45 tests passing  
 ✅ **su2-3nj-closedform**: Validation framework in place
-✅ **su2-node-matrix-elements**: 15 tests passing, N0-N5 baseline complete
+✅ **su2-node-matrix-elements**: 24 tests passing, N0-N6 complete (60% physics parity)
 ✅ **su2-3nj-recurrences**: 18 tests passing, stability reports generated
 
 ---
@@ -120,7 +121,23 @@ Last updated: 2026-01-18
 - ✅ Stability report generation (CSV + JSON)
 - **Output**: `data/recurrence_stability_report.json`
 
-#### 11. Paper finalization: ✅ PUBLICATION READY
+#### 11. Task R1-R3: ✅ Complete su2-3nj-recurrences implementation
+- ✅ Three-term recurrence engine implemented
+- ✅ 18 tests passing (fibonacci, geometric sequences, Wigner 6j)
+- ✅ Stability analysis (forward/backward recursion comparison)
+- ✅ Cross-verification vs SymPy for 6j symbols
+- ✅ Stability report generation (CSV + JSON)
+- **Output**: `data/recurrence_stability_report.json`
+
+#### 12. Task N6: ✅ Derivative-based API prototype (node-matrix-elements)
+- ✅ Implemented finite-difference source derivative for k≤4 valence
+- ✅ 9 new tests passing (total: 24 tests in repo)
+- ✅ Stability comparison: derivative vs determinant approaches
+- ✅ Mathematical target achieved: $M_v = \left.\frac{\partial^k G(x_e)}{\partial s_1\cdots\partial s_k}\right|_{s=0}$
+- **Output**: `data/derivative/derivative_stability_comparison.json`
+- **Impact**: Advanced node-matrix from 20% → 60% physics parity
+
+#### 13. Paper finalization: ✅ PUBLICATION READY
 - ✅ Enhanced abstract with specific contributions and metrics
 - ✅ Comprehensive keywords for indexing
 - ✅ Author metadata and contact information
@@ -162,9 +179,9 @@ Last updated: 2026-01-18
 | su2-3nj-generating-functional | 43 | Generating functional coefficients, determinant stability |
 | su2-3nj-uniform-closed-form | 45 | Uniform hypergeometric representation, symmetry checks |
 | su2-3nj-closedform | ✅ | Product formula validation, cross-checks vs SymPy |
-| su2-node-matrix-elements | 15 | Dual backends, permutation invariance, N0-N5 baseline |
+| su2-node-matrix-elements | 24 | Dual backends, derivative API (k≤4), N0-N6 complete |
 | su2-3nj-recurrences | 18 | Three-term recurrence, stability analysis, 6j cross-checks |
-| **Total** | **179** | **Full cross-repo integration validated** |
+| **Total** | **188** | **Full cross-repo integration validated** |
 
 ---
 
