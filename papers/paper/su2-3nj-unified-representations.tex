@@ -451,6 +451,52 @@ Backward recursion preferred when condition numbers $\kappa_k > 10^3$. Forward r
 \paragraph{Generating functional (\Cref{thm:generating-functional}):}
 Determinant evaluation stable via LU decomposition for graphs with $< 20$ vertices. Sparse matrix techniques extend range to $\approx 50$ vertices.
 
+\subsection{Uncertainty Quantification Protocol}
+
+We recommend the following UQ protocol for production computations:
+
+\paragraph{Spin range assessment:}
+\begin{enumerate}
+\item For $j_{\text{max}} \leq 10$: All representations numerically stable with IEEE 754 double precision.
+\item For $10 < j_{\text{max}} \leq 30$: Use hypergeometric product formula (\Cref{thm:product}) or backward recurrence (\Cref{thm:recurrence}). Verify condition numbers $\kappa < 10^6$.
+\item For $j_{\text{max}} > 30$: Requires multi-precision arithmetic (128-bit or arbitrary precision via \texttt{mpmath}). Monitor Pochhammer symbol growth in uniform representation.
+\end{enumerate}
+
+\paragraph{Precision requirements:}
+\begin{itemize}
+\item \textbf{Rational arithmetic}: Exact for symbolic verification, but factorial growth limits practical range to $j \approx 15$.
+\item \textbf{Double precision (15-17 digits)}: Adequate for physical applications with $j \leq 20$ and proper scaling.
+\item \textbf{Quadruple precision (33-36 digits)}: Extends stable regime to $j \approx 50$ for most topologies.
+\item \textbf{Arbitrary precision (50+ digits)}: Required for reference dataset generation and validation at $j > 50$.
+\end{itemize}
+
+\paragraph{Implementation selection guide:}
+\begin{table}[h]
+\centering
+\caption{Recommended implementation by use case}
+\label{tab:implementation-guide}
+\begin{tabular}{lll}
+\toprule
+\textbf{Use Case} & \textbf{Representation} & \textbf{Rationale} \\
+\midrule
+Small graphs ($\leq 10$ vertices) & Generating functional & Direct determinant \\
+Large graphs ($> 10$ vertices) & Product formula & Polynomial complexity \\
+Sequential computation & Recurrence & Minimal memory \\
+Symbolic verification & Uniform ${}_5F_4$ & Single-sum structure \\
+High precision ($j > 30$) & Product formula & Stable ${}_2F_1$ evaluation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Failure mode detection:}
+Monitor the following indicators during computation:
+\begin{itemize}
+\item \textbf{Overflow/underflow}: Factorial terms $> 10^{308}$ or $< 10^{-308}$ require rescaling.
+\item \textbf{Determinant near-singularity}: $|\det(I-K)| < 10^{-10}$ indicates ill-conditioning.
+\item \textbf{Series non-convergence}: Hypergeometric sums requiring $> 1000$ terms suggest instability.
+\item \textbf{Cross-check disagreement}: Discrepancy $> 10^{-12}$ between implementations flags numerical issues.
+\end{itemize}
+
 \section{Conclusions}
 \label{sec:conclusions}
 
