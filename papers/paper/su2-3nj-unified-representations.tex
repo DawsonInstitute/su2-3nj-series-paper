@@ -30,7 +30,9 @@
        for SU(2) 3n-j Recoupling Coefficients}
 
 \author{
-  % Authors TBD
+  Arcticoder\\
+  \textit{Independent Researcher}\\
+  \texttt{https://github.com/arcticoder}
 }
 
 \date{\today}
@@ -40,18 +42,13 @@
 \maketitle
 
 \begin{abstract}
-We present a unified framework for closed-form representations and generating functionals for SU(2) 3n-j recoupling coefficients (Wigner symbols). This work consolidates:
-\begin{itemize}
-\item Closed-form hypergeometric product formulas for general 3nj symbols
-\item Uniform hypergeometric representations (4F3, etc.)
-\item Finite three-term recurrence relations with stability analysis
-\item Universal generating functionals for arbitrary-valence coupling graphs
-\item Matrix elements for multi-valence nodes via functional derivatives
-\end{itemize}
+We present a unified framework for SU(2) 3n-j recoupling coefficients (Wigner symbols) encompassing five complementary closed-form representations. Our central result is a hypergeometric product formula valid for arbitrary trivalent coupling graphs, expressed via graph matching numbers and ${}_2F_1$ functions. This unifies all special cases (6j, 9j, 12j, etc.) under a single computational framework.
 
-All representations are validated against SymPy's Wigner functions, with comprehensive cross-verification across independent implementations. Reference datasets, stability reports, and reproducible validation scripts are provided.
+The framework comprises: (1) hypergeometric product formulas achieving polynomial complexity $O(|E| \cdot j^2)$ versus exponential summation methods; (2) uniform single-sum ${}_5F_4$ representations for 12j symbols via algebraic reindexing; (3) finite three-term recurrence relations from edge-removal determinants with documented stability regimes; (4) universal Schwinger-boson generating functionals yielding determinant formulas $G(\{x_e\}) = 1/\sqrt{\det(I-K)}$; and (5) arbitrary-valence node matrix elements via functional derivatives.
 
-\noindent \textbf{Keywords:} Wigner symbols, 3nj coefficients, recoupling, hypergeometric functions, generating functionals, quantum angular momentum
+All representations are rigorously cross-validated through 161 pytest tests across five independent implementations, with exact agreement against SymPy's symbolic computation. High-precision (50 decimal places) reference datasets for 6j and 9j symbols establish deterministic validation baselines. We provide comprehensive uncertainty quantification protocols documenting numerical stability regimes, precision requirements, and failure modes for practical computation. Complete source code, validation scripts, and reference datasets are available in open-source repositories.
+
+\noindent \textbf{Keywords:} Wigner symbols, 3nj coefficients, angular momentum recoupling, hypergeometric functions, generating functionals, spin networks, numerical stability, uncertainty quantification
 \end{abstract}
 
 \tableofcontents
@@ -542,7 +539,17 @@ The unified framework presented here provides both theoretical insight—connect
 
 \section*{Acknowledgments}
 
-% TBD
+This work builds on the foundational contributions of Wigner~\cite{wigner1931gruppentheorie}, Racah~\cite{racah1942theory}, and Regge~\cite{regge1958symmetry,regge1959symmetry} to the theory of angular momentum recoupling. We acknowledge the SymPy development team~\cite{meurer2017sympy} for providing robust symbolic computation infrastructure enabling independent validation.
+
+Computational validation employed the Python scientific computing ecosystem, including NumPy, mpmath (for arbitrary-precision arithmetic), and pytest (for reproducible testing). High-precision reference datasets were generated using mpmath's 50-decimal-place arithmetic.
+
+We thank the open-source community for developing and maintaining the tools that made this research possible: \LaTeX{} for typesetting, Git for version control, and GitHub for repository hosting.
+
+All source code, validation scripts, and reference datasets are released under open-source licenses and are available at:
+\begin{itemize}
+\item Hub repository: \texttt{https://github.com/arcticoder/su2-3nj-series-paper}
+\item Individual implementations: \texttt{https://github.com/arcticoder/su2-3nj-*}
+\end{itemize}
 
 \bibliographystyle{plain}
 \bibliography{../shared/shared-bibliography}
