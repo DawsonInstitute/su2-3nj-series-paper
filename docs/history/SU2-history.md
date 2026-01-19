@@ -685,3 +685,34 @@ The recurrences repo exists and has code but needs a venv setup. Since the integ
 **Publication-ready**:
 - ✅ Master paper: 23 pages, BibTeX-resolved, ready for arXiv
 <!-- ------ -->
+- Add R1-R3 and N6 to task history
+- Update test counts: 188 total (up from 179)
+- Update node-matrix status: 24 tests, N0-N6 complete (60% physics parity)"
+
+## ✅ Summary of Completed Work
+
+### Option 1: Setup su2-3nj-recurrences environment ✅ COMPLETE
+- Created venv and installed package
+- **18 tests passing** (recurrence engine, Wigner 6j, stability analysis)
+- Generated stability report comparing forward vs backward recursion
+- Validated R1-R3 completion criteria
+
+### Option 2: Implement N6 derivative-based API prototype ✅ COMPLETE
+- Created `derivative.py` module with finite-difference implementation
+- Supports valence k ≤ 4 (trivalent and tetravalent nodes)
+- Implements 4th-order mixed partial derivatives using central differences
+- **9 new tests added** (total: 24 tests in node-matrix repo, up from 15)
+- Generated derivative vs determinant stability comparison report
+- Advanced node-matrix from N0-N5 baseline → **60% physics parity**
+
+### Documentation Refactoring ✅ COMPLETE
+- Created docs/SU2-TODO-completed.md archive
+- Streamlined main TODO (reduced from 497 lines → ~350 lines)
+- Updated all status indicators and test counts
+
+### Overall Status
+- **188 tests passing** across 5 repos (up from 179)
+- **All 5 repos fully operational** with pytest + stability reports
+- **Master paper**: 23 pages, publication-ready
+- **Remaining work**: arXiv submission packaging (optional: N7+ higher valence support)
+<!-- ------ -->
