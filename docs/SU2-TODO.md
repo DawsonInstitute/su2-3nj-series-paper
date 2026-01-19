@@ -355,15 +355,23 @@ Acceptance criteria:
    - **Results**: 161 tests, 3 auto-generated LaTeX tables, 10-page compiled PDF
 
 ### Medium-term (next month)
-6. **Task P1**: 🔄 Finalize paper bundling decision
-   - Review current 15-page unified structure
-   - Assess whether to split into 2-3 papers or keep as single JMP-style draft
-   - Recommended: keep unified given strong cross-connections between sections
-   - Add cross-references between sections (closed-form ↔ generating functional, etc.)
+6. **Task P1**: ✅ Paper structure finalized
+   - ✅ Reviewed 18-page unified structure
+   - ✅ Decision: Keep as single comprehensive paper (strong cross-connections)
+   - ✅ Added extensive cross-references using \Cref throughout all sections
+   - ✅ Comprehensive conclusion with all 5 representations summarized
+   - **Output**: 18-page unified paper ready for final polishing
 
-7. **Task T1-T4**: 🔄 Cross-repo standardization refinements
-   - T1: Spin domain validation (already largely complete)
-   - T3: Document cross-verification matrix in paper appendix
-   - T4: Add UQ protocol documentation
+7. **Task T3**: ✅ Cross-verification matrix documented
+   - ✅ Appendix A: Complete 4×4 verification table
+   - ✅ Documented all validation routes (SymPy, Closed-form, Gen-Func, Recurrence)
+   - ✅ Backend cross-checks (NumPy vs SymPy) for node-matrix elements
+   - ✅ Permutation invariance verification documented
+   - **Output**: Comprehensive validation documentation in paper appendices
 
-8. **Task N0-N5**: ⚠️ Complete su2-node-matrix-elements computational implementation
+8. **Task T1-T4**: 🔄 Remaining standardization tasks
+   - T1: ✅ Spin domain validation (already complete in all repos)
+   - T3: ✅ Cross-verification matrix (COMPLETE - see above)
+   - T4: ⚠️ Add UQ protocol documentation to paper (stability regimes partially documented)
+
+9. **Task N0-N5**: ⚠️ Complete su2-node-matrix-elements computational implementation
