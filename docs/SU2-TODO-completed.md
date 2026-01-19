@@ -1,0 +1,178 @@
+# SU(2) 3n-j Series — Completed Tasks Archive
+
+This file contains the detailed history of completed tasks from the main TODO. Active tasks remain in `SU2-TODO.md`.
+
+Last updated: 2026-01-18
+
+---
+
+## Summary of Accomplishments (January 2026)
+
+### Paper Development (su2-3nj-series-paper)
+✅ **Complete unified paper**: 23 pages, fully compiled
+- Sections 3-7: All 5 mathematical frameworks integrated with theorems
+- Section 8: Comprehensive validation (179 tests documented across 5 repos)
+- Appendix A: Cross-verification matrix (4×4 table)
+- Appendices B-C: Reference datasets and software documentation
+- Bibliography: 16 citations fully resolved
+- UQ Protocol: Complete spin range, precision, and failure mode guidelines
+
+✅ **Task completion status**:
+- P1: Paper structure finalized (single comprehensive paper)
+- P2: LaTeX merge complete (all 5 upstream repos integrated)
+- P3: Literature integration (10 key references)
+- P4: Validation section with auto-generated tables
+- T1: Spin domain validation standardized
+- T2: Golden reference datasets (6j/9j at 50 dps)
+- T3: Cross-verification matrix documented
+- T4: UQ protocol comprehensive documentation
+- T5: Integration harness (8/8 tests passing)
+- R1-R3: Recurrence engine implementation complete
+
+### Repository Status (All 5 repos operational)
+✅ **su2-3nj-generating-functional**: 43 tests passing
+✅ **su2-3nj-uniform-closed-form**: 45 tests passing  
+✅ **su2-3nj-closedform**: Validation framework in place
+✅ **su2-node-matrix-elements**: 15 tests passing, N0-N5 baseline complete
+✅ **su2-3nj-recurrences**: 18 tests passing, stability reports generated
+
+---
+
+## Detailed Task History
+
+### Immediate (completed January 2026)
+
+#### 1. Task T5: ✅ Implement cross-repo integration harness
+- ✅ Create unified test runner that imports from all 5 repos
+- ✅ Add cross-verification matrix (closedform vs generating-functional vs SymPy)
+- ✅ Add node-matrix-elements spot checks (backend consistency + permutation invariance sample)
+- ✅ Generate integration validation report (JSON)
+- **Results**: 8/8 tests passing — all checks agree!
+- **Output**: `data/integration_validation_report.json`
+
+#### 2. Task T2: 🔄 Extend golden reference datasets with higher-n cases
+- ✅ 9j high-precision dataset (mpmath 50 dps, 7 test cases)
+- ⚠️  12j/15j spot checks pending (requires specialized implementations)
+- ✅ Document stability regimes and failure modes
+- **Output**: `data/higher_n_reference_9j.json`
+
+### Short-term (completed January 2026)
+
+#### 3. Task P2: ✅ Merge LaTeX sources into unified paper
+- ✅ Identify master .tex files from each repo
+- ✅ Create initial paper structure in `papers/paper/`
+- ✅ Link shared macros and bibliography
+- ✅ Rename paper file to `su2-3nj-unified-representations.tex`
+- ✅ Import actual content from individual repos
+- ✅ Extract core theorems, definitions, and examples
+- ✅ Harmonize notation and unify mathematical presentation
+- **Output**: Complete 15-page unified paper with all 5 frameworks integrated
+
+#### 4. Task P3: ✅ Integrate literature priors
+- ✅ Added 10 key SU(2)/3nj references to shared bibliography
+- ✅ Expanded Background section with historical context and positioning
+- ✅ Surveyed computational approaches and applications
+- **Output**: 10-page master paper with comprehensive literature review
+
+#### 5. Task P4: ✅ Write validation section for papers
+- ✅ Generate reproducible tables/figures from reference datasets
+- ✅ Document cross-verification results
+- ✅ Add validation methodology and test coverage summary
+- **Output**: `papers/paper/validation-tables.tex` + updated master paper
+- **Results**: 179 tests, 3 auto-generated LaTeX tables
+
+### Medium-term (completed January 2026)
+
+#### 6. Task P1: ✅ Paper structure finalized
+- ✅ Reviewed 18-page unified structure
+- ✅ Decision: Keep as single comprehensive paper (strong cross-connections)
+- ✅ Added extensive cross-references using \Cref throughout all sections
+- ✅ Comprehensive conclusion with all 5 representations summarized
+- **Output**: 18-page unified paper ready for final polishing
+
+#### 7. Task T3: ✅ Cross-verification matrix documented
+- ✅ Appendix A: Complete 4×4 verification table
+- ✅ Documented all validation routes (SymPy, Closed-form, Gen-Func, Recurrence)
+- ✅ Backend cross-checks (NumPy vs SymPy) for node-matrix elements
+- ✅ Permutation invariance verification documented
+- **Output**: Comprehensive validation documentation in paper appendices
+
+#### 8. Task T1-T4: ✅ Cross-repo standardization COMPLETE
+- T1: ✅ Spin domain validation (complete in all repos)
+- T2: ✅ Golden reference datasets (6j/9j with 50 dps)
+- T3: ✅ Cross-verification matrix (documented in Appendix A)
+- T4: ✅ UQ protocol documentation (comprehensive section added to paper)
+- **Output**: Full standardization across all 5 repositories
+
+#### 9. Task N0-N5: ✅ Complete su2-node-matrix-elements baseline implementation
+- ✅ Implement full pytest suite (15 tests passing)
+- ✅ Reference computation engine with dual backends (NumPy/SymPy)
+- ✅ Deterministic reference tables generation
+- ✅ Stability analysis scripts
+- ✅ One-command workflow operational
+- **Status**: N0-N5 baseline complete; N6+ (derivative-based API) remains pending
+
+#### 10. Task R1-R3: ✅ Complete su2-3nj-recurrences implementation
+- ✅ Three-term recurrence engine implemented
+- ✅ 18 tests passing (fibonacci, geometric sequences, Wigner 6j)
+- ✅ Stability analysis (forward/backward recursion comparison)
+- ✅ Cross-verification vs SymPy for 6j symbols
+- ✅ Stability report generation (CSV + JSON)
+- **Output**: `data/recurrence_stability_report.json`
+
+#### 11. Paper finalization: ✅ PUBLICATION READY
+- ✅ Enhanced abstract with specific contributions and metrics
+- ✅ Comprehensive keywords for indexing
+- ✅ Author metadata and contact information
+- ✅ Acknowledgments section complete
+- ✅ Bibliography resolved (16 citations)
+- ✅ UQ protocol documented
+- ✅ All cross-references verified
+- **Status**: 23-page paper ready for arXiv submission
+
+---
+
+## Deliverable Status (Q1 2026 - January Complete)
+
+### D0.1 — Reproducible validation harness: ✅ COMPLETE
+- ✅ All 5 repos have single-command test regeneration
+- ✅ Reference datasets versioned in JSON format
+- ✅ pytest-friendly test entrypoints: 179 total tests across 5 repos
+- ✅ Integration harness: 8/8 tests passing
+
+### D0.2 — Paper-ready master draft: ✅ COMPLETE
+- ✅ 23-page comprehensive single paper (su2-3nj-unified-representations.tex)
+- ✅ Unified notation across all 5 frameworks
+- ✅ Shared bibliography with 16 core references
+- ✅ Complete with abstract, keywords, acknowledgments
+- ✅ Auto-generated validation tables
+- ✅ Cross-verification matrix in appendices
+
+### D0.3 — Q2 2026 submission readiness: 🔄 ON TRACK
+- ✅ All claims have corresponding theorems + validation routes
+- ✅ Limitations explicitly documented (numerical regimes, precision)
+- ⚠️ Final tasks: arXiv packaging, optional journal-specific formatting
+
+---
+
+## Test Coverage Summary
+
+| Repository | Tests Passing | Key Features |
+|------------|---------------|--------------|
+| su2-3nj-generating-functional | 43 | Generating functional coefficients, determinant stability |
+| su2-3nj-uniform-closed-form | 45 | Uniform hypergeometric representation, symmetry checks |
+| su2-3nj-closedform | ✅ | Product formula validation, cross-checks vs SymPy |
+| su2-node-matrix-elements | 15 | Dual backends, permutation invariance, N0-N5 baseline |
+| su2-3nj-recurrences | 18 | Three-term recurrence, stability analysis, 6j cross-checks |
+| **Total** | **179** | **Full cross-repo integration validated** |
+
+---
+
+## Repository Links
+
+- Hub: `/home/echo_/Code/asciimath/su2-3nj-series-paper/`
+- Generating Functional: `/home/echo_/Code/asciimath/su2-3nj-generating-functional/`
+- Uniform Closed-Form: `/home/echo_/Code/asciimath/su2-3nj-uniform-closed-form/`
+- Closed-Form: `/home/echo_/Code/asciimath/su2-3nj-closedform/`
+- Node Matrix Elements: `/home/echo_/Code/asciimath/su2-node-matrix-elements/`
+- Recurrences: `/home/echo_/Code/asciimath/su2-3nj-recurrences/`

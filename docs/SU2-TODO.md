@@ -5,15 +5,19 @@ Date: 2026-01-18
 ## At-a-glance status
 
 - **Repos with pytest**: 5/5  
-  Progress: `██████████` (100%)
+  Progress: `██████████` (100%) — **179 tests** passing total
 - **Hub integration harness**: 8/8 checks passing  
   Progress: `██████████` (100%)
-- **Node-matrix baseline parity (N0–N5)**: complete (tests + scripts + artifacts present)
+- **Node-matrix baseline parity (N0–N5)**: ✅ complete (15 tests + scripts + artifacts)
   Progress: `██████████` (100%)
-- **Node-matrix physics parity (N6+)**: pending (derivative-based API path + deeper stability sweeps)
+- **Recurrences implementation (R1-R3)**: ✅ complete (18 tests + stability reports)
+  Progress: `██████████` (100%)
+- **Node-matrix physics parity (N6+)**: 🔄 in progress (derivative-based API path + deeper stability sweeps)
   Progress: `██░░░░░░░░` (20%)
-- **Master paper**: PUBLICATION READY (compiled + BibTeX-resolved)
-- **Main remaining engineering gap**: deepen `su2-node-matrix-elements` beyond the current deterministic placeholder model (N6+: derivative-based API path + richer stability sweeps)
+- **Master paper**: ✅ PUBLICATION READY (23 pages, BibTeX-resolved)
+- **Main remaining engineering gap**: N6+ derivative-based API for node-matrix elements
+
+> **📋 Detailed completion history**: See [SU2-TODO-completed.md](SU2-TODO-completed.md) for full task archive
 
 This TODO is the cross-repository execution plan for the SU(2) 3n-j series:
 
@@ -229,16 +233,23 @@ Tasks:
 ### 3.3 `su2-3nj-recurrences`
 Current assets:
 - LaTeX master: finite recurrences paper
-- No Python entrypoint found yet
+- Python package in `src/su2_3nj_recur/`
+- 18 tests passing (pytest suite)
+- Stability report scripts
 
-Tasks:
-- R1: Implement a small reference recurrence engine (Python):
-  - represent three-term recurrence coefficients $a_k,b_k,c_k$
-  - compute sequences from boundary data
-- R2: Provide stability analysis:
-  - forward vs backward recursion
-  - scaling/normalization strategies
-- R3: Cross-check recurrence-generated values against SymPy (6j/9j) or against closed-form scripts
+Status: ✅ R1-R3 COMPLETE
+- ✅ R1: Three-term recurrence engine implemented
+- ✅ R2: Stability analysis (forward vs backward recursion)
+- ✅ R3: Cross-check vs SymPy for 6j symbols
+
+Acceptance criteria: ✅ MET
+- `python -m pytest` passes (18 tests)
+- Stability report generated (`data/recurrence_stability_report.json`)
+- Cross-verification with SymPy validated
+
+Next (optional enhancements):
+- Extend to 9j recurrence relations
+- Add adaptive stability threshold detection
 
 ### 3.4 `su2-3nj-generating-functional`
 Current assets:
@@ -259,34 +270,29 @@ Tasks:
 ### 3.5 `su2-node-matrix-elements`
 Current assets:
 - LaTeX masters + docs
-- Python package + pytest + deterministic artifact scripts
+- Python package + pytest (15 tests passing)
+- Deterministic reference + stability scripts
 
-Tasks:
-- N0: Add pytest + package skeleton (mirrors other repos)
-  - `pyproject.toml`, `src/` layout, `tests/`, deterministic scripts
-  - target: 15–20 tests
-- N1: Implement a minimal `node_matrix_element(...)` API
-  - Start with a deterministic placeholder model and explicitly hedge scope
-  - Provide both numeric backend (NumPy) and symbolic backend (SymPy) for cross-verification
-  - Mathematical target (future):
-    $$M_v = \left.\frac{\partial^k G(x_e)}{\partial s_1\cdots\partial s_k}\right|_{s=0},\quad G(x_e)\approx \frac{1}{\det(I-K(x_e))}$$
-- N2: Add unit tests for invariants + cross-verification
-  - determinant invariance under permutation of node legs
-  - half-integer domain validation ($2j\in\mathbb{Z}$)
-  - cross-check NumPy vs SymPy determinant for small valence
-- N3: Generate deterministic reference JSON tables for paper inclusion
-  - include small valence sets (3,4,5) and mixed integer/half-integer spins
-- N4: Add stability analysis for arbitrary valence nodes
-  - report condition numbers / regularization sensitivity
-  - output CSV/JSON stability report (mirrors recurrences repo)
-- N5: Add one-command workflow
-  - `python -m pytest`
-  - plus a script to regenerate reference/stability artifacts deterministically
+Status: ✅ N0-N5 BASELINE COMPLETE
+- ✅ N0: pytest + package skeleton (pyproject.toml, src/, tests/, scripts/)
+- ✅ N1: Minimal `node_matrix_element(...)` API with deterministic placeholder
+- ✅ N2: Unit tests for invariants (15 tests: permutation, backend consistency, half-integers)
+- ✅ N3: Deterministic reference JSON tables (`data/reference/node_matrix_reference.json`)
+- ✅ N4: Stability analysis (`data/stability/node_matrix_stability_report.json`)
+- ✅ N5: One-command workflow (`python -m pytest` + regeneration scripts)
 
-Acceptance criteria:
-- `python -m pytest` passes in `su2-node-matrix-elements`
-- Reference JSON tables are regenerated deterministically
-- Stability report exists (CSV/JSON) with clear caveats
+Acceptance criteria: ✅ MET
+- `python -m pytest` passes (15 tests)
+- Reference JSON regenerated deterministically
+- Stability report with condition numbers
+
+**Next (recommended N6+):**
+- **N6**: Add derivative-based API path  
+  - Implement finite-difference "source derivative" prototype for valence k=4
+  - Mathematical target: $M_v = \left.\frac{\partial^k G(x_e)}{\partial s_1\cdots\partial s_k}\right|_{s=0}$
+  - Validate against determinant placeholder for small cases
+  - Add stability sweep comparing derivative vs determinant approaches
+
 
 Next (recommended):
 - N6: Add an explicit derivative-based API path (finite-difference “source derivative” prototype for valence k=4) and validate it against the determinant placeholder for small cases.
@@ -346,140 +352,36 @@ This checklist is intentionally end-to-end: it gets a fresh checkout from “wor
 
 ---
 
-## Next Steps (Priority Order)
+## Next Priorities
 
-### Immediate (this week)
-1. **Task T5**: ✅ Implement cross-repo integration harness
-   - ✅ Create unified test runner that imports from all 5 repos
-   - ✅ Add cross-verification matrix (closedform vs generating-functional vs SymPy)
-  - ✅ Add node-matrix-elements spot checks (backend consistency + permutation invariance sample)
-   - ✅ Generate integration validation report (JSON)
-  - **Results**: 8/8 tests passing — all checks agree!
-   - **Output**: `data/integration_validation_report.json`
+### Active Tasks
 
-2. **Task T2**: 🔄 Extend golden reference datasets with higher-n cases
-   - ✅ 9j high-precision dataset (mpmath 50 dps, 7 test cases)
-   - ⚠️  12j/15j spot checks pending (requires specialized implementations)
-   - ✅ Document stability regimes and failure modes
-   - **Output**: `data/higher_n_reference_9j.json`
+1. **N6 — Derivative-based API prototype** (su2-node-matrix-elements)
+   - Implement finite-difference source derivative for k=4 valence
+   - Add tests + stability sweep comparing derivative vs determinant
+   - Target: advance node-matrix from 20% → 60% physics parity
 
-### Short-term (next 2 weeks)
-3. **Task P2**: ✅ Merge LaTeX sources into unified paper
-   - ✅ Identify master .tex files from each repo
-   - ✅ Create initial paper structure in `papers/paper/`
-   - ✅ Link shared macros and bibliography
-   - ✅ Rename paper file to `su2-3nj-unified-representations.tex`
-   - ✅ Import actual content from individual repos
-   - ✅ Extract core theorems, definitions, and examples
-   - ✅ Harmonize notation and unify mathematical presentation
-   - **Output**: Complete 15-page unified paper with all 5 frameworks integrated
+2. **arXiv Submission Package**
+   - Create `.tar.gz` bundle that compiles on arXiv's TeX stack
+   - Test clean build without manual steps
+   - Include reproducibility instructions
 
-4. **Task P3**: ✅ Integrate literature priors
-   - ✅ Added 10 key SU(2)/3nj references to shared bibliography
-   - ✅ Expanded Background section with historical context and positioning
-   - ✅ Surveyed computational approaches and applications
-   - **Output**: 10-page master paper with comprehensive literature review
-
-5. **Task P4**: ✅ Write validation section for papers
-   - ✅ Generate reproducible tables/figures from reference datasets
-   - ✅ Document cross-verification results
-   - ✅ Add validation methodology and test coverage summary
-  - **Output**: `papers/paper/validation-tables.tex` + updated master paper
-   - **Results**: 161 tests, 3 auto-generated LaTeX tables, 10-page compiled PDF
-
-### Medium-term (next month)
-6. **Task P1**: ✅ Paper structure finalized
-   - ✅ Reviewed 18-page unified structure
-   - ✅ Decision: Keep as single comprehensive paper (strong cross-connections)
-   - ✅ Added extensive cross-references using \Cref throughout all sections
-   - ✅ Comprehensive conclusion with all 5 representations summarized
-   - **Output**: 18-page unified paper ready for final polishing
-
-7. **Task T3**: ✅ Cross-verification matrix documented
-   - ✅ Appendix A: Complete 4×4 verification table
-   - ✅ Documented all validation routes (SymPy, Closed-form, Gen-Func, Recurrence)
-   - ✅ Backend cross-checks (NumPy vs SymPy) for node-matrix elements
-   - ✅ Permutation invariance verification documented
-   - **Output**: Comprehensive validation documentation in paper appendices
-
-8. **Task T1-T4**: ✅ Cross-repo standardization COMPLETE
-   - T1: ✅ Spin domain validation (complete in all repos)
-   - T2: ✅ Golden reference datasets (6j/9j with 50 dps)
-   - T3: ✅ Cross-verification matrix (documented in Appendix A)
-   - T4: ✅ UQ protocol documentation (comprehensive section added to paper)
-   - **Output**: Full standardization across all 5 repositories
-
-### Long-term (next 2-3 months)
-9. **Task N0-N5**: ⚠️ Complete su2-node-matrix-elements computational implementation
-   - Priority: Implement full pytest suite and reference computation engine
-   - Target: Match validation completeness of other 4 repos
-   
-10. **Paper finalization**: ✅ PUBLICATION READY
-   - ✅ Enhanced abstract with specific contributions and metrics
-   - ✅ Comprehensive keywords for indexing
-   - ✅ Author metadata and contact information
-   - ✅ Acknowledgments section complete
-   - ✅ Bibliography resolved (16 citations)
-   - ✅ UQ protocol documented
-   - ✅ All cross-references verified
-   - **Status**: 23-page paper ready for arXiv submission
+3. **Optional Enhancements**
+   - 12j/15j spot checks (requires specialized implementations)
+   - 9j recurrence relations (extend recurrences repo)
+   - Higher-n validation sweeps
 
 ---
 
-## Deliverable Status (Q1 2026 - January Complete)
+## Deliverable Status
 
 ### D0.1 — Reproducible validation harness: ✅ COMPLETE
-- ✅ All 5 repos have single-command test regeneration
-- ✅ Reference datasets versioned in JSON format
-- ✅ pytest-friendly test entrypoints: 161 total tests
-- ✅ Integration harness: 8/8 tests passing
+- All 5 repos operational with 179 total tests passing
+- Integration harness: 8/8 tests passing
 
-### D0.2 — Paper-ready master draft: ✅ COMPLETE
-- ✅ 23-page comprehensive single paper (su2-3nj-unified-representations.tex)
-- ✅ Unified notation across all 5 frameworks
-- ✅ Shared bibliography with 16 core references
-- ✅ Complete with abstract, keywords, acknowledgments
-- ✅ Auto-generated validation tables
-- ✅ Cross-verification matrix in appendices
+### D0.2 — Paper-ready master draft: ✅ COMPLETE  
+- 23-page unified paper with all 5 frameworks
+- Bibliography resolved (16 citations)
 
 ### D0.3 — Q2 2026 submission readiness: 🔄 ON TRACK
-- ✅ All claims have corresponding theorems + validation routes
-- ✅ Limitations explicitly documented (numerical regimes, precision)
-- ⚠️ Final tasks: arXiv packaging, optional journal-specific formatting
-
----
-
-## Summary of Accomplishments (January 2026)
-
-### Paper Development (su2-3nj-series-paper)
-✅ **Complete unified paper**: 22 pages, 293 KB, fully compiled
-- Sections 3-7: All 5 mathematical frameworks integrated with theorems
-- Section 8: Comprehensive validation (161 tests documented)
-- Appendix A: Cross-verification matrix (4×4 table)
-- Appendices B-C: Reference datasets and software documentation
-- Bibliography: 16 citations fully resolved
-- UQ Protocol: Complete spin range, precision, and failure mode guidelines
-
-✅ **Task completion status**:
-- P1: Paper structure finalized (single comprehensive paper)
-- P2: LaTeX merge complete (all 5 upstream repos integrated)
-- P3: Literature integration (10 key references)
-- P4: Validation section with auto-generated tables
-- T1: Spin domain validation standardized
-- T2: Golden reference datasets (6j/9j at 50 dps)
-- T3: Cross-verification matrix documented
-- T4: UQ protocol comprehensive documentation
-- T5: Integration harness (8/8 tests passing)
-
-### Repository Status
-✅ **su2-3nj-generating-functional**: 43 tests passing
-✅ **su2-3nj-uniform-closed-form**: 45 tests passing  
-✅ **su2-3nj-closedform**: Validation framework in place
-✅ **su2-node-matrix-elements**: 15 tests passing, integrated into hub
-⚠️ **su2-3nj-recurrences**: LaTeX complete, computational implementation pending
-
-### Next Priorities
-1. Final paper review and acknowledgments
-2. Complete su2-node-matrix-elements full implementation (N0-N5)
-3. Implement su2-3nj-recurrences computational engine (R1-R3)
-4. Prepare arXiv submission package
+- Remaining: arXiv packaging + optional N6 implementation
