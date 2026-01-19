@@ -5,17 +5,17 @@ Date: 2026-01-18
 ## At-a-glance status
 
 - **Repos with pytest**: 5/5  
-  Progress: `██████████` (100%) — **179 tests** passing total
+  Progress: `██████████` (100%) — **188 tests** passing total
 - **Hub integration harness**: 8/8 checks passing  
   Progress: `██████████` (100%)
 - **Node-matrix baseline parity (N0–N5)**: ✅ complete (15 tests + scripts + artifacts)
   Progress: `██████████` (100%)
 - **Recurrences implementation (R1-R3)**: ✅ complete (18 tests + stability reports)
   Progress: `██████████` (100%)
-- **Node-matrix physics parity (N6+)**: 🔄 in progress (derivative-based API path + deeper stability sweeps)
-  Progress: `██░░░░░░░░` (20%)
+- **Node-matrix physics parity (N6+)**: ✅ N6 complete (9 tests, derivative API for k≤4)
+  Progress: `██████░░░░` (60%) — derivative-based API prototype operational
 - **Master paper**: ✅ PUBLICATION READY (23 pages, BibTeX-resolved)
-- **Main remaining engineering gap**: N6+ derivative-based API for node-matrix elements
+- **Main remaining work**: arXiv submission packaging + optional N7+ enhancements
 
 > **📋 Detailed completion history**: See [SU2-TODO-completed.md](SU2-TODO-completed.md) for full task archive
 
@@ -287,11 +287,14 @@ Acceptance criteria: ✅ MET
 - Stability report with condition numbers
 
 **Next (recommended N6+):**
-- **N6**: Add derivative-based API path  
-  - Implement finite-difference "source derivative" prototype for valence k=4
-  - Mathematical target: $M_v = \left.\frac{\partial^k G(x_e)}{\partial s_1\cdots\partial s_k}\right|_{s=0}$
-  - Validate against determinant placeholder for small cases
-  - Add stability sweep comparing derivative vs determinant approaches
+- ✅ **N6**: Add derivative-based API path (COMPLETE)
+  - ✅ Implemented finite-difference "source derivative" prototype for valence k≤4
+  - ✅ Mathematical target: $M_v = \left.\frac{\partial^k G(x_e)}{\partial s_1\cdots\partial s_k}\right|_{s=0}$
+  - ✅ Validated against determinant placeholder for multiple cases
+  - ✅ Added stability sweep comparing derivative vs determinant approaches
+  - **Output**: 9 new tests, stability comparison report (`data/derivative/derivative_stability_comparison.json`)
+- **N7** (optional enhancement): Extend to k=5, k=6 (higher valence)
+- **N8** (optional enhancement): Automatic differentiation (replace finite differences)
 
 
 Next (recommended):
@@ -356,10 +359,10 @@ This checklist is intentionally end-to-end: it gets a fresh checkout from “wor
 
 ### Active Tasks
 
-1. **N6 — Derivative-based API prototype** (su2-node-matrix-elements)
-   - Implement finite-difference source derivative for k=4 valence
-   - Add tests + stability sweep comparing derivative vs determinant
-   - Target: advance node-matrix from 20% → 60% physics parity
+1. ✅ **N6 — Derivative-based API prototype** (COMPLETE)
+   - Finite-difference source derivative for k≤4 valence
+   - 24 tests passing (15 baseline + 9 N6)
+   - Stability comparison report generated
 
 2. **arXiv Submission Package**
    - Create `.tar.gz` bundle that compiles on arXiv's TeX stack
@@ -369,7 +372,7 @@ This checklist is intentionally end-to-end: it gets a fresh checkout from “wor
 3. **Optional Enhancements**
    - 12j/15j spot checks (requires specialized implementations)
    - 9j recurrence relations (extend recurrences repo)
-   - Higher-n validation sweeps
+   - N7+: Higher valence derivative support (k=5, k=6)
 
 ---
 
