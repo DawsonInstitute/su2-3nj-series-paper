@@ -14,8 +14,8 @@ Date: 2026-01-18
   Progress: `██████████` (100%)
 - **Node-matrix physics parity (N6+)**: ✅ N6 complete (9 tests, derivative API for k≤4)
   Progress: `██████░░░░` (60%) — derivative-based API prototype operational
-- **Master paper**: ✅ **arXiv-ready** (~21 pages with 1in margins, all polish tasks A1-A8 complete)
-- **Main remaining work**: Optional enhancements (N7+ higher valence, additional figures)
+- **Master paper**: ✅ **arXiv-ready** (~21 pages with 1in margins, all polish tasks A1-A8 + B1 complete, arXiv bundle tested)
+- **Main remaining work**: Optional enhancements (N7+ higher valence, 9j recurrence relations)
 
 **Notes**
 - **Test count reconciled (2026-01-18)**: **178 total tests** = 21 integration checks + 157 per-repo unit tests. All documentation and paper now consistent.
@@ -159,7 +159,27 @@ Bundle contents:
 
 Acceptance criteria: ✅ `pdflatex` works from extracted bundle; upload-ready for arXiv.
 
-Scope note: for `su2-node-matrix-elements`, implement a *minimal, deterministic* computational entrypoint first (even if initially a placeholder), with clear hedging and tests that verify invariants, stability reporting, and cross-checks against independent numeric/symbolic backends.
+### B1 — ✅ Bibliography verification pass (downloaded sources)
+**Status**: Complete (2026-01-19)
+
+Goal: Ensure a small set of core priors in `papers/shared/shared-bibliography.bib` match the cited source files under `papers/related/`, and that `papers/paper/su2-3nj-unified-representations.bbl` regenerates cleanly.
+
+Verified / corrected:
+- ✅ Johansson & Forssén (WIGXJPF): title/authors verified against `papers/related/wigxjpfpaper.tex`.
+- ✅ Luscombe & Luban (Phys. Rev. E 57, 7274): title corrected to "Simplified recursive algorithm for Wigner 3j and 6j symbols"; DOI added.
+- ✅ Meurer et al. (SymPy): title/venue/DOI verified against `papers/related/Meurer2017.pdf`; author list expanded; DOI/URL added.
+- ✅ Racah (Phys. Rev. 62, 438): title verified against `papers/related/Racah_1942.pdf`; APS-style bib fields + DOI/URL added.
+- ✅ Rasch & Yu (SIAM SISC): DOI verified against `papers/related/Rasch_and_Yu2003.pdf`; citation normalized to the journal issue year (2004).
+- ✅ Raynal et al. (J. Math. Phys. 20, 276): title/DOI verified against `papers/related/Raynal_1979.pdf`; DOI/URL added.
+- ✅ Regge 1958 (Nuovo Cim. 10, 544): title/venue verified against corrected `papers/related/Regge_1958.pdf` ("Symmetry Properties of Clebsch-Gordan's Coefficients"); DOI confirmed.
+- ✅ Rovelli & Smolin (Spin networks): title/authors verified against `papers/related/Rovelli_and_Smolin_1995.pdf`; page range + DOI + arXiv id added.
+- ✅ Schulten & Gordon (J. Math. Phys. 16, 1961): title/DOI verified against `papers/related/Schulten_1975.pdf`; DOI/URL added.
+- ✅ Varshalovich et al. (book): PDF metadata verified; bib entry aligned with authoritative DOI.
+- ✅ Yutsis et al. (book): Changed from `@article` to `@book` to eliminate BibTeX "empty journal" warning.
+
+Acceptance criteria: ✅ All core priors verified; `.bbl` regenerates cleanly without warnings.
+
+Scope note: Scope note: for `su2-node-matrix-elements`, implement a *minimal, deterministic* computational entrypoint first (even if initially a placeholder), with clear hedging and tests that verify invariants, stability reporting, and cross-checks against independent numeric/symbolic backends.
 
 ---
 
@@ -479,10 +499,11 @@ This checklist is intentionally end-to-end: it gets a fresh checkout from “wor
    - 24 tests passing (15 baseline + 9 N6)
    - Stability comparison report generated
 
-2. **arXiv Submission Package**
-   - Create `.tar.gz` bundle that compiles on arXiv's TeX stack
-   - Test clean build without manual steps
-   - Include reproducibility instructions
+2. ✅ **arXiv Submission Package** (COMPLETE)
+   - Created `.tar.gz` bundle that compiles on arXiv's TeX stack
+   - Tested clean build from extracted bundle (2 pdflatex passes → 21 pages, 375KB PDF)
+   - Reproducibility appendix included in paper
+   - Bundle verified: `arxiv-submission-2026-01-19.tar.gz`
 
 3. **Optional Enhancements**
   - 12j/15j spot checks (requires explicit topology/kind + implementation)
