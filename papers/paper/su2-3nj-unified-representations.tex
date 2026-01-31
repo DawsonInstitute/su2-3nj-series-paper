@@ -83,21 +83,21 @@ Selection rules include triangle inequalities (e.g., $|j_1-j_2| \leq j_3 \leq j_
 
 \subsection{Historical Context and Existing Approaches}
 
-The theory of angular momentum recoupling has a rich seventy-year history. Wigner~\cite{wigner1931gruppentheorie} established the foundation with 3j symbols, extended by Racah~\cite{racah1942theory} to 6j coefficients. The comprehensive treatise by Varshalovich et al.~\cite{varshalovich1988quantum} systematized computational methods and remains the standard reference.
+The theory of angular momentum recoupling has a rich seventy-year history. Wigner~\cite{wigner2013} established the foundation with 3j symbols, extended by Racah~\cite{racah1942} to 6j coefficients. The comprehensive treatise by Varshalovich et al.~\cite{varshalovich1988} systematized computational methods and remains the standard reference.
 
 Prior computational approaches include:
 
-\paragraph{Summation formulas} Direct evaluation of Racah sums. Accurate but computationally expensive for large quantum numbers. Schulten and Gordon~\cite{schulten1975exact} developed exact recursive evaluation.
+\paragraph{Summation formulas} Direct evaluation of Racah sums. Accurate but computationally expensive for large quantum numbers. Schulten and Gordon~\cite{schulten1975} developed exact recursive evaluation.
 
-\paragraph{Hypergeometric representations} Recognition that 3nj symbols are special hypergeometric functions. Raynal~\cite{raynal1979complete} provided complete 6j representations. We extend this to universal product formulas.
+\paragraph{Hypergeometric representations} Recognition that 3nj symbols are special hypergeometric functions. Raynal~\cite{raynal1979} provided complete 6j representations. We extend this to universal product formulas.
 
-\paragraph{Recurrence relations} Three-term recurrences build values from boundaries. Luscombe and Luban~\cite{luscombe1998three} developed a simplified recursive algorithm for Wigner 3j and 6j symbols. We derive closed forms for coefficients.
+\paragraph{Recurrence relations} Three-term recurrences build values from boundaries. Luscombe and Luban~\cite{luscombe1998} developed a simplified recursive algorithm for Wigner 3j and 6j symbols. We derive closed forms for coefficients.
 
-\paragraph{Generating functionals} Yutsis et al.~\cite{yutsis1962mathematical} introduced graphical methods. We develop systematic generating functional calculus for arbitrary valence.
+\paragraph{Generating functionals} Yutsis et al.~\cite{yutsis1962} introduced graphical methods. We develop systematic generating functional calculus for arbitrary valence.
 
-\paragraph{Symmetry relations} Regge~\cite{regge1958symmetry,regge1959symmetry} discovered profound permutation symmetries. Our formulas naturally encode these through hypergeometric structure.
+\paragraph{Symmetry relations} Regge~\cite{regge1958,regge1959} discovered profound permutation symmetries. Our formulas naturally encode these through hypergeometric structure.
 
-Modern implementations (SymPy~\cite{meurer2017sympy}, specialized libraries~\cite{johansson2016fast,rasch2003efficient}) combine these with numerical optimization.
+Modern implementations (SymPy~\cite{meurer2017}, specialized libraries~\cite{johansson2016,rasch2004}) combine these with numerical optimization.
 
 \subsection{Applications}
 
@@ -105,7 +105,7 @@ Modern implementations (SymPy~\cite{meurer2017sympy}, specialized libraries~\cit
 \begin{itemize}
 \item \textbf{Atomic/molecular}: Multi-electron systems, hyperfine structure
 \item \textbf{Nuclear structure}: Shell models, coupled-cluster methods
-\item \textbf{Quantum gravity}: Spin networks~\cite{rovelli1995spin}, loop quantum gravity recoupling~\cite{depietri1996regge}
+\item \textbf{Quantum gravity}: Spin networks~\cite{rovelli1995}, loop quantum gravity recoupling~\cite{depietri1996}
 \item \textbf{Quantum information}: Entanglement, tensor networks
 \end{itemize}
 
@@ -633,7 +633,7 @@ The unified framework presented here provides both theoretical insight—connect
 
 \section*{Acknowledgments}
 
-This work builds on the foundational contributions of Wigner~\cite{wigner1931gruppentheorie}, Racah~\cite{racah1942theory}, and Regge~\cite{regge1958symmetry,regge1959symmetry} to the theory of angular momentum recoupling. We acknowledge the SymPy development team~\cite{meurer2017sympy} for providing robust symbolic computation infrastructure enabling independent validation.
+This work builds on the foundational contributions of Wigner~\cite{wigner2013}, Racah~\cite{racah1942}, and Regge~\cite{regge1958,regge1959} to the theory of angular momentum recoupling. We acknowledge the SymPy development team~\cite{meurer2017} for providing robust symbolic computation infrastructure enabling independent validation.
 
 Computational validation employed the Python scientific computing ecosystem, including NumPy, mpmath (for arbitrary-precision arithmetic), and pytest (for reproducible testing). High-precision reference datasets were generated using mpmath's 50-decimal-place arithmetic.
 

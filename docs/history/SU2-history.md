@@ -1016,3 +1016,6 @@ This gives you both the standard AMS formatting (which puts author info in the f
 The document compiled successfully with the updated bibliography file name. The .bib file has been renamed to `references.bib` and the bibliography command changed to `\bibliography{references}`, matching the format used in the Zheng2026 paper. The PDF should now have the author information displayed only once, as handled by the AMS LaTeX `\maketitle` command.
 <!-- ------ -->
 ---
+The citation keys in the LaTeX document have been updated to match the keys in the bibliography file (e.g., `wigner1931gruppentheorie` → `wigner2013`, `racah1942theory` → `racah1942`, etc.). The document compiled successfully, generating an updated PDF with the corrected references. All instances of the old keys have been replaced with the new author-year format keys from the `.bib` file.
+<!-- ------ -->
+---
