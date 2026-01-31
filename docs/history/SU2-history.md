@@ -1019,3 +1019,13 @@ The document compiled successfully with the updated bibliography file name. The 
 The citation keys in the LaTeX document have been updated to match the keys in the bibliography file (e.g., `wigner1931gruppentheorie` → `wigner2013`, `racah1942theory` → `racah1942`, etc.). The document compiled successfully, generating an updated PDF with the corrected references. All instances of the old keys have been replaced with the new author-year format keys from the `.bib` file.
 <!-- ------ -->
 ---
+The LaTeX document has been successfully updated to resolve the compilation issues. The key fixes included:
+
+- Added the missing `\footnotetext` after `\maketitle` to define the footnote mark used in the author block.
+- Simplified the author block to use standard AMS LaTeX commands (`\author`, `\address`, `\email`) for proper formatting.
+- Ensured the bibliography command points to references.bib and the file exists.
+- Defined the necessary macros (`\authorname`, `\authoraffiliation`, `\authoremail`) to support the footnote text.
+
+The document should now compile without the footnote error, producing a professional PDF with visible author information suitable for arXiv submission. All citation keys have been updated to match the bibliography, and the document structure follows AMS standards.
+<!-- ------ -->
+---
