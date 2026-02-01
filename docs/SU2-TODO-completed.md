@@ -238,11 +238,20 @@ Last updated: 2026-01-31
 - ✅ **Content confirmed**: Includes comprehensive 3nj tables (Chapters 8-9)
 - **Result**: General attribution verified; full conversion unnecessary for this reference
 
+**schulten1975 Evaluation** (2026-02-01):
+- ✅ Converted `Schulten_1975.pdf` to markdown (609 lines)
+- ✅ Evaluated citation in manuscript (line 80)
+- ✅ **Verified**: Correctly attributed "exact recursive evaluation" to Schulten & Gordon (1975)
+- ✅ **Citation accuracy**: Paper title matches claim precisely
+- ✅ **Key finding**: Developed three-term recursion relationships with numerical stability for large quantum numbers
+- ✅ **Technical content**: Sections II-IV detail recursion algorithms, forward/backward recursion, and accuracy testing
+- **Result**: All claims verified; no corrections needed
+
 **Summary**:
-- **Completed evaluations**: 3/17 (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓)
+- **Completed evaluations**: 4/17 (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓)
 - **Issues found**: 1 historical inaccuracy (wigner2013) — resolved
 - **Manuscript revisions**: Updated line 91 to distinguish Clebsch-Gordan vs 3j notation
 - **New citations added**: wigner1993 (3j formalization)
-- **Pending evaluations**: 14/17 remaining
+- **Pending evaluations**: 13/17 remaining
 
 

@@ -66,7 +66,7 @@ Date: 2026-01-18
 
 ## PDF Conversions and Citation Evaluations
 
-**Progress**: 3/17 complete (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓) | 14/17 pending
+**Progress**: 4/17 complete (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓) | 13/17 pending
 **Completed tasks moved to**: [SU2-TODO-completed.md](SU2-TODO-completed.md#16-bibliography-citation-evaluations)
 
 ### schulten1975
