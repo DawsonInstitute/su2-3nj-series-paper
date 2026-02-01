@@ -1513,3 +1513,44 @@ Remaining Phase 3 tasks from SU2-TODO.md:
 - `docs/SU2-TODO.md` (Task management)
 - `docs/SU2-TODO-completed.md` (Archived tasks)
 - `energy/docs/downloaded_paper_locations.tsv` (New entries)
+
+<!-- ------ -->
+---
+
+## Session Summary — racah1942 Citation Evaluation (2026-02-01)
+
+### What Was Accomplished
+
+#### 1. Citation Evaluation
+- **Evaluated** racah1942 against manuscript claims
+- **Verified** manuscript correctly attributes extension to 6j coefficients to Racah (1942)
+- **Located** key content: Section §5 introduces $W$-coefficient (Racah 6j symbol precursor)
+
+#### 2. Key Findings
+- **W-Coefficient Introduction**: Racah (1942) Section §5, Equation (57) and beyond
+  - Introduces $W(j_1 j_2 j_3 j_4; j_5 j_6)$ notation
+  - Modern 6j symbol: $\begin{Bmatrix} j_1 & j_2 & j_3 \\ j_4 & j_5 & j_6 \end{Bmatrix} = (-1)^{j_1+j_2+j_4+j_5} W(j_1 j_2 j_5 j_4; j_3 j_6)$
+- **Historical Context**: Paper predates standardized "6j symbol" notation
+- **Mathematical Content**: Tensor operator algebra, V-coefficients, many-electron spectra
+
+#### 3. Citation Accuracy
+- ✅ **Line 76**: "extended by Racah to 6j coefficients" — CORRECT
+- ✅ **Line 80**: "Racah sums" — APPROPRIATE (refers to summation formulas in §2)
+- ✅ **Line 270**: "Racah 6j case" — STANDARD TERMINOLOGY
+- ✅ **Line 626**: Foundational attribution — JUSTIFIED
+
+### Files Modified
+- `papers/paper/su2-3nj-unified-representations-bib-annotations.md` (Completed evaluation)
+- `docs/SU2-TODO.md` (Marked racah1942 tasks complete)
+- `docs/history/SU2-history.md` (This summary)
+
+### Evaluation Status
+- **Completed**: 2/17 (wigner2013 ✓, racah1942 ✓)
+- **Pending**: 15/17 remaining citations
+
+### Notes
+- Racah (1942) is THE foundational reference for 6j symbols (W-coefficients)
+- 1375-line markdown conversion available for reference
+- All manuscript claims verified against source material
+- No issues or corrections needed
+
