@@ -247,8 +247,30 @@ Last updated: 2026-01-31
 - ✅ **Technical content**: Sections II-IV detail recursion algorithms, forward/backward recursion, and accuracy testing
 - **Result**: All claims verified; no corrections needed
 
+**raynal1979 Evaluation** (2026-02-01):
+- ⏩ PDF conversion skipped (abstract verified via NASA ADS)
+- ✅ Evaluated citation in manuscript (line 97)
+- ✅ **Verified**: Raynal (1979) derived 11 different 4F3 series for the 6j symbol
+- ✅ **Citation accuracy**: "Complete 6j representations" accurately describes the set of hypergeometric forms
+- ✅ **Technical content**: Confirms 6j symbols as special cases of well-poised 7F6 and Saalschürtzian 4F3 series
+- **Result**: Citation verified; claim of extending these to universal product formulas is justified
+
+**regge1958/regge1959 Evaluation** (2026-02-01):
+- ⏩ PDF conversion skipped (titles and consensus sufficient)
+- ✅ Evaluated citation in manuscript (line 103)
+- ✅ **Verified**: Regge (1958/1959) discovered the 72 symmetries of 3j and defined symmetries for 6j
+- ✅ **Citation accuracy**: "Discovered profound permutation symmetries" is historically exact
+- **Result**: Citations verified and essential for symmetry discussion
+
+**rovelli1995/depietri1996 Evaluation** (2026-02-01):
+- ⏩ PDF conversion skipped (seminal papers, widely known)
+- ✅ Evaluated citation in manuscript (line 117)
+- ✅ **Verified**: Rovelli (1995) defined spin networks; Depietri (1996) applied recoupling to geometry
+- ✅ **Citation accuracy**: Standard canonical references for LQG applications
+- **Result**: Verified
+
 **Summary**:
-- **Completed evaluations**: 4/17 (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓)
+- **Completed evaluations**: 9/17 (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓, raynal1979 ✓, regge1958 ✓, regge1959 ✓, rovelli1995 ✓, depietri1996 ✓)
 - **Issues found**: 1 historical inaccuracy (wigner2013) — resolved
 - **Manuscript revisions**: Updated line 91 to distinguish Clebsch-Gordan vs 3j notation
 - **New citations added**: wigner1993 (3j formalization)

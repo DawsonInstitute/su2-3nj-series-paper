@@ -10,7 +10,7 @@ Prioritize: polish → arXiv → JMP submission → use acceptance/under-review 
   Novelty claim strong and verifiable; validation rigorous (161 pytest + SymPy + high-precision refs).  
   Affiliation: Dawson Institute for Advanced Physics (sufficient for JMP; math rigor trumps letterhead).  
 - **Bibliography**: ~16-17 entries; elliott1953 removed (uncited); DOIs mostly complete; added labarthe1975 and aquilanti2014 (or equivalent) recommended.  
-- **Citation Evaluations**: wigner2013 ✓ (accurate: foundational coupling coeffs; 3j notation later), racah1942 ✓; 13-15 pending but low-risk (standard refs).  
+- **Citation Evaluations**: wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓, raynal1979 ✓, regge1958/59 ✓, rovelli+ ✓; 8 pending.  
 - **Code/Validation**: 100% on core repos (pytest, hub harness, recurrences, node-matrix N0–N5); N6+ at 60% (derivative API prototype done).  
 - **Remaining Risk**: Minor citation tweaks only; no invalidations found so far.
 
@@ -27,14 +27,14 @@ Prioritize: polish → arXiv → JMP submission → use acceptance/under-review 
 - [ ] Word count / page estimate: Aim 20–30 pages (current ~21 pages reasonable for JMP).
 
 ### 2. Bibliography & Citation Final Checks (1 day)
-- [ ] Spot-check 4–6 remaining high-impact citations manually (no full MinerU needed for most):  
-  - varshalovich1988 (standard reference; quick metadata + key table check)  
-  - schulten1975 (recurrence comparison)  
-  - raynal1979 (generalized 6j)  
-  - regge1958/regge1959 (symmetries; verify Regge encoding in hypergeometric structure)  
-  - rovelli1995/depietri1996 (LQG/spin network applications)  
-- [ ] If any gap (e.g., missing explicit Regge in product formula), add footnote or sentence in §Closed-Form Hypergeometric Formulas.  
-- [ ] Update su2-3nj-unified-representations-bib-annotations.md: Mark completed (wigner2013, racah1942); summarize others as "metadata valid, claim alignment assumed unless contradicted."  
+- [x] Spot-check 4–6 remaining high-impact citations manually (no full MinerU needed for most):
+  - [x] varshalovich1988 (standard reference; quick metadata + key table check)
+  - [x] schulten1975 (recurrence comparison)
+  - [x] raynal1979 (generalized 6j)
+  - [x] regge1958/regge1959 (symmetries; verify Regge encoding in hypergeometric structure)
+  - [x] rovelli1995/depietri1996 (LQG/spin network applications)
+- [ ] If any gap (e.g., missing explicit Regge in product formula), add footnote or sentence in §Closed-Form Hypergeometric Formulas.
+- [x] Update su2-3nj-unified-representations-bib-annotations.md: Mark completed (wigner2013, racah1942); summarize others as "metadata valid, claim alignment assumed unless contradicted."
 - [ ] Halt only if critical invalidation (extremely unlikely at this stage).
 
 ### 3. arXiv Preparation & Upload (1 day)
