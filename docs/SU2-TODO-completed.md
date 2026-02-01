@@ -2,7 +2,7 @@
 
 This file contains the detailed history of completed tasks from the main TODO. Active tasks remain in `SU2-TODO.md`.
 
-Last updated: 2026-01-18
+Last updated: 2026-01-31
 
 ---
 
@@ -193,3 +193,13 @@ Last updated: 2026-01-18
 - Closed-Form: `/home/echo_/Code/asciimath/su2-3nj-closedform/`
 - Node Matrix Elements: `/home/echo_/Code/asciimath/su2-node-matrix-elements/`
 - Recurrences: `/home/echo_/Code/asciimath/su2-3nj-recurrences/`
+
+#### 14. Phase 3 Bibliography Completeness Check: ✅ COMPLETE (2026-01-31)
+- ✅ Reviewed all 17 bibliography entries for DOI coverage
+- ✅ Verified 16/17 entries have DOIs (only yutsis1962, a 1962 book, lacks DOI as expected)
+- ✅ Removed elliott1953 from bibliography (not cited in manuscript)
+- ✅ Added labarthe1975 citation in Section 6 (Generating Functionals)
+- ✅ Added bitencourt2014 citation in Section 8 (Validation and Cross-Verification)
+- **Final bibliography count**: 16 entries (all with DOIs except yutsis1962)
+- **Citations added**: "extending the early generating function work of Labarthe" (Section 6), "complement the asymptotic analysis of Bitencourt et al." (Section 8)
+

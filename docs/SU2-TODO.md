@@ -27,12 +27,13 @@ Date: 2026-01-18
   - [x] Add PACS codes (02.20.Qs, 03.65.Fd, 04.60.Pp)
   - **Status**: ✅ Complete (2026-01-31)
 
-- [ ] **Bibliography completeness check**:
-  - [ ] Verify all DOIs are present (priority: johansson2016, meurer2017)
-  - [ ] Remove elliott1953 if not cited in manuscript text
-  - [ ] Ensure labarthe1975 and bitencourt2014 are properly cited in relevant sections
-  - [ ] Add cross-references in Section 6 (Generating Functionals) for labarthe1975
-  - [ ] Add cross-references in Section 8 (Stability Analysis) for bitencourt2014
+- [x] **Bibliography completeness check**:
+  - [x] Verify all DOIs are present (16/17 entries have DOIs; only yutsis1962 lacks DOI - expected for 1962 book)
+  - [x] Remove elliott1953 if not cited in manuscript text (removed - not cited)
+  - [x] Ensure labarthe1975 and bitencourt2014 are properly cited in relevant sections
+  - [x] Add cross-references in Section 6 (Generating Functionals) for labarthe1975
+  - [x] Add cross-references in Section 8 (Validation and Cross-Verification) for bitencourt2014
+  - **Status**: ✅ Complete (2026-01-31)
 
 - [ ] **Prepare arXiv submission bundle**:
   - [ ] Validate with `arxiv-collector` tool

@@ -314,7 +314,7 @@ The choice of recursion direction is critical: forward recursion is stable when 
 \section{Generating Functionals}
 \label{sec:generating-functional}
 
-We introduce a universal generating functional framework based on Schwinger-boson Gaussian integrals over spinors. This approach unifies all 3nj symbols through a single determinant formula.
+We introduce a universal generating functional framework based on Schwinger-boson Gaussian integrals over spinors. This approach unifies all 3nj symbols through a single determinant formula, extending the early generating function work of Labarthe~\cite{labarthe1975} to arbitrary coupling graphs.
 
 \subsection{Graph-Theoretic Formulation}
 
@@ -479,7 +479,7 @@ To establish deterministic validation baselines beyond 6j symbols, we computed h
 \item Edge cases (all zeros, partial zeros with triangle violations)
 \end{itemize}
 
-All 7 cases computed successfully with documented stability behavior. Table~\ref{tab:validation-summary} provides a comprehensive summary of test coverage across all validation suites.
+All 7 cases computed successfully with documented stability behavior. Table~\ref{tab:validation-summary} provides a comprehensive summary of test coverage across all validation suites. Our exact computation methods complement the asymptotic analysis of Bitencourt et al.~\cite{bitencourt2014} for the screen representation.
 
 % Include auto-generated validation tables
 \input{validation-tables}

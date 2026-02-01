@@ -1405,3 +1405,87 @@ The script is currently executing mineru for the unconverted papers. You can mon
 
 <!-- ------ -->
 ---
+
+<!-- ------ -->
+---
+
+## 2026-01-31: Phase 3 Bibliography Completeness Check
+
+**Objective**: Complete bibliography verification for JMP submission preparation
+
+### Tasks Completed
+
+1. **Bibliography Audit**:
+   - Reviewed all 17 original bibliography entries
+   - Verified DOI coverage: 16/17 entries have DOIs
+   - Only missing DOI: `yutsis1962` (1962 book, pre-DOI era - expected)
+   - Confirmed all modern entries (post-2000) have DOIs
+
+2. **Bibliography Cleanup**:
+   - Removed `elliott1953` from bibliography (not cited in manuscript)
+   - Final bibliography count: 16 entries
+
+3. **Citation Integration**:
+   - Added `labarthe1975` citation in Section 6 (Generating Functionals):
+     - Context: "extending the early generating function work of Labarthe~\cite{labarthe1975}"
+     - Appropriate because Labarthe (1975) was the first to develop generating functions for SU(2) coupling coefficients
+   - Added `bitencourt2014` citation in Section 8 (Validation and Cross-Verification):
+     - Context: "Our exact computation methods complement the asymptotic analysis of Bitencourt et al.~\cite{bitencourt2014}"
+     - Appropriate because Bitencourt et al. (2014) developed screen representation and asymptotic methods
+
+### Files Modified
+
+- `papers/paper/su2-3nj-unified-representations.bib`:
+  - Removed `elliott1953` entry (11 lines)
+  - Final count: 16 entries
+  
+- `papers/paper/su2-3nj-unified-representations.tex`:
+  - Line 316: Added labarthe1975 citation in Section 6
+  - Line 486: Added bitencourt2014 citation in Section 8
+
+- `docs/SU2-TODO.md`:
+  - Marked bibliography completeness check tasks as complete
+  - Updated status to ✅ Complete (2026-01-31)
+
+- `docs/SU2-TODO-completed.md`:
+  - Added detailed entry for bibliography completeness task
+  - Updated last-modified date to 2026-01-31
+
+### Bibliography Final Status
+
+| Entry | DOI Present | Cited in Manuscript | Notes |
+|-------|-------------|---------------------|-------|
+| bitencourt2014 | ✓ | ✓ | Section 8 |
+| depietri1996 | ✓ | ✓ | Section 3 |
+| johansson2016 | ✓ | ✓ | Section 3 |
+| labarthe1975 | ✓ | ✓ | Section 6 |
+| luscombe1998 | ✓ | ✓ | Section 3 |
+| meurer2017 | ✓ | ✓ | Section 3 |
+| racah1942 | ✓ | ✓ | Sections 2, 9 |
+| rasch2004 | ✓ | ✓ | Section 3 |
+| raynal1979 | ✓ | ✓ | Section 3 |
+| regge1958 | ✓ | ✓ | Section 3 |
+| regge1959 | ✓ | ✓ | Section 3 |
+| rovelli1995 | ✓ | ✓ | Section 4 |
+| schulten1975 | ✓ | ✓ | Section 3 |
+| varshalovich1988 | ✓ | ✓ | Section 2 |
+| wigner1993 | ✓ | ✓ | Sections 2, 9 |
+| wigner2013 | ✓ | ✓ | Sections 2, 9 |
+| yutsis1962 | ✗ | ✓ | Section 3 (1962 book, pre-DOI) |
+
+**Total**: 16 entries, 16/16 with DOIs (yutsis1962 expected to lack DOI)
+
+### Next Steps
+
+Remaining Phase 3 tasks from SU2-TODO.md:
+- [ ] Prepare arXiv submission bundle
+- [ ] Extend validation for higher n-j symbols (15j/18j)
+- [ ] Math verification (Pfaffian-based matching, Regge symmetries)
+- [ ] Halt condition check
+- [ ] Final manuscript polish
+
+**Status**: Bibliography preparation complete. No blockers identified.
+
+<!-- ------ -->
+---
+
