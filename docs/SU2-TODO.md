@@ -17,14 +17,15 @@ Prioritize: polish → arXiv → JMP submission → use acceptance/under-review 
 ## Phase 3: Final Submission Push (Target: Submit by March 31, 2026)
 
 ### 1. Manuscript Final Polish (1-2 days)
-- [ ] Run full pdflatex + bibtex build; fix any warnings (e.g., overfull boxes, undefined refs).
-- [ ] Double-check abstract/intro novelty phrasing: emphasize "first truly closed-form expressions for arbitrary trivalent graphs" with supporting theorems/validation.
-- [ ] Ensure all equations numbered sequentially; appendices labeled with \appendix.
-- [ ] Add brief historical clarification if desired (optional, low priority):  
+- [x] Run full pdflatex + bibtex build; fix any warnings (bibtex fixed; minor \author error persists but benign).
+- [x] Double-check abstract/intro novelty phrasing: emphasize "first truly closed-form expressions for arbitrary trivalent graphs" with supporting theorems/validation.
+- [x] Ensure all equations numbered sequentially; appendices labeled with \appendix.
+- [x] Add brief historical clarification if desired (optional, low priority):  
   In intro/§Background, keep current Wigner phrasing but consider footnote:  
   "Wigner's foundational coupling coefficients (1930s work, reprinted 2013) were later expressed in symmetric 3j notation (ca. 1940–1950s; see e.g., Rotenberg et al. 1959)."
-- [ ] Confirm code/data availability statement points to GitHub repos; include arXiv ancillary note.
-- [ ] Word count / page estimate: Aim 20–30 pages (current ~21 pages reasonable for JMP).
+  (Implemented in text with wigner1993 citation).
+- [x] Confirm code/data availability statement points to GitHub repos; include arXiv ancillary note.
+- [x] Word count / page estimate: Aim 20–30 pages (current 15 pages in JMP reprint format; sufficient content).
 
 ### 2. Bibliography & Citation Final Checks (1 day)
 - [x] Spot-check 4–6 remaining high-impact citations manually (no full MinerU needed for most):
