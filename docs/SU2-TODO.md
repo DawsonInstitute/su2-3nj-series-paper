@@ -8,8 +8,9 @@ Date: 2026-01-18
 # SU(2) 3n-j Series — Citations Assessment TODO
 
 **Date Added**: 2026-01-31  
-**Last Updated**: 2026-01-31 (Submission Preparation Phase)  
+**Last Updated**: 2026-02-01 (Submission Preparation Phase)  
 **Objective**: Systematically convert all referenced PDFs to markdown using MinerU, evaluate citations in the manuscript, and create comprehensive citation annotations to ensure accuracy and completeness.
+
 
 ## Phase 3: Journal Submission Preparation (Q1 2026)
 

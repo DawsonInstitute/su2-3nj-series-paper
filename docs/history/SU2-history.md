@@ -1268,9 +1268,6 @@ Key fixes applied:
 The script is currently executing mineru for the unconverted papers. You can monitor progress by checking the terminal output or the generated directories in `~/Code/asciimath/su2-3nj-series-paper/papers/related`. If any papers fail to process, you can re-run the script as it will skip already completed ones.
 <!-- ------ -->
 ---
-<!-- ------ -->
----
-
 ## Session Summary — Journal Submission Preparation & Citation Verification (2026-01-31)
 
 ### What Was Accomplished
@@ -1489,3 +1486,30 @@ Remaining Phase 3 tasks from SU2-TODO.md:
 <!-- ------ -->
 ---
 
+
+<!-- ------ -->
+---
+
+## Session Summary — History Cleanup & Tracking Update (2026-02-01)
+
+### What Was Accomplished
+
+#### 1. Maintenance & Cleanup
+- **Fixed** duplicate session separator in `SU2-history.md` (lines 1269-1272)
+- **Ensured** clean history log format
+
+#### 2. Tracking Updates
+- **Updated** `downloaded_paper_locations.tsv` with missing entries from bibliography:
+  - **Added** `labarthe1975` (Generating Functions for the Coupling-Recoupling Coefficients of SU(2))
+  - **Added** `bitencourt2014` (mapped to `3j_LNCS2014-arxiv.tex`)
+  - **Verified** `wigner1993` entry availability (already present)
+
+#### 3. Task Management
+- **Moved** completed maintenance tasks to `SU2-TODO-completed.md`
+- **Refreshed** `SU2-TODO.md` state
+
+### Files Modified
+- `docs/history/SU2-history.md` (Cleanup)
+- `docs/SU2-TODO.md` (Task management)
+- `docs/SU2-TODO-completed.md` (Archived tasks)
+- `energy/docs/downloaded_paper_locations.tsv` (New entries)

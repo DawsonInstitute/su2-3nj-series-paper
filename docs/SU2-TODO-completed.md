@@ -203,3 +203,12 @@ Last updated: 2026-01-31
 - **Final bibliography count**: 16 entries (all with DOIs except yutsis1962)
 - **Citations added**: "extending the early generating function work of Labarthe" (Section 6), "complement the asymptotic analysis of Bitencourt et al." (Section 8)
 
+#### 15. History and Tracking Maintenance: ✅ COMPLETE (2026-02-01)
+- ✅ Cleaned up duplicate session separators in `SU2-history.md`
+- ✅ Updated `downloaded_paper_locations.tsv` with missing entries:
+  - Added `labarthe1975` (Journal of Physics A)
+  - Added `bitencourt2014` (mapped to 3j_LNCS2014-arxiv.tex)
+  - Verified `wigner1993` was already present and correct
+- ✅ Cross-referenced with .bib file for accuracy
+
+
