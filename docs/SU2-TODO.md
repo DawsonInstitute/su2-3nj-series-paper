@@ -1,6 +1,172 @@
 # SU(2) 3n-j Series — Cross-Repo TODO (Q1–Q2 2026)
 
-Date: 2026-01-18
+Date: 2026-01-18  
+**Last Updated**: 2026-01-31 (Citation Assessment Phase)
+
+---
+
+# SU(2) 3n-j Series — Citations Assessment TODO
+
+**Date Added**: 2026-01-31  
+**Objective**: Systematically convert all referenced PDFs to markdown using MinerU, evaluate citations in the manuscript, and create comprehensive citation annotations to ensure accuracy and completeness.
+
+## PDF Conversions and Citation Evaluations
+
+### wigner2013
+- [ ] Convert `Wigner_1931.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:31`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/wigner2013/wigner2013.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:91,641`
+  - Reference: "Gruppentheorie und ihre Anwendung auf die Quantenmechanik der Atomspektren"
+  - Create/update annotation file with findings
+  - Determine if citation changes needed
+  - Check for additional citations needed
+  - Verify manuscript content aligns with source
+
+### racah1942
+- [ ] Convert `Racah_1942.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:41`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/racah1942/racah1942.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:91,641`
+  - Reference: "Theory of Complex Spectra. II"
+  - Create/update annotation file with findings
+
+### varshalovich1988
+- [ ] Convert `Varshalovich_1988.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:34`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/varshalovich1988/varshalovich1988.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:91`
+  - Reference: "Quantum Theory of Angular Momentum"
+  - Create/update annotation file with findings
+
+### schulten1975
+- [ ] Convert `Schulten_1975.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:28`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/schulten1975/schulten1975.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:95`
+  - Reference: "Exact recursive evaluation of 3j- and 6j-coefficients for quantum-mechanical coupling of angular momenta"
+  - Create/update annotation file with findings
+
+### raynal1979
+- [ ] Convert `Raynal_1979.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:33`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/raynal1979/raynal1979.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:97`
+  - Reference: "On the definition and properties of generalized 6‐j symbols"
+  - Create/update annotation file with findings
+
+### luscombe1998
+- [ ] Convert `PhysRevE.57.7274.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:36`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/luscombe1998/luscombe1998.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:99`
+  - Reference: "Simplified recursive algorithm for Wigner 3j and 6j symbols"
+  - Create/update annotation file with findings
+
+### yutsis1962
+- [ ] Convert `Yutsis_1962.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:32`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/yutsis1962/yutsis1962.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:101`
+  - Reference: "Mathematical Apparatus of the Theory of Angular Momentum"
+  - Create/update annotation file with findings
+
+### regge1958
+- [ ] Convert `Regge_1958.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:38`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/regge1958/regge1958.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:103`
+  - Reference: "Symmetry properties of Clebsch-Gordon's coefficients"
+  - Create/update annotation file with findings
+
+### regge1959
+- [ ] Convert `Regge_1959.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:35`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/regge1959/regge1959.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:103`
+  - Reference: "Simmetry properties of Racah's coefficients"
+  - Create/update annotation file with findings
+
+### meurer2017
+- [ ] Convert `Meurer2017.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:39`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/meurer2017/meurer2017.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:105`
+  - Reference: "SymPy: symbolic computing in Python"
+  - Create/update annotation file with findings
+
+### johansson2016
+- [ ] Convert `johansson2016.pdf` (from wigxjpfpaper.tex source location) to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:29`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/johansson2016/johansson2016.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:105`
+  - Reference: "Fast and accurate evaluation of Wigner 3j, 6j, and 9j symbols using prime factorisation and multi-word integer arithmetic"
+  - Create/update annotation file with findings
+
+### rasch2004
+- [ ] Convert `Rasch_and_Yu2003.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:27`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/rasch2004/rasch2004.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:105`
+  - Reference: "Efficient storage scheme for precalculated Wigner 3j, 6j and Gaunt coefficients"
+  - Create/update annotation file with findings
+
+### rovelli1995
+- [ ] Convert `Rovelli_and_Smolin_1995.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:37`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/rovelli1995/rovelli1995.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:117`
+  - Reference: "Spin networks and quantum gravity"
+  - Create/update annotation file with findings
+
+### depietri1996
+- [ ] Convert `depietri1996.pdf` (from De_Pietri_and_Rovelli_1996.tex source location) to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:30`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/depietri1996/depietri1996.md`
+- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:117`
+  - Reference: "Geometry eigenvalues and the scalar product from recoupling theory in loop quantum gravity"
+  - Create/update annotation file with findings
+
+### elliott1953
+- [ ] Convert `theoretical-studies-in-nuclear-structure-v-the-matrix-elements-o-1953.pdf` to markdown using MinerU
+  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:40`
+  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/elliott1953/elliott1953.md`
+- [ ] Evaluate if cited in manuscript (check su2-3nj-unified-representations.bib but not in .tex)
+  - Reference: "Theoretical studies in nuclear structure V. The matrix elements of non-central forces with an application to the 2p-shell"
+  - Determine if this should be cited in manuscript
+
+## Cross-Cutting Tasks
+
+- [ ] Create `~/Code/asciimath/su2-3nj-series-paper/papers/su2-3nj-unified-representations-bib-annotations.md`
+  - Model after `~/Code/asciimath/coherence-gravity-coupling/papers/coherence_gravity_coupling-bib-annotations.md`
+  - Document all citation assessments
+  - Track needed changes, additions, or removals
+  - Flag any content that challenges manuscript validity
+
+- [ ] Update `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv`
+  - Update "Converted Path" column for each processed PDF
+  - Update "Status" column (e.g., "Converted with MinerU", "Annotated (bibkey)")
+
+- [ ] Final manuscript review
+  - Incorporate all citation assessment findings
+  - Make necessary text changes to support citations
+  - Remove or modify citations as needed
+  - Add additional citations where gaps identified
+
+- [ ] Commit changes with descriptive messages
+  - Commit after each major milestone (PDF conversion, citation evaluation, etc.)
+  - Use chat output summary for commit messages
+
+## Critical Notes
+
+- **Scope**: PDFs are from `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv` lines 27-41
+- **MinerU**: Conversions may take 1+ hours each - use polling timers and wait for completion
+- **HALT CONDITION**: If any paper invalidates the manuscript, STOP ALL WORK and report findings immediately
+- **Prioritization**: Create TODO items before completing tasks (enables parallel processing by other models)
+- **Workflow**: Action TODO items before starting next PDF conversion
+- **Open-ended assessment**: Be prepared for necessary changes to citations, manuscript text, or research direction
+
+---
 
 ## At-a-glance status
 

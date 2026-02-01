@@ -1029,3 +1029,100 @@ The LaTeX document has been successfully updated to resolve the compilation issu
 The document should now compile without the footnote error, producing a professional PDF with visible author information suitable for arXiv submission. All citation keys have been updated to match the bibliography, and the document structure follows AMS standards.
 <!-- ------ -->
 ---
+
+<!-- ------ -->
+---
+## Session Summary — Citation Assessment Infrastructure (2026-01-31)
+
+### What Was Accomplished
+
+#### 1. Fixed LaTeX Document Citation Processing
+- **Problem**: PDF showed question marks instead of citation numbers
+- **Solution**: Created `references.bib` (copy of `su2-3nj-unified-representations.bib`) and ran complete BibTeX → pdflatex → pdflatex workflow
+- **Result**: ✅ PDF now displays proper numbered citations for all 16 bibliography entries
+
+#### 2. Created Comprehensive Citation Assessment Infrastructure
+
+**`docs/SU2-TODO.md`**: Added new section "SU(2) 3n-j Series — Citations Assessment TODO"
+- 16 PDF conversion tasks (wigner2013, racah1942, varshalovich1988, schulten1975, raynal1979, luscombe1998, yutsis1962, regge1958, regge1959, meurer2017, johansson2016, rasch2004, rovelli1995, depietri1996, elliott1953)
+- Each task includes:
+  - Source PDF location from `downloaded_paper_locations.tsv`
+  - Target markdown output path
+  - Line numbers where cited in manuscript
+  - Reference title for cross-verification
+  - Evaluation criteria (accuracy, completeness, necessity, alignment, potential issues)
+- Cross-cutting tasks for annotation file creation, TSV updates, manuscript review, and commit strategy
+- **Critical halt condition**: STOP ALL WORK if any paper invalidates manuscript
+
+**`papers/su2-3nj-unified-representations-bib-annotations.md`**: Citation annotation framework
+- Structured template for each of 16 bibliography entries
+- Evaluation criteria: Citation Accuracy, Completeness, Necessity, Manuscript Alignment, Potential Issues
+- Status tracking table linking manuscript claims to source verification
+- Embedded action checklists per citation
+- Summary sections for critical issues, needed changes, and validation tracking
+
+#### 3. Started First PDF Conversion (wigner2013)
+
+**Command executed**:
+```bash
+cd /home/echo_/Code/asciimath/su2-3nj-series-paper/papers/related
+mineru -p Wigner_1931.pdf -o wigner2013 -m auto -d cuda -l en
+```
+
+**Status**: 🔄 In progress (background process, ID: 9e6f8f9f-eed4-469a-93b9-4b669377a061)
+- Model loaded: MinerU2.5-2509-1.2B (VLM engine)
+- GPU: NVIDIA GeForce RTX 2060 SUPER (compute capability 7.5)
+- Using CUDA with FlexAttention backend
+- Expected completion: 1+ hours
+
+**Project**: Convert Wigner's 1931 *Gruppentheorie und ihre Anwendung auf die Quantenmechanik der Atomspektren* to searchable markdown for citation verification
+
+#### 4. File Changes
+
+**Created**:
+- `papers/su2-3nj-unified-representations-bib-annotations.md` — Structured citation evaluation framework (16 entries)
+- `papers/paper/references.bib` — Bibliography file copy for LaTeX processing
+
+**Modified**:
+- `docs/SU2-TODO.md` — Added "Citations Assessment TODO" section with 16 PDF/evaluation task pairs
+- `papers/paper/su2-3nj-unified-representations.tex` — Fixed `\bibliography{references}` command (previously failed due to missing .bib)
+
+**Pending**:
+- `energy/docs/downloaded_paper_locations.tsv` — To be updated with "Converted Path" and "Status" as PDFs complete
+
+### Next Steps
+
+1. **Monitor wigner2013 conversion** — Poll background process for completion (~1+ hour expected)
+2. **Evaluate wigner2013 citations** — Once markdown available:
+   - Verify line 91: "established the foundation with 3j symbols"
+   - Verify line 641: (context TBD)
+   - Check for historical accuracy, additional relevant passages
+   - Update annotations file with findings
+3. **Start racah1942 conversion** — After wigner2013 evaluation complete
+4. **Continue systematic pattern** — Convert → Evaluate → Update TSV → Commit for each of 16 sources
+
+### Methodology
+
+**Open-ended citation assessment**: Not just verifying existing citations, but discovering:
+- Missing citations that should exist
+- Citations that need modification
+- Additional manuscript sections needed to support claims
+- **Critical**: Material that challenges manuscript validity (immediate halt condition)
+
+**Workflow designed for parallel processing**: Comprehensive TODO enables other AI models (e.g., Grok) to prioritize which tasks to complete while MinerU conversions run
+
+### Key Decisions
+
+- **Bibliography filename**: Using `references.bib` (standardized name vs. manuscript-specific)
+- **Conversion tool**: MinerU with hybrid-auto-engine backend, CUDA GPU acceleration
+- **Output structure**: Each source gets dedicated subdirectory (e.g., `papers/related/wigner2013/`)
+- **Evaluation before next conversion**: Action TODO items before starting subsequent conversions
+
+### References
+
+- Source tracking: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv` lines 27-41
+- MinerU docs: Using `mineru` command with `-m auto -d cuda -l en` flags
+- Model: `coherence-gravity-coupling/papers/coherence_gravity_coupling-bib-annotations.md` as annotation template
+
+<!-- ------ -->
+---
