@@ -211,4 +211,29 @@ Last updated: 2026-01-31
   - Verified `wigner1993` was already present and correct
 - ✅ Cross-referenced with .bib file for accuracy
 
+#### 16. Bibliography Citation Evaluations: ✅ Phase 1 COMPLETE (2026-02-01)
+
+**wigner2013 Evaluation** (2026-01-31):
+- ✅ Converted `Wigner_1931.pdf` to markdown (10,005 lines)
+- ✅ Evaluated citations in manuscript (lines 91, 641)
+- ⚠️ **Critical finding**: Wigner (1931) introduced Clebsch-Gordan coefficients, NOT "3j symbol" notation
+- ✅ **Resolution**: Manuscript revised to distinguish coupling coefficients from 3j notation
+- ✅ Added wigner1993 citation for 3j notation formalization
+- **Result**: Historical accuracy corrected; no manuscript validity issues
+
+**racah1942 Evaluation** (2026-02-01):
+- ✅ Converted `Racah_1942.pdf` to markdown (1375 lines)
+- ✅ Evaluated citations in manuscript (lines 76, 80, 270, 626)
+- ✅ **Verified**: Racah (1942) introduced W-coefficient (precursor to 6j symbol)
+- ✅ **Citation accuracy**: All manuscript claims correct
+- ✅ **Key finding**: Section §5 introduces $W(j_1 j_2 j_3 j_4; j_5 j_6)$ notation
+- **Result**: All citations verified; no corrections needed
+
+**Summary**:
+- **Completed evaluations**: 2/17 (wigner2013 ✓, racah1942 ✓)
+- **Issues found**: 1 historical inaccuracy (wigner2013) — resolved
+- **Manuscript revisions**: Updated line 91 to distinguish Clebsch-Gordan vs 3j notation
+- **New citations added**: wigner1993 (3j formalization)
+- **Pending evaluations**: 15/17 remaining
+
 

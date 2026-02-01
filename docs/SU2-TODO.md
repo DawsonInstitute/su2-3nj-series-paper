@@ -66,31 +66,8 @@ Date: 2026-01-18
 
 ## PDF Conversions and Citation Evaluations
 
-### wigner2013
-- [x] ✅ Convert `Wigner_1931.pdf` to markdown using MinerU
-  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:31`
-  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/wigner2013/Wigner_1931/hybrid_auto/Wigner_1931.md` (10,005 lines)
-  - **Completed**: 2026-01-31
-- [x] ✅ Evaluate citations in `su2-3nj-unified-representations.tex:91,641`
-  - Reference: "Gruppentheorie und ihre Anwendung auf die Quantenmechanik der Atomspektren"
-  - **Completed**: 2026-01-31
-  - **⚠️ CRITICAL FINDING**: Manuscript claims "Wigner established the foundation with 3j symbols" but Wigner (1931) introduced **Clebsch-Gordan coefficients** (coupling coefficients $s_{L\mu\nu}$), NOT the "3j symbol" notation
-  - **Action Required**: Revise manuscript line 91 to correctly attribute "coupling coefficients" or "Clebsch-Gordan coefficients"
-  - **Resolution**: Manuscript updated to distinguish Wigner (1931) coupling coefficients from later 3j symbol notation. Added Wigner (1993/1940) citation.
-  - Full evaluation in: `~/Code/asciimath/su2-3nj-series-paper/papers/su2-3nj-unified-representations-bib-annotations.md`
-
-### racah1942
-- [x] ✅ Convert `Racah_1942.pdf` to markdown using MinerU
-  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:41`
-  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/racah1942/Racah_1942/hybrid_auto/Racah_1942.md` (1375 lines)
-  - **Completed**: 2026-02-01
-- [x] ✅ Evaluate citations in `su2-3nj-unified-representations.tex:76,80,270,626`
-  - Reference: "Theory of Complex Spectra. II"
-  - **Completed**: 2026-02-01
-  - **✓ VERIFIED**: Racah (1942) introduced the $W$-coefficient (precursor to modern 6j symbol notation)
-  - **Citation Accuracy**: ✅ CORRECT - manuscript correctly attributes extension to 6j coefficients
-  - **Key Finding**: Section §5 introduces $W(j_1 j_2 j_3 j_4; j_5 j_6)$ which relates to modern 6j symbols via phase factor
-  - Full evaluation in: `~/Code/asciimath/su2-3nj-series-paper/papers/paper/su2-3nj-unified-representations-bib-annotations.md`
+**Progress**: 2/17 complete (wigner2013 ✓, racah1942 ✓) | 15/17 pending
+**Completed tasks moved to**: [SU2-TODO-completed.md](SU2-TODO-completed.md#16-bibliography-citation-evaluations)
 
 
 ### varshalovich1988
