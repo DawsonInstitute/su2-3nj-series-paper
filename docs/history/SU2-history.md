@@ -1554,3 +1554,4 @@ Remaining Phase 3 tasks from SU2-TODO.md:
 - All manuscript claims verified against source material
 - No issues or corrections needed
 
+\n## Session 2026-02-01\n- **Completed Citations**: Verified varshalovich1988, schulten1975, raynal1979, regge1958/59, rovelli1995/depietri1996.\n- **Manuscript Polish**: Fixed BibTeX generation (added `cleveref`), fixed yutsis1962 publisher, verified build (15 pages).\n- **Documentation**: Updated SU2-TODO.md and SU2-TODO-completed.md with confirmation results.
