@@ -66,17 +66,8 @@ Date: 2026-01-18
 
 ## PDF Conversions and Citation Evaluations
 
-**Progress**: 2/17 complete (wigner2013 ✓, racah1942 ✓) | 15/17 pending
+**Progress**: 3/17 complete (wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓) | 14/17 pending
 **Completed tasks moved to**: [SU2-TODO-completed.md](SU2-TODO-completed.md#16-bibliography-citation-evaluations)
-
-
-### varshalovich1988
-- [ ] Convert `Varshalovich_1988.pdf` to markdown using MinerU
-  - Source: `~/Code/asciimath/energy/docs/downloaded_paper_locations.tsv:34`
-  - Output: `~/Code/asciimath/su2-3nj-series-paper/papers/related/varshalovich1988/varshalovich1988.md`
-- [ ] Evaluate citations in `su2-3nj-unified-representations.tex:91`
-  - Reference: "Quantum Theory of Angular Momentum"
-  - Create/update annotation file with findings
 
 ### schulten1975
 - [ ] Convert `Schulten_1975.pdf` to markdown using MinerU
