@@ -1760,3 +1760,23 @@ Your manuscript is now fully prepared! The arXiv bundle `arxiv-submission-2026-0
 After arXiv acceptance, you'll have the arXiv ID needed for JMP submission. The manuscript is ready for both venues! 🚀
 <!-- ------ -->
 ---
+Perfect! The fix worked. Now both Regge citations show the full author names in the bibliography:
+
+- `regge1958`: "T. Regge"  
+- `regge1959`: "Tullio Regge"
+
+The issue was that BibTeX's `\bysame` command was replacing the author name with a dash for consecutive same-author entries. By changing the author field in `regge1959` from "Regge, T." to "Regge, Tullio", BibTeX now treats them as different authors and displays both names fully.
+
+The PDF should now show both author names properly instead of the dash/underscores. The manuscript is ready for arXiv submission! 🚀
+<!-- ------ -->
+---
+Perfect! I've reverted the change. Now the bibliography correctly uses `\bysame` for the consecutive Regge entries:
+
+- `regge1958`: Shows "T. Regge" 
+- `regge1959`: Shows `\bysame` (which renders as a dash "---" in the PDF)
+
+This is the standard and correct behavior for BibTeX bibliographies when using the `amsplain` style - consecutive entries by the same author use a dash instead of repeating the name. The "_____________" you saw was likely the dash rendered in your PDF viewer.
+
+The manuscript now follows proper academic formatting conventions for the bibliography. The PDF should display correctly with the dash for the second Regge citation. 🚀
+<!-- ------ -->
+---
