@@ -1,0 +1,461 @@
+{
+  "timestamp": "2026-01-18T21:33:09.795110",
+  "tests": [
+    {
+      "spins": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "description": "uniform integer",
+      "implementations": {
+        "sympy": "1/6",
+        "generating_functional": "1/6",
+        "closed_form": "1/6"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "description": "sequential integer",
+      "implementations": {
+        "sympy": "sqrt(1430)/2145",
+        "generating_functional": "sqrt(1430)/2145",
+        "closed_form": "sqrt(1430)/2145"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      "description": "uniform j=2",
+      "implementations": {
+        "sympy": "-3/70",
+        "generating_functional": "-3/70",
+        "closed_form": "-3/70"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1/2",
+        "1",
+        "1/2",
+        "1/2",
+        "1"
+      ],
+      "description": "half-integer",
+      "implementations": {
+        "sympy": "1/6",
+        "generating_functional": "1/6",
+        "closed_form": "1/6"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "1",
+        "1/2",
+        "3/2",
+        "1",
+        "1/2",
+        "3/2"
+      ],
+      "description": "mixed",
+      "implementations": {
+        "sympy": "-1/12",
+        "generating_functional": "-1/12",
+        "closed_form": "-1/12"
+      },
+      "status": "PASS",
+      "agreement": "All implementations agree"
+    },
+    {
+      "spins": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "description": "recursion vs generate",
+      "implementations": {
+        "recursion_3nj": "31*sqrt(13)/2730",
+        "generate_3nj": "31*sqrt(13)/2730"
+      },
+      "status": "PASS"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1",
+        "3/2",
+        "2"
+      ],
+      "description": "node-matrix backend consistency",
+      "implementations": {
+        "numpy": "0.04923076922152896",
+        "sympy": "0.049230769221529"
+      },
+      "status": "PASS"
+    },
+    {
+      "spins": [
+        "1/2",
+        "1",
+        "3/2",
+        "2"
+      ],
+      "description": "node-matrix permutation invariance (sample)",
+      "max_abs_diff": 4.163336342344337e-17,
+      "status": "PASS"
+    },
+    {
+      "description": "9j reference: uniform j=1",
+      "symbol": "9j",
+      "spins": [
+        [
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "0",
+        "reference_exact": "0"
+      }
+    },
+    {
+      "description": "9j reference: uniform j=2",
+      "symbol": "9j",
+      "spins": [
+        [
+          "2",
+          "2",
+          "2"
+        ],
+        [
+          "2",
+          "2",
+          "2"
+        ],
+        [
+          "2",
+          "2",
+          "2"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "41/2450",
+        "reference_exact": "41/2450"
+      }
+    },
+    {
+      "description": "9j reference: sequential ladder",
+      "symbol": "9j",
+      "spins": [
+        [
+          "1",
+          "2",
+          "3"
+        ],
+        [
+          "2",
+          "3",
+          "4"
+        ],
+        [
+          "3",
+          "4",
+          "5"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "-61/66150",
+        "reference_exact": "-61/66150"
+      }
+    },
+    {
+      "description": "9j reference: half-integer basic",
+      "symbol": "9j",
+      "spins": [
+        [
+          "1/2",
+          "1/2",
+          "1"
+        ],
+        [
+          "1/2",
+          "1/2",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "0"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "-1/18",
+        "reference_exact": "-1/18"
+      }
+    },
+    {
+      "description": "9j reference: mixed spin configuration",
+      "symbol": "9j",
+      "spins": [
+        [
+          "1",
+          "1/2",
+          "3/2"
+        ],
+        [
+          "1/2",
+          "1",
+          "3/2"
+        ],
+        [
+          "3/2",
+          "3/2",
+          "0"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "-1/48",
+        "reference_exact": "-1/48"
+      }
+    },
+    {
+      "description": "9j reference: all zeros",
+      "symbol": "9j",
+      "spins": [
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "1",
+        "reference_exact": "1"
+      }
+    },
+    {
+      "description": "9j reference: partial zeros",
+      "symbol": "9j",
+      "spins": [
+        [
+          "1",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "PASS",
+      "implementations": {
+        "sympy": "1/3",
+        "reference_exact": "1/3"
+      }
+    },
+    {
+      "description": "12j reference: uniform j=1",
+      "symbol": "12j",
+      "spins": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "status": "PASS",
+      "implementations": {
+        "6j_decomposition": "1/54",
+        "reference_exact": "1/54"
+      }
+    },
+    {
+      "description": "12j reference: uniform j=1/2",
+      "symbol": "12j",
+      "spins": [
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2"
+      ],
+      "status": "PASS",
+      "implementations": {
+        "6j_decomposition": "0",
+        "reference_exact": "0"
+      }
+    },
+    {
+      "description": "12j reference: four triangular triads",
+      "symbol": "12j",
+      "spins": [
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0"
+      ],
+      "status": "PASS",
+      "implementations": {
+        "6j_decomposition": "1/27",
+        "reference_exact": "1/27"
+      }
+    },
+    {
+      "description": "12j reference: all j=1",
+      "symbol": "12j",
+      "spins": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "status": "PASS",
+      "implementations": {
+        "6j_decomposition": "1/54",
+        "reference_exact": "1/54"
+      }
+    },
+    {
+      "description": "12j reference: all zeros",
+      "symbol": "12j",
+      "spins": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "status": "PASS",
+      "implementations": {
+        "6j_decomposition": "1",
+        "reference_exact": "1"
+      }
+    },
+    {
+      "description": "12j reference: alternating 1,2",
+      "symbol": "12j",
+      "spins": [
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2"
+      ],
+      "status": "PASS",
+      "implementations": {
+        "6j_decomposition": "sqrt(5)/30000 + 7/6000",
+        "reference_exact": "sqrt(5)/30000 + 7/6000"
+      }
+    }
+  ],
+  "summary": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0
+  }
+}

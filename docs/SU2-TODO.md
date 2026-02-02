@@ -39,8 +39,8 @@ Prioritize: polish → arXiv → JMP submission → use acceptance/under-review 
 - [ ] Halt only if critical invalidation (extremely unlikely at this stage).
 
 ### 3. arXiv Preparation & Upload (1 day)
-- [ ] Run arxiv-collector on paper directory; include .tex, .bib, ancillary code/data/figures.  
-- [ ] Test ancillary build (e.g., reference datasets JSON, validation scripts).  
+- [x] Run arxiv-collector on paper directory; include .tex, .bib, ancillary code/data/figures.  
+- [x] Test ancillary build (e.g., reference datasets JSON, validation scripts).  
 - [ ] Categories: math-ph (primary); cross-list quant-ph, gr-qc.  
 - [ ] Upload as preprint (can update post-JMP submission if revisions needed).
 
