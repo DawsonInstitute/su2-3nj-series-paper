@@ -7,7 +7,7 @@
 ## Bundle Contents
 
 ### Main Files
-- `su2-3nj-unified-representations.tex` - Main manuscript (RevTeX 4.2, JMP format)
+- `su2-3nj-unified-representations.tex` - Main manuscript (amsart, 12pt)
 - `su2-3nj-unified-representations.bbl` - Compiled bibliography (17 entries)
 - `su2-3nj-unified-representations.bib` - Bibliography source
 - `appendix-reproducibility.tex` - Reproducibility appendix (included by main file)
@@ -25,7 +25,15 @@
 - `run_integration_tests.py` - Integration test suite (20KB)
 - `generate_validation_tables.py` - Validation table generator (11KB)
 
-**Total Size**: 454KB (well within arXiv 50MB limit)
+**Total Size**: ~500KB (well within arXiv 50MB limit)
+
+## MSC 2020 Classifications
+
+The manuscript uses the following Mathematics Subject Classification codes:
+- **81R05**: Representations of finite-dimensional groups and algebras in quantum theory
+- **33C45**: Orthogonal polynomials and functions of hypergeometric type  
+- **05C90**: Applications of graph theory
+- **81T45**: Topological field theories in quantum mechanics
 
 ## Build Verification
 
@@ -36,7 +44,15 @@ pdflatex su2-3nj-unified-representations.tex
 ```
 
 **Result**: ✅ Success  
-**Output**: 15 pages, 437KB PDF
+**Output**: 20 pages, ~384KB PDF
+
+Compile command:
+```bash
+pdflatex su2-3nj-unified-representations.tex
+bibtex su2-3nj-unified-representations  
+pdflatex su2-3nj-unified-representations.tex
+pdflatex su2-3nj-unified-representations.tex
+```
 
 ## arXiv Submission Details
 
@@ -77,7 +93,10 @@ Readers can independently verify all claims using the provided scripts and data.
 
 ## License
 
-The manuscript is submitted to JMP (AIP Publishing) and follows their standard copyright agreement.
+The manuscript and all code are released under the MIT License (see repository LICENSE file).
+Submissions to journals typically require transfer of publication rights while maintaining
+author rights to distribute preprints and code - review specific journal agreement when submitting.
+
 The ancillary files (validation scripts and data) are provided under MIT License for community use.
 
 ## Next Steps

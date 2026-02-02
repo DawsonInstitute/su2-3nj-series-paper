@@ -6,12 +6,12 @@ Prioritize: polish → arXiv → JMP submission → use acceptance/under-review 
 
 ## Current Status Summary (2026-02-01)
 
-- **Manuscript**: RevTeX 4.2 (aip,jmp options), complete structure (Introduction → Theorems 1–5 → Validation → Conclusions), no inline TODOs, PACS/keywords included, bibliography uses aipnum4-2 style.  
+- **Manuscript**: **UPDATED TO AMSART** (was RevTeX 4.2). Now uses standard amsart documentclass with MSC2020 classifications. Complete structure (Introduction → Theorems 1–5 → Validation → Conclusions), no inline TODOs. Date hard-coded to "February 1, 2026. arXiv v1". Bibliography uses amsplain style.  
   Novelty claim strong and verifiable; validation rigorous (161 pytest + SymPy + high-precision refs).  
-  Affiliation: Dawson Institute for Advanced Physics (sufficient for JMP; math rigor trumps letterhead).  
-- **Bibliography**: ~16-17 entries; elliott1953 removed (uncited); DOIs mostly complete; added labarthe1975 and aquilanti2014 (or equivalent) recommended.  
-- **Citation Evaluations**: wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓, raynal1979 ✓, regge1958/59 ✓, rovelli+ ✓; 8 pending.  
-- **Code/Validation**: 100% on core repos (pytest, hub harness, recurrences, node-matrix N0–N5); N6+ at 60% (derivative API prototype done).  
+  Author/affiliation formatting matches arXiv standard (author name, affiliation, email at bottom).
+- **Bibliography**: 17 entries complete; DOIs mostly complete; 2 warnings for bitencourt2014 (arXiv preprint - acceptable).  
+- **Citation Evaluations**: wigner2013 ✓, racah1942 ✓, varshalovich1988 ✓, schulten1975 ✓, raynal1979 ✓, regge1958/59 ✓, rovelli+ ✓; 8 pending (low priority).  
+- **Code/Validation**: 100% on core repos (pytest, hub harness, recurrences, node-matrix N0–N5); integration tests pass (21/21).  
 - **Remaining Risk**: Minor citation tweaks only; no invalidations found so far.
 
 ## Phase 3: Final Submission Push (Target: Submit by March 31, 2026)
@@ -45,7 +45,8 @@ Prioritize: polish → arXiv → JMP submission → use acceptance/under-review 
 - [ ] Upload as preprint (can update post-JMP submission if revisions needed).
 
 ### 4. JMP Submission (Immediate after arXiv)
-- [ ] Submit via AIP portal[](https://jmp.peerx-press.org/); use RevTeX bundle.  
+- [ ] **NOTE**: Now using amsart instead of RevTeX. May need to convert back to RevTeX for JMP or submit amsart version.
+- [ ] Submit via AIP portal[](https://jmp.peerx-press.org/).  
 - [ ] Cover letter: Highlight mathematical novelty, rigorous validation, open-source code; note independent status but emphasize content merit.  
 - [ ] If desk-rejected (low risk ~5-10% for affiliation): Add UBC visiting (if secured) and resubmit to Journal of Physics A or similar.
 

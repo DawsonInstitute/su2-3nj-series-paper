@@ -29,3 +29,8 @@ papers/**/*.blg
 papers/**/*.png
 papers/**/*Zone.Identifier
 papers/**/author_config.tex
+papers/**/*Notes.bib
+
+# Test build directories
+papers/test-arxiv-build/
+papers/**/test-build/

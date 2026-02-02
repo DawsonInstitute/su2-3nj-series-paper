@@ -1,41 +1,45 @@
-% Master Paper Bundle — SU(2) 3nj Series
-% Target: Journal of Mathematical Physics (JMP) - AIP
+% SU(2) 3nj Series — Unified Closed-Form Representations
 % arXiv: math-ph (primary), quant-ph, gr-qc (cross-list)
+% Licensed under MIT License
 
-\documentclass[aip,jmp,amsmath,amssymb,reprint]{revtex4-2}
+\documentclass[12pt]{amsart}
 
-% Additional packages
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{graphicx}
 
-% Theorem environments (RevTeX compatible)
+\numberwithin{equation}{section}
+
+% Theorem environments
+\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-% Hyperref (RevTeX handles this internally, but can be customized)
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \usepackage{cleveref}
 
-% Shared macros
-% Shared macros (if needed)
-% \input{../shared/shared-macros}
-
-\title[SU(2) 3n-j Recoupling Coefficients]{Unified Closed-Form Representations and Generating Functionals for SU(2) 3n-j Recoupling Coefficients}
+% Title and author
+\title[SU(2) 3n-j Recoupling Coefficients]{Unified Closed-Form Representations\\ and Generating Functionals\\ for SU(2) 3n-j Recoupling Coefficients}
 
 \author{Ryan Sherrington}
-\email{rsherrington@dawsoninstitute.org}
-\affiliation{Dawson Institute for Advanced Physics}
+\address[R.~Sherrington]{Dawson Institute for Advanced Physics}
+\email{\href{mailto:rsherrington@dawsoninstitute.org}{rsherrington@dawsoninstitute.org}}
 
-\date{\today}
+\date{February 1, 2026. arXiv v1}
 
-\pacs{02.20.Qs, 03.65.Fd, 04.60.Pp}
+\subjclass[2020]{81R05, 33C45, 05C90, 81T45}
+
 \keywords{SU(2), recoupling coefficients, 3n-j symbols, generating functionals, hypergeometric functions}
 
 \begin{document}
@@ -636,7 +640,7 @@ All source code, validation scripts, and reference datasets are released under o
 \item Individual implementations: \texttt{https://github.com/DawsonInstitute/su2-3nj-*}
 \end{itemize}
 
-\bibliographystyle{aipnum4-2}
+\bibliographystyle{amsplain}
 \bibliography{su2-3nj-unified-representations}
 
 \appendix
