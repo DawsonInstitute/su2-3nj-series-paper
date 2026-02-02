@@ -1555,3 +1555,29 @@ Remaining Phase 3 tasks from SU2-TODO.md:
 - No issues or corrections needed
 
 \n## Session 2026-02-01\n- **Completed Citations**: Verified varshalovich1988, schulten1975, raynal1979, regge1958/59, rovelli1995/depietri1996.\n- **Manuscript Polish**: Fixed BibTeX generation (added `cleveref`), fixed yutsis1962 publisher, verified build (15 pages).\n- **Documentation**: Updated SU2-TODO.md and SU2-TODO-completed.md with confirmation results.
+
+## Session 2026-02-01 (arXiv Package Preparation)
+
+### Completed
+- Installed arxiv-latex-cleaner tool for preparing submission bundles
+- Created paper_arXiv/ directory with cleaned LaTeX sources
+- Added ancillary files (anc/) containing:
+  - Validation data: 9j, 12j reference values, integration test report (JSON)
+  - Validation scripts: run_integration_tests.py, generate_validation_tables.py
+  - 00README.txt documentation for ancillary files
+- Created arxiv-submission-2026-02-01.tar.gz (454KB total)
+- Test build verified: 15 pages, 437KB PDF compiles successfully
+- Documented bundle in papers/ARXIV_SUBMISSION_NOTES.md
+
+### Bundle Contents
+- Main: .tex, .bbl, .bib, appendix-reproducibility.tex, validation-tables.tex
+- Figures: 2 PDFs (determinant_stability, recurrence_stability)
+- Ancillary: 3 JSON datasets + 2 Python validation scripts + README
+
+### Recommended arXiv Categories
+- Primary: math-ph (Mathematical Physics)
+- Cross-list: quant-ph (Quantum Physics), gr-qc (General Relativity/Quantum Cosmology)
+
+### Next Steps
+- Upload arxiv-submission-2026-02-01.tar.gz to https://arxiv.org/submit
+- Submit to JMP after obtaining arXiv number
