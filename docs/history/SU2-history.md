@@ -1885,3 +1885,55 @@ Fixed! The issue was that RevTeX 4.2 requires the frontmatter commands (`\title`
 The manuscript now compiles cleanly and is ready for arXiv/JMP submission.
 <!-- ------ -->
 ---
+Perfect! Both issues have been fixed:
+
+## Summary of Changes
+
+### 1. **Stability Figures Improved** (generate_stability_figures.py)
+
+**Enhanced data visibility and labeling:**
+- Added diagnostic output showing data ranges (confirms non-zero variability):
+  - Forward errors: 0.083–0.528
+  - Backward errors: 0.131–2.752  
+  - Condition numbers: 1.08–1.72
+- Improved plot labels to match actual data columns:
+  - "Forward Recursion" / "Backward Recursion" (clearer than just "Forward"/"Backward")
+  - Configuration names match CSV exactly: `uniform_1`, `uniform_2`, `mixed_1`, `mixed_2`, `half_int`
+- Enhanced visual clarity:
+  - Bolder titles with fontweight='bold'
+  - Larger markers (size 8 vs 6)  
+  - White-filled markers with colored edges for better visibility
+  - Explicit y-axis limits to ensure all data points visible
+  - Grid styling improved (dotted lines, better alpha)
+  - Log scale properly set for error bars with floor at 0.01
+
+### 2. **Date Fixed** (su2-3nj-unified-representations.tex:20)
+
+- Changed `\date{\today}` → `\date{February 2, 2026}`
+- Matches last meaningful commit date per git history
+- Prevents dynamic date changes on rebuilds (better for version control)
+- Fully compliant with AIP/JMP requirements (aipsamp.tex explicitly allows explicit dates)
+
+## Verification
+
+**New figures generated with clear diagnostic output:**
+```
+  Loaded 5 configurations from recurrence data
+  Labels: ['uniform_1', 'uniform_2', 'mixed_1', 'mixed_2', 'half_int']
+  Forward error range: [8.333e-02, 5.283e-01]
+  Backward error range: [1.309e-01, 2.752e+00]
+  Condition number range: [1.08, 1.72]
+```
+
+**PDF rebuilt successfully:**
+- 16 pages, 452KB (452910 bytes - slightly larger due to enhanced figures)
+- Date confirmed: *(Dated: February 2, 2026)*
+- No LaTeX errors, only cosmetic warnings
+
+The figures now clearly show:
+- **Left plot**: Bar chart with visible variation in forward/backward errors (log scale properly displays 0.08–2.75 range)
+- **Right plot**: Condition number line plot clearly shows values from 1.08 to 1.72 (not zeros)
+
+All data matches the source CSV files exactly, with improved labeling and visual presentation for the final submission.
+<!-- ------ -->
+---
