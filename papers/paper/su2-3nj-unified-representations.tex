@@ -8,6 +8,7 @@
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{placeins}
 
 \begin{document}
 
@@ -545,7 +546,7 @@ We recommend the following UQ protocol for production computations:
 \end{itemize}
 
 \paragraph{Implementation selection guide:}
-\begin{table}[h]
+\begin{table}[!ht]
 \centering
 \caption{Recommended implementation by use case}
 \label{tab:implementation-guide}
@@ -561,6 +562,7 @@ High precision ($j > 30$) & Product formula & Stable ${}_2F_1$ evaluation \\
 \bottomrule
 \end{tabular}
 \end{table}
+\FloatBarrier
 
 \paragraph{Failure mode detection:}
 Monitor the following indicators during computation:

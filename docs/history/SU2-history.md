@@ -1937,3 +1937,17 @@ The figures now clearly show:
 All data matches the source CSV files exactly, with improved labeling and visual presentation for the final submission.
 <!-- ------ -->
 ---
+Done! Second approach applied successfully.
+
+**What changed:**
+1. Added `\usepackage{placeins}` to the preamble
+2. Changed table specifier from `[h]` to `[!ht]` (forces "here or top" placement, overriding LaTeX's spacing preferences)
+3. Added `\FloatBarrier` immediately after the table (prevents it from floating past the next paragraph heading)
+
+**How it works:**
+The `\FloatBarrier` command creates an invisible barrier that prevents any floats (like tables/figures) from moving past it. Combined with the `[!ht]` specifier, LaTeX will now place the table either exactly where it appears in the source or at the top of the current page—but it cannot float past the "Failure mode detection:" heading.
+
+**Result:**
+Clean compilation with no errors, 16 pages, 452KB. The table should now appear directly after "Implementation selection guide:" instead of floating to page 13 between the bullet points.
+<!-- ------ -->
+---
