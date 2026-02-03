@@ -3,22 +3,24 @@
 **Date Added/Last Major Update**: 2026-02-02  
 **Objective**: Immediate arXiv upload and JMP submission via Peer X-Press. Use status for UBC applications.
 
-## Current Status Summary (2026-02-02)
+## Current Status Summary (2026-02-02 Evening Update)
 
-- **Manuscript**: Switched back to RevTeX 4.2 (aip,jmp,reprint options) for JMP compliance. Structure complete; added mandatory AIP sections (Author Declarations, Data Availability). PACS/keywords included. No inline TODOs. Builds clean (warnings resolved).  
-  Novelty/verification strong. Affiliation: Dawson Institute (sufficient).  
-- **Bibliography**: 17 entries; DOIs/URLs maximized; switched to aipnum4-2 style.  
-- **Citation Evaluations**: All high-impact done (wigner2013, racah1942, varshalovich1988, schulten1975, raynal1979, regge1958/59, rovelli1995/depietri1996); 8 low-priority complete via metadata check—no issues.  
+- **Manuscript**: Successfully converted to RevTeX 4.2 (aip,jmp,reprint options) for JMP compliance. Added mandatory AIP sections (Author Declarations, Data Availability, supplementary material block). PACS codes + keywords included. Bibliography switched to aipnum4-2 style.  
+  **Current Issue**: Full document compilation needs debugging (minimal test files compile successfully with RevTeX).  
+  Novelty/verification strong. Affiliation: Dawson Institute.  
+- **Bibliography**: 17 entries verified; regge1959 author fixed to "Regge, T." for proper \bysame formatting; aipnum4-2 style configured.  
+- **Citation Evaluations**: All high-impact done + 8 low-priority via metadata check—no issues.  
 - **Code/Validation**: 100% (161+ tests pass).  
-- **Remaining Risk**: None; submission-ready.
+- **Next Steps**: Debug full document compilation, then generate arXiv bundle and submit.
 
 ## Phase 3: Submission (Target: Submit by February 7, 2026)
 
-### 1. Immediate Pre-Submission Checks (Today)
-- [ ] Revert to RevTeX: Replace \documentclass{amsart} with \documentclass[aip,jmp,amsmath,amssymb,reprint]{revtex4-2}. Retain packages; update bib style to aipnum4-2. Rebuild PDF.
-- [ ] Add AIP sections: After Acknowledgments, insert Author Declarations (COI: none; Ethics: not required; Contributions: CRediT for C. Dawson) and Data Availability (GitHub repos).
-- [ ] Final build: pdflatex + bibtex; fix any errors. Verify figures/tables fit JMP sizes.
-- [ ] Cover letter: Draft ready (see below); customize if needed.
+### 1. Immediate Pre-Submission Checks (In Progress)
+- [x] Revert to RevTeX: Converted \documentclass to revtex4-2 with [aip,jmp,amsmath,amssymb,reprint]. Bibliography style updated to aipnum4-2.
+- [x] Add AIP sections: Author Declarations (COI: none; Ethics: not required; Contributions: CRediT for R. Sherrington) and Data Availability (GitHub repos) inserted after Acknowledgments. Suppinfo block added.
+- [x] Add PACS codes: 02.20.Uw, 02.30.Ik, 03.65.Fd, 04.60.Pp
+- [ ] **Debug compilation**: Full document has compilation issue (minimal tests work). Need to resolve package conflicts or document structure issue.
+- [ ] Final build verification: After debug, run complete pdflatex + bibtex cycle and verify PDF output.
 
 ### 2. arXiv Upload (Tomorrow)
 - [ ] arxiv-collector: Bundle .tex, .bib, ancillary (code, datasets).

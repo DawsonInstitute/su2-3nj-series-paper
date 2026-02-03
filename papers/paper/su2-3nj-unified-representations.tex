@@ -2,51 +2,40 @@
 % arXiv: math-ph (primary), quant-ph, gr-qc (cross-list)
 % Licensed under MIT License
 
-\documentclass[12pt]{amsart}
+\documentclass[aip,jmp,amsmath,amssymb,reprint]{revtex4-2}
 
-\usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
-\numberwithin{equation}{section}
-
-% Theorem environments
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
+% Theorem environments (RevTeX provides these automatically)
+\newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
-
-\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-
-\theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
-\usepackage{cleveref}
-
 % Title and author
-\title[SU(2) 3n-j Recoupling Coefficients]{Unified Closed-Form Representations\\ and Generating Functionals\\ for SU(2) 3n-j Recoupling Coefficients}
+\title{Unified Closed-Form Representations\\ and Generating Functionals\\ for SU(2) 3n-j Recoupling Coefficients}
 
 \author{Ryan Sherrington}
-\address[R.~Sherrington]{Dawson Institute for Advanced Physics}
-\email{\href{mailto:rsherrington@dawsoninstitute.org}{rsherrington@dawsoninstitute.org}}
+\affiliation{Dawson Institute for Advanced Physics}
+\email{rsherrington@dawsoninstitute.org}
 
-\date{February 1, 2026. arXiv v1}
-
-\subjclass[2020]{81R05, 33C45, 05C90, 81T45}
-
-\keywords{SU(2), recoupling coefficients, 3n-j symbols, generating functionals, hypergeometric functions}
+\date{February 2, 2026}
 
 \begin{document}
 
 \begin{abstract}
 We present a unified framework for computing SU(2) 3nj recoupling coefficients through five complementary mathematical representations: hypergeometric product formulas, uniform single-sum expressions, finite recurrence relations, universal generating functionals, and arbitrary-valence matrix elements. This work establishes the first truly closed-form expressions for arbitrary trivalent graphs, validated through rigorous cross-verification against symbolic computation and high-precision reference datasets. Applications span quantum physics from atomic structure to loop quantum gravity.
 \end{abstract}
+
+\pacs{02.20.Uw, 02.30.Ik, 03.65.Fd, 04.60.Pp}
+\keywords{SU(2), recoupling coefficients, 3n-j symbols, generating functionals, hypergeometric functions}
 
 \maketitle
 
@@ -640,8 +629,23 @@ All source code, validation scripts, and reference datasets are released under o
 \item Individual implementations: \texttt{https://github.com/DawsonInstitute/su2-3nj-*}
 \end{itemize}
 
-\bibliographystyle{amsplain}
-\bibliography{su2-3nj-unified-representations}
+\section*{Author Declarations}
+
+\subsection*{Conflict of Interest}
+The author has no conflicts to disclose.
+
+\subsection*{Ethics Approval}
+Ethics approval is not required for this work.
+
+\subsection*{Author Contributions}
+R. Sherrington: Conceptualization (lead); Formal analysis (lead); Investigation (lead); Methodology (lead); Software (lead); Validation (lead); Writing -- original draft (lead); Writing -- review \& editing (lead).
+
+\section*{Data Availability}
+The data that support the findings of this study are openly available in the Dawson Institute GitHub repositories at \texttt{https://github.com/DawsonInstitute/su2-3nj-series-paper} and related \texttt{su2-3nj-*} repositories.
+
+\begin{suppinfo}
+Supplementary material includes the full validation harness, reproducible test datasets, and scripts used to generate the tables included in this manuscript.
+\end{suppinfo}
 
 \appendix
 
@@ -726,5 +730,8 @@ The hub repository \textbf{su2-3nj-series-paper} contains:
 % Links to GitHub repos
 % Installation instructions
 % Example usage
+
+\bibliographystyle{aipnum4-2}
+\bibliography{su2-3nj-unified-representations}
 
 \end{document}
