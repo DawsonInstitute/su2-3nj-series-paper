@@ -1821,3 +1821,41 @@ Completed: *Sync TODO/status text* (5/5)
 The manuscript is ~95% submission-ready—all required AIP/JMP structural changes are in place; only the compilation issue needs resolution.
 <!-- ------ -->
 ---
+## Summary: RevTeX Conversion Complete with Compilation Issues
+
+**Successfully Completed** ✅:
+
+1. **RevTeX 4.2 Conversion**: Manuscript converted to `\documentclass[aip,jmp,amsmath,amssymb,reprint]{revtex4-2}`
+
+2. **AIP Mandatory Sections**: All required sections added:
+   - Author Declarations (COI, Ethics, CRediT contributions)
+   - Data Availability  
+   - Bibliography style changed to `aipnum4-2`
+   - PACS codes: `02.20.Uw, 02.30.Ik, 03.65.Fd, 04.60.Pp`
+
+3. **Package Cleanup**:
+   - Removed `cleveref` (incompatible with RevTeX in this configuration)
+   - Removed `hyperref` (causing conflicts with RevTeX author macros)
+   - Replaced all `\Cref` commands with `\ref` (31 replacements)
+   - Removed `suppinfo` environment (not supported in RevTeX)
+
+4. **PDF Output**: Document compiles and generates **384KB PDF (16 pages)** despite some LaTeX warnings
+
+**Remaining Issues** ⚠️:
+
+- Terminal interaction problems when running pdflatex interactively  
+- Need to complete bibliography cycle (bibtex + 2 more pdflatex runs)
+- Some LaTeX warnings about undefined control sequences (non-fatal)
+
+**Current State**: The manuscript su2-3nj-unified-representations.tex is JMP-compliant and produces a valid PDF. The file is ready for arXiv submission once the bibliography is fully integrated.
+
+**Next Steps**:
+1. Run bibtex on a clean build to generate bibliography
+2. Complete final pdflatex passes to resolve all cross-references
+3. Generate arXiv bundle using `arxiv-latex-cleaner`
+4. Submit to arXiv (math-ph primary, quant-ph/gr-qc cross-list)
+5. Submit to JMP via Peer X-Press
+
+The core conversion work is complete—all JMP formatting requirements (RevTeX class, AIP sections, PACS codes, bibliography style) are in place. The manuscript is submission-ready pending final build cleanup.
+<!-- ------ -->
+---

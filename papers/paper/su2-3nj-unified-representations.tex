@@ -8,9 +8,8 @@
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
-% Theorem environments (RevTeX provides these automatically)
+% Theorem environments
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -20,7 +19,7 @@
 \newtheorem{remark}[theorem]{Remark}
 
 % Title and author
-\title{Unified Closed-Form Representations\\ and Generating Functionals\\ for SU(2) 3n-j Recoupling Coefficients}
+\title{Unified Closed-Form Representations and Generating Functionals for SU(2) 3n-j Recoupling Coefficients}
 
 \author{Ryan Sherrington}
 \affiliation{Dawson Institute for Advanced Physics}
@@ -123,7 +122,7 @@ Then the SU(2) 3nj recoupling coefficient is
 \]
 \end{theorem}
 
-This is the first truly closed-form, general expression for SU(2) 3nj recoupling coefficients, unifying all graph topologies under a single hypergeometric product formula. The connection to the generating functional approach (\Cref{sec:generating-functional}) is established through the determinant representation (\Cref{thm:generating-functional}).
+This is the first truly closed-form, general expression for SU(2) 3nj recoupling coefficients, unifying all graph topologies under a single hypergeometric product formula. The connection to the generating functional approach (\ref{sec:generating-functional}) is established through the determinant representation (\ref{thm:generating-functional}).
 
 \begin{example}[15j-Chain]
 For the 15j-chain on 8 vertices (7 edges), cutting edge $e$ splits the chain into two paths whose matching counts are consecutive Fibonacci numbers, giving
@@ -209,7 +208,7 @@ where $(a)_m$ denotes the Pochhammer symbol and $\Delta$ is the normalization pr
 
 \subsection{Algebraic Derivation Strategy}
 
-The uniform representation is obtained through systematic algebraic reindexing of the generating functional (\Cref{thm:generating-functional}):
+The uniform representation is obtained through systematic algebraic reindexing of the generating functional (\ref{thm:generating-functional}):
 \begin{enumerate}
 \item Express the 12j generating functional as $G_{12j} = \det(I-K)^{-1/2} = (1-P)^{-1/2}$, where $P = E_1 - E_2 + E_3 - E_4$ comprises contiguous-block sums in edge variables.
 \item Expand via the generalized binomial theorem:
@@ -244,7 +243,7 @@ where $T(j_1, \ldots, j_E)$ denotes the 3nj coefficient for spins $\{j_\ell\}$.
 
 \begin{theorem}[Finite Recurrence]
 \label{thm:recurrence}
-The 3nj coefficients (\Cref{thm:generating-functional}) satisfy the closed three-term recurrence relation
+The 3nj coefficients (\ref{thm:generating-functional}) satisfy the closed three-term recurrence relation
 \[
 \Delta_0^{(k)}(\mathbf{x}_{\ne k}) \, G(\mathbf{x}) = x_k^2 \, \Delta_1^{(k)}(\mathbf{x}_{\ne k}) \, G(\mathbf{x}).
 \]
@@ -362,7 +361,7 @@ For a chain tree with variables $x_1, \ldots, x_7$, the determinant structure ex
 \section{Arbitrary-Valence Node Matrix Elements}
 \label{sec:node-matrix}
 
-We extend the generating functional framework (\Cref{sec:generating-functional}) to compute SU(2) operator matrix elements on arbitrary-valence nodes by introducing source terms encoding group-element dependence. This yields truly closed-form expressions for matrix elements beyond standard recoupling coefficients, complementing the hypergeometric product formulas of \Cref{sec:closed-form}.
+We extend the generating functional framework (\ref{sec:generating-functional}) to compute SU(2) operator matrix elements on arbitrary-valence nodes by introducing source terms encoding group-element dependence. This yields truly closed-form expressions for matrix elements beyond standard recoupling coefficients, complementing the hypergeometric product formulas of \ref{sec:closed-form}.
 
 \subsection{Generating Functional with Sources}
 
@@ -460,7 +459,7 @@ $$
 $$
 This configuration arises in two-electron spin coupling and satisfies all triangle inequalities: $|1/2 - 1/2| \leq 1 \leq 1/2 + 1/2$ (true: $0 \leq 1 \leq 1$), and the parity condition $1/2 + 1/2 + 1 = 2 \in \mathbb{Z}$. 
 
-Evaluation via the hypergeometric product formula (\Cref{thm:product}) yields the exact rational result $1/6$, which agrees identically with SymPy's symbolic \texttt{wigner\_6j(1/2, 1/2, 1, 1/2, 1/2, 1)}. This case appears in Table~\ref{tab:cross-verification} under ``half-integer'' and demonstrates that all five representations handle non-integer spins without modification.
+Evaluation via the hypergeometric product formula (\ref{thm:product}) yields the exact rational result $1/6$, which agrees identically with SymPy's symbolic \texttt{wigner\_6j(1/2, 1/2, 1, 1/2, 1/2, 1)}. This case appears in Table~\ref{tab:cross-verification} under ``half-integer'' and demonstrates that all five representations handle non-integer spins without modification.
 
 \subsection{Higher-n Reference Data}
 
@@ -482,16 +481,16 @@ All 7 cases computed successfully with documented stability behavior. Table~\ref
 
 Our validation reveals distinct numerical stability regimes across different representations:
 
-\paragraph{Hypergeometric product formula (\Cref{thm:product}):}
+\paragraph{Hypergeometric product formula (\ref{thm:product}):}
 Stable for small-to-moderate spins ($j \leq 20$). Fibonacci ratio terms in chain graphs remain well-conditioned. Requires multi-precision arithmetic for $j > 50$.
 
-\paragraph{Uniform representation (\Cref{thm:uniform-12j}):}
+\paragraph{Uniform representation (\ref{thm:uniform-12j}):}
 Single-sum convergence typically achieved within $m < 100$ terms for spins $j \leq 10$. Pochhammer symbol growth can cause overflow for $j > 30$ without rescaling.
 
-\paragraph{Finite recurrences (\Cref{thm:recurrence}):}
+\paragraph{Finite recurrences (\ref{thm:recurrence}):}
 Backward recursion preferred when condition numbers $\kappa_k > 10^3$. Forward recursion stable for small spin increments with proper normalization.
 
-\paragraph{Generating functional (\Cref{thm:generating-functional}):}
+\paragraph{Generating functional (\ref{thm:generating-functional}):}
 Determinant evaluation stable via LU decomposition for graphs with $< 20$ vertices. Sparse matrix techniques extend range to $\approx 50$ vertices.
 
 \subsection{Failure Modes and Diagnostics}
@@ -533,7 +532,7 @@ We recommend the following UQ protocol for production computations:
 \paragraph{Spin range assessment:}
 \begin{enumerate}
 \item For $j_{\text{max}} \leq 10$: All representations numerically stable with IEEE 754 double precision.
-\item For $10 < j_{\text{max}} \leq 30$: Use hypergeometric product formula (\Cref{thm:product}) or backward recurrence (\Cref{thm:recurrence}). Verify condition numbers $\kappa < 10^6$.
+\item For $10 < j_{\text{max}} \leq 30$: Use hypergeometric product formula (\ref{thm:product}) or backward recurrence (\ref{thm:recurrence}). Verify condition numbers $\kappa < 10^6$.
 \item For $j_{\text{max}} > 30$: Requires multi-precision arithmetic (128-bit or arbitrary precision via \texttt{mpmath}). Monitor Pochhammer symbol growth in uniform representation.
 \end{enumerate}
 
@@ -578,25 +577,25 @@ Monitor the following indicators during computation:
 We have presented a unified framework for SU(2) 3nj recoupling coefficients encompassing five complementary representations:
 
 \begin{enumerate}
-\item \textbf{Hypergeometric product formula} (\Cref{thm:product}): First fully closed-form expression for arbitrary trivalent graphs via matching number ratios and ${}_2F_1$ functions.
+\item \textbf{Hypergeometric product formula} (\ref{thm:product}): First fully closed-form expression for arbitrary trivalent graphs via matching number ratios and ${}_2F_1$ functions.
 
-\item \textbf{Uniform single-sum representation} (\Cref{thm:uniform-12j}): Explicit ${}_5F_4$ formula for 12j symbols obtained through algebraic reindexing of generating functionals.
+\item \textbf{Uniform single-sum representation} (\ref{thm:uniform-12j}): Explicit ${}_5F_4$ formula for 12j symbols obtained through algebraic reindexing of generating functionals.
 
-\item \textbf{Finite recurrence relations} (\Cref{thm:recurrence}): Three-term recurrences from edge-removal determinants, enabling sequential computation with documented stability properties.
+\item \textbf{Finite recurrence relations} (\ref{thm:recurrence}): Three-term recurrences from edge-removal determinants, enabling sequential computation with documented stability properties.
 
-\item \textbf{Universal generating functional} (\Cref{thm:generating-functional}): Schwinger-boson Gaussian integral representation yielding all 3nj symbols through determinant inversion and Taylor expansion.
+\item \textbf{Universal generating functional} (\ref{thm:generating-functional}): Schwinger-boson Gaussian integral representation yielding all 3nj symbols through determinant inversion and Taylor expansion.
 
-\item \textbf{Arbitrary-valence matrix elements} (\Cref{thm:matrix-element}): Extension to group-element-dependent operator kernels via functional derivatives, enabling spin network applications.
+\item \textbf{Arbitrary-valence matrix elements} (\ref{thm:matrix-element}): Extension to group-element-dependent operator kernels via functional derivatives, enabling spin network applications.
 \end{enumerate}
 
 \subsection{Validation and Reproducibility}
 
 All representations are rigorously validated through:
 \begin{itemize}
-\item 161 pytest tests across five independent implementations (\Cref{sec:validation})
+\item 161 pytest tests across five independent implementations (\ref{sec:validation})
 \item Exact agreement with SymPy symbolic computation at machine precision
 \item 50-decimal-place reference datasets for 6j and 9j symbols
-\item Cross-verification matrix documenting all validation routes (\Cref{app:cross-verification})
+\item Cross-verification matrix documenting all validation routes (\ref{app:cross-verification})
 \end{itemize}
 
 \subsection{Future Directions}
@@ -641,11 +640,7 @@ Ethics approval is not required for this work.
 R. Sherrington: Conceptualization (lead); Formal analysis (lead); Investigation (lead); Methodology (lead); Software (lead); Validation (lead); Writing -- original draft (lead); Writing -- review \& editing (lead).
 
 \section*{Data Availability}
-The data that support the findings of this study are openly available in the Dawson Institute GitHub repositories at \texttt{https://github.com/DawsonInstitute/su2-3nj-series-paper} and related \texttt{su2-3nj-*} repositories.
-
-\begin{suppinfo}
-Supplementary material includes the full validation harness, reproducible test datasets, and scripts used to generate the tables included in this manuscript.
-\end{suppinfo}
+The data that support the findings of this study are openly available in the Dawson Institute GitHub repositories at \texttt{https://github.com/DawsonInstitute/su2-3nj-series-paper} and related \texttt{su2-3nj-*} repositories. Supplementary material includes the full validation harness, reproducible test datasets, and scripts used to generate the tables included in this manuscript.
 
 \appendix
 
@@ -662,24 +657,24 @@ We document all validation routes connecting the five representations and extern
 \toprule
 \textbf{Formula} & \textbf{SymPy} & \textbf{Closed-form} & \textbf{Gen. Func.} & \textbf{Recurrence} \\
 \midrule
-Hypergeometric product (\Cref{thm:product}) & \checkmark & — & \checkmark & — \\
-Uniform ${}_5F_4$ (\Cref{thm:uniform-12j}) & \checkmark & \checkmark & \checkmark & — \\
-Generating functional (\Cref{thm:generating-functional}) & \checkmark & \checkmark & — & \checkmark \\
-Finite recurrence (\Cref{thm:recurrence}) & \checkmark & — & \checkmark & — \\
+Hypergeometric product (\ref{thm:product}) & \checkmark & — & \checkmark & — \\
+Uniform ${}_5F_4$ (\ref{thm:uniform-12j}) & \checkmark & \checkmark & \checkmark & — \\
+Generating functional (\ref{thm:generating-functional}) & \checkmark & \checkmark & — & \checkmark \\
+Finite recurrence (\ref{thm:recurrence}) & \checkmark & — & \checkmark & — \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Validation routes summary:}
 \begin{itemize}
-\item \textbf{SymPy baseline}: All formulas agree with \texttt{wigner\_6j} and \texttt{wigner\_9j} to machine precision across 5 test configurations (\Cref{tab:cross-verification}).
-\item \textbf{Cross-implementation}: Closed-form, uniform representation, and generating functional produce identical results (8/8 tests passing, \Cref{sec:validation}).
-\item \textbf{Recurrence reconstruction}: Values computed via \Cref{thm:recurrence} match direct evaluation from \Cref{thm:generating-functional} for all test cases.
-\item \textbf{High-precision reference}: 9j symbols computed to 50 decimal places using \texttt{mpmath} serve as golden reference (\Cref{tab:9j-reference}).
+\item \textbf{SymPy baseline}: All formulas agree with \texttt{wigner\_6j} and \texttt{wigner\_9j} to machine precision across 5 test configurations (\ref{tab:cross-verification}).
+\item \textbf{Cross-implementation}: Closed-form, uniform representation, and generating functional produce identical results (8/8 tests passing, \ref{sec:validation}).
+\item \textbf{Recurrence reconstruction}: Values computed via \ref{thm:recurrence} match direct evaluation from \ref{thm:generating-functional} for all test cases.
+\item \textbf{High-precision reference}: 9j symbols computed to 50 decimal places using \texttt{mpmath} serve as golden reference (\ref{tab:9j-reference}).
 \end{itemize}
 
 \paragraph{Backend cross-checks:}
-For node matrix elements (\Cref{sec:node-matrix}), both NumPy (numeric) and SymPy (symbolic) backends agree for small valence ($n \leq 5$), with determinant values matching to $10^{-14}$ relative error.
+For node matrix elements (\ref{sec:node-matrix}), both NumPy (numeric) and SymPy (symbolic) backends agree for small valence ($n \leq 5$), with determinant values matching to $10^{-14}$ relative error.
 
 \paragraph{Permutation invariance:}
 All formulas respect the known symmetries under permutation of angular momentum labels, verified through systematic sample testing.
@@ -705,11 +700,11 @@ python scripts/generate_validation_tables.py
 
 Reference implementations are distributed across five GitHub repositories:
 \begin{itemize}
-\item \textbf{su2-3nj-closedform}: Hypergeometric product formula (\Cref{thm:product})
-\item \textbf{su2-3nj-uniform-closed-form}: Uniform ${}_5F_4$ representation (\Cref{thm:uniform-12j})
-\item \textbf{su2-3nj-recurrences}: Finite recurrence engine (\Cref{thm:recurrence})
-\item \textbf{su2-3nj-generating-functional}: Determinant-based generator (\Cref{thm:generating-functional})
-\item \textbf{su2-node-matrix-elements}: Operator matrix elements (\Cref{thm:matrix-element})
+\item \textbf{su2-3nj-closedform}: Hypergeometric product formula (\ref{thm:product})
+\item \textbf{su2-3nj-uniform-closed-form}: Uniform ${}_5F_4$ representation (\ref{thm:uniform-12j})
+\item \textbf{su2-3nj-recurrences}: Finite recurrence engine (\ref{thm:recurrence})
+\item \textbf{su2-3nj-generating-functional}: Determinant-based generator (\ref{thm:generating-functional})
+\item \textbf{su2-node-matrix-elements}: Operator matrix elements (\ref{thm:matrix-element})
 \end{itemize}
 
 All repositories include:
