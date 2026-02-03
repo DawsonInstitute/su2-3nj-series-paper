@@ -1870,3 +1870,18 @@ Build successful! The manuscript compiles cleanly now (16 pages, 424KB PDF). The
 The manuscript is now submission-ready for both arXiv and JMP with all mandatory AIP sections in place.
 <!-- ------ -->
 ---
+Fixed! The issue was that RevTeX 4.2 requires the frontmatter commands (`\title`, `\author`, `\affiliation`, `\date`) to be placed **after** `\begin{document}` rather than in the preamble. This allows RevTeX to fully initialize its internal macros before processing author information.
+
+**Changes made:**
+- Moved `\title`, `\author`, `\affiliation`, and `\date` to after `\begin{document}`
+- Kept theorem environment definitions after `\begin{document}` (both are now in the correct location)
+
+**Verification:**
+✅ 0 LaTeX errors  
+✅ PDF generated: 16 pages, 437KB  
+✅ All cross-references resolved  
+✅ Bibliography integrated  
+
+The manuscript now compiles cleanly and is ready for arXiv/JMP submission.
+<!-- ------ -->
+---
