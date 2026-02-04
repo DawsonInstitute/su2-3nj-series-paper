@@ -20,6 +20,10 @@ The authoritative implementations remain in their respective repos:
 - **papers/related/**: Local literature archive (ignored by git)
 - **scripts/**: Cross-repo integration scripts (coming soon)
 
+## Wolfram symbolic checks
+
+- Run the independent Wolfram verification harness: `wolframscript -file scripts/verify_wolfram.wls`
+
 ## Current Status
 
 **Phase 1 (core implementations)**: ✅ Complete — all 5 repos have pytest + validation harnesses

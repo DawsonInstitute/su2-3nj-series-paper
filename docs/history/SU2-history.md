@@ -1951,3 +1951,22 @@ The `\FloatBarrier` command creates an invisible barrier that prevents any float
 Clean compilation with no errors, 16 pages, 452KB. The table should now appear directly after "Implementation selection guide:" instead of floating to page 13 between the bullet points.
 <!-- ------ -->
 ---
+Implemented an independent Wolfram verification path (as Claude suggested) in this repo.
+
+**What I added**
+- A runnable Wolfram harness: verify_wolfram.wls
+- A README entry showing how to run it: README.md
+
+**What it verifies (independently)**
+- 3j sanity check against a known closed value.
+- 6j cross-check: built-in `SixJSymbol` vs an independent Racah-sum implementation (`racah6J`).
+- 9j cross-check without relying on a built-in 9j (this Wolfram install does not evaluate `NineJSymbol`): validates that
+  - “9j as sum of three 6j’s” (standard reduction identity) matches
+  - “9j as sum of six 3j’s” (definition-style)  
+  and does this both with built-in 6j and with Racah 6j.
+
+**Run it**
+- From the repo root: `wolframscript -file scripts/verify_wolfram.wls`
+- It exits nonzero if anything fails (good for CI/hooks later).
+<!-- ------ -->
+---
