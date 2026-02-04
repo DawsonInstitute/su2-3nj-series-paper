@@ -339,10 +339,11 @@ where $K$ is the antisymmetric adjacency matrix with entries $K_{ij} = \pm x_e$ 
 \end{theorem}
 
 \begin{corollary}[3nj Coefficients from Series Expansion]
-The Taylor expansion coefficient of $\prod_e x_e^{2j_e}$ in $G(\{x_e\})$ equals the Wigner 3nj symbol for the given coupling tree:
+The multivariate Taylor expansion of $G(\{x_e\})$ defines a canonical family of coefficients
 \[
-\{3nj\}(\{j_e\}) = \frac{1}{\prod_e (2j_e)!} \left[\prod_e x_e^{2j_e}\right] G(\{x_e\}).
+C_G(\{j_e\}) \;:=\; \frac{1}{\prod_e (2j_e)!}\,\left[\prod_e x_e^{2j_e}\right] G(\{x_e\}).
 \]
+These coefficients are related to standard Wigner $3n\!j$ symbols by a convention-dependent normalization and phase map (choice of intertwiner normalization, edge orientations, and Schwinger-boson conventions). We therefore treat $C_G$ as the primary output of the determinant generating functional and only identify it with a specific Wigner-symbol convention after fixing those normalization choices explicitly.
 \end{corollary}
 
 \subsection{Explicit Examples}
