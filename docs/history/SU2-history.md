@@ -2015,3 +2015,16 @@ Implemented “paper-theorem” verification blocks in the Wolfram harness, usin
 - Wolfram full: still FAILS on the same theorem-targeted items as before, and additionally shows the provided “explicit K(x,y)” determinant factorization is *not* algebraically equal as written (it prints `det(I-K) - knownDet = ...` to help diagnose sign/convention issues).
 <!-- ------ -->
 ---
+**What Just Happened (Latest High-Signal Work)**  
+- The verification effort converged on “definition mismatch” as the cause of the remaining FAILs: the paper’s stated 2‑variable determinant example and the “coefficient equals 6j” corollary did not match the specific tetrahedral antisymmetric $K$ used in the harness.  
+- Recent Wolfram-side experiments expanded and inspected the paper’s claimed quartic determinant polynomial and compared it against multiple candidate constructions (`det(I-K)`, `det(I+K^2)`, block/spinor-style lift attempts, and brute-force sign/entry searches); none reproduced the quartic form under plausible $K$ ansätze.  
+- A key concrete specialization check showed the implemented tetrahedral $K$ gives `det(I-K)|_{a=b=c=x,d=e=f=y} = 1 + 3x^2 + 3y^2 + x^2 y^2`, i.e., degree‑2 behavior in $x,y$, contradicting the quartic-factor expression.  
+- The recurrence claim `Δ0 G = x_k^2 Δ1 G` was debugged and found false; a correct structural fact was validated instead: `det(I-K)` is quadratic in any single edge variable (`Exponent[..., x_k] == 2`).  
+- The workflow was stabilized by separating “baseline truths” from “paper-claims under current conventions”: baseline 3j/6j/9j checks pass; paper-aligned checks were adjusted to only assert what follows from the defined $K$; strict coefficient-equality checks were gated behind an explicit flag in the Wolfram harness.
+
+**Where This Lives in the Repo**  
+- Wolfram verification harness: su2-3nj-series-paper/scripts/verify_wolfram.wls  
+- Python numerical cross-check harness: su2-3nj-series-paper/scripts/verify_python.py  
+- Paper LaTeX under test: su2-3nj-series-paper/papers/paper_arXiv/su2-3nj-unified-representations.tex
+<!-- ------ -->
+---

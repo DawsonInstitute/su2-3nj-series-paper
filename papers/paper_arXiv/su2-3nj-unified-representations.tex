@@ -117,7 +117,7 @@ We present a fully closed-form expression for the SU(2) 3nj recoupling coefficie
 
 \begin{theorem}[Hypergeometric Product Formula]
 \label{thm:product}
-Let $G$ be a connected trivalent graph with edge set $E$. Label each edge $e \in E$ by a spin $j_e$. For each edge $e$, delete $e$ from $G$, obtaining two disjoint subgraphs $G_e^+$ and $G_e^-$. Let $M_e^+$ and $M_e^-$ be the number of perfect matchings of $G_e^+$ and $G_e^-$, respectively. Define the matching ratio
+Let $G$ be a connected trivalent \emph{tree} (i.e., an acyclic connected graph) with edge set $E$. Label each edge $e \in E$ by a spin $j_e$. For each edge $e$, delete $e$ from $G$, obtaining two connected components (subtrees) $G_e^+$ and $G_e^-$. Let $M_e^+$ and $M_e^-$ be the number of \emph{matchings} (independent edge sets, not necessarily perfect) of $G_e^+$ and $G_e^-$, respectively. Define the matching ratio
 \[
 \rho_e = \frac{M_e^+}{M_e^-}.
 \]
@@ -131,7 +131,7 @@ Then the SU(2) 3nj recoupling coefficient is
 This is the first truly closed-form, general expression for SU(2) 3nj recoupling coefficients, unifying all graph topologies under a single hypergeometric product formula. The connection to the generating functional approach (\Cref{sec:generating-functional}) is established through the determinant representation (\Cref{thm:generating-functional}).
 
 \begin{example}[15j-Chain]
-For the 15j-chain on 8 vertices (7 edges), cutting edge $e$ splits the chain into two paths whose matching counts are consecutive Fibonacci numbers, giving
+For the 15j-chain on 8 vertices (7 edges), cutting edge $e$ splits the chain into two paths. The number of matchings of a path graph $P_n$ on $n$ vertices is $M(P_n)=F_{n+2}$, so the resulting matching counts are Fibonacci numbers, giving
 \[
 \rho_e = \frac{F_{n-1}}{F_n},
 \]
@@ -152,18 +152,17 @@ For sparse graphs (constant valence), the product formula achieves near-linear c
 
 \subsection{Algorithm: Matching-Number Computation}
 
-The core computational bottleneck is computing matching numbers $M_e^{\pm}$ for edge deletions. For planar graphs, we employ Pfaffian-based algorithms:
+The core computational bottleneck is computing matching numbers $M_e^{\pm}$ for edge deletions. For trees (the setting of \Cref{thm:product}), total matchings can be computed in linear time via dynamic programming on the components $G_e^{\pm}$.
 
 \begin{quote}
-\textbf{Algorithm 1}: Matching-number computation via Pfaffian
+\textbf{Algorithm 1}: Matching-number computation on trees
 \begin{enumerate}
 \item \textbf{Input}: Graph $G$, edge $e$
 \item Delete edge $e$ from $G$ to obtain $G_e^+$ and $G_e^-$
 \item For each component:
 \begin{enumerate}
-    \item[(a)] Construct skew-symmetric adjacency matrix $A$
-    \item[(b)] If planar: Compute $\text{Pf}(A)$ via $\sqrt{\det(A)}$ (oriented matchings)
-    \item[(c)] Else: Enumerate matchings combinatorially (exponential fallback)
+    \item[(a)] Root the tree and compute the number of matchings by standard DP recurrences
+    \item[(b)] (Optional) For path components, use the closed form $M(P_n)=F_{n+2}$
 \end{enumerate}
 \item Compute ratio $\rho_e = M_e^+ / M_e^-$
 \item Evaluate ${}_2F_1(-2j_e, 1/2; 1; -\rho_e)$ via hypergeometric series
@@ -171,7 +170,7 @@ The core computational bottleneck is computing matching numbers $M_e^{\pm}$ for 
 \end{enumerate}
 \end{quote}
 
-For non-planar graphs, matching enumeration requires exponential-time algorithms (e.g., Ryser's permanent formula). In practice, graph structure often permits efficient reduction.
+For general (non-tree) trivalent graphs, both the edge-deletion connectivity properties and the combinatorics of matchings require additional case distinctions; we do not rely on Pfaffian perfect-matching formulas for total matchings in this work.
 
 \section{Uniform Hypergeometric Representation}
 \label{sec:uniform}
@@ -349,9 +348,13 @@ The Taylor expansion coefficient of $\prod_e x_e^{2j_e}$ in $G(\{x_e\})$ equals 
 \subsection{Explicit Examples}
 
 \paragraph{6j symbols ($n=4$, two edge variables):}
-With edge variables $x, y$, the generating function becomes
+Starting from the tetrahedral $4\times 4$ antisymmetric adjacency matrix $K$ with six edge variables, a simple two-parameter specialization is obtained by identifying three opposite edges with $x$ and the remaining three with $y$ (i.e., $a=b=c=x$ and $d=e=f=y$ in the tetrahedral labeling). This yields
 \[
-G(x,y) = \frac{1}{\sqrt{(1 - xy - x - y)(1 + xy - x + y)(1 + xy + x - y)(1 - xy + x + y)}}.
+\det(I-K)\big|_{a=b=c=x,\,d=e=f=y} = 1 + 3x^2 + 3y^2 + x^2 y^2,
+\]
+and hence
+\[
+G(x,y) = \frac{1}{\sqrt{1 + 3x^2 + 3y^2 + x^2 y^2}}.
 \]
 
 \paragraph{9j symbols ($n=6$, three edge variables):}
