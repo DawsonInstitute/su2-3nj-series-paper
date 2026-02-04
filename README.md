@@ -25,6 +25,11 @@ The authoritative implementations remain in their respective repos:
 - Run the full Wolfram verification harness (includes paper-targeted theorem checks): `wolframscript -file scripts/verify_wolfram.wls`
 - Run baseline-only checks (Wigner symbols / Racah / 9j definitions): `wolframscript -file scripts/verify_wolfram.wls --baseline-only`
 
+## Python numerical checks (mpmath)
+
+- Run the Python verification harness (independent 3j + 6j via Racah and a 3j-definition sum for small spins): `python scripts/verify_python.py`
+- Increase precision (optional): `python scripts/verify_python.py --dps 120`
+
 ## Current Status
 
 **Phase 1 (core implementations)**: ✅ Complete — all 5 repos have pytest + validation harnesses

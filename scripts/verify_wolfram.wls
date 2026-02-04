@@ -219,7 +219,13 @@ Module[{cases6j},
     {1/2, 1/2, 1, 1/2, 1/2, 1},
     {1, 1, 1, 1, 1, 1},
     {1, 1/2, 3/2, 1, 1/2, 3/2},
-    {2, 3/2, 1/2, 1, 3/2, 5/2}
+    {2, 3/2, 1/2, 1, 3/2, 5/2},
+    (* Edge / limiting cases *)
+    {1/2, 1/2, 0, 1/2, 1/2, 0},
+    (* Higher spins (still cheap for Racah sum; probes numeric stability) *)
+    {10, 10, 10, 10, 10, 10},
+    {10, 10, 0, 10, 10, 0},
+    {21/2, 21/2, 0, 21/2, 21/2, 0}
   };
   Scan[
     Function[{c},
@@ -333,6 +339,30 @@ If[runPaperChecks,
     assertTrue[
       "6j det specialization (a=b=c=x, d=e=f=y) matches paper's 2-variable determinant",
       FullSimplify[detSpecial == detPaper]
+    ];
+  ];
+];
+
+(* Independent symbolic determinant identity as sometimes stated for a 2-variable tetrahedral K.
+   This does not fix the paper's K-conventions, but it does validate the internal algebra of
+   that specific K(x,y) -> det factorization claim.
+*)
+If[runPaperChecks,
+  Module[{x, y, Kxy, detIK, knownDet},
+    Kxy = {
+      {0, x, y, -x - y},
+      {-x, 0, x + y, y},
+      {-y, -x - y, 0, x},
+      {x + y, -y, -x, 0}
+    };
+    detIK = Det[IdentityMatrix[4] - Kxy];
+    knownDet = Expand[(1 - x y - x - y) (1 + x y - x + y) (1 + x y + x - y) (1 - x y + x + y)];
+    Module[{diff = FullSimplify[detIK - knownDet]},
+      If[TrueQ[diff === 0],
+        assertTrue["Symbolic det identity for explicit K(x,y)", True],
+        Print["  det(I-K) - knownDet = ", diff];
+        assertTrue["Symbolic det identity for explicit K(x,y)", False]
+      ]
     ];
   ];
 ];

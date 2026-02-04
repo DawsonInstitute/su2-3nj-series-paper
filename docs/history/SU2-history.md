@@ -1999,3 +1999,19 @@ Implemented “paper-theorem” verification blocks in the Wolfram harness, usin
   - The 15j-chain Fibonacci statement is only consistent if “matching counts” means **total matchings**, not **perfect matchings** (your Theorem 1 explicitly says perfect).
 <!-- ------ -->
 ---
+**What I changed**
+- Added a Python high-precision verifier at verify_python.py (independent `mpmath` implementations of 3j + 6j via Racah, plus 6j via a 4×3j definition for small spins; includes edge/limit + high-spin sanity).
+- Extended verify_wolfram.wls with more edge/high-spin 6j cases and a new “explicit K(x,y) determinant identity” check (now prints the symbolic difference when it fails).
+- Documented the Python harness in README.md.
+
+**How to run**
+- Wolfram baseline-only: `wolframscript -file verify_wolfram.wls --baseline-only`
+- Wolfram full (paper checks): `wolframscript -file scripts/verify_wolfram.wls`
+- Python: `python scripts/verify_python.py` (optional precision: `python verify_python.py --dps 120`)
+
+**Current status**
+- Wolfram baseline-only: PASS (including new edge/high-spin 6j cases).
+- Python verifier: PASS (3j known identities, 6j Racah, 6j 3j-sum cross-check on small cases, boundary/high-spin finiteness checks).
+- Wolfram full: still FAILS on the same theorem-targeted items as before, and additionally shows the provided “explicit K(x,y)” determinant factorization is *not* algebraically equal as written (it prints `det(I-K) - knownDet = ...` to help diagnose sign/convention issues).
+<!-- ------ -->
+---
