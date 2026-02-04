@@ -18,6 +18,9 @@ $MinPrecision = 80;
 ClearAll[assertTrue, assertApprox, reportSummary, failures];
 failures = {};
 
+ClearAll[runPaperChecks];
+runPaperChecks = !MemberQ[$ScriptCommandLine, "--baseline-only"];
+
 assertTrue[name_String, cond_] := Module[{ok = TrueQ[cond]},
   If[ok,
     Print["[PASS] ", name],
@@ -30,7 +33,13 @@ assertTrue[name_String, cond_] := Module[{ok = TrueQ[cond]},
 assertApprox[name_String, expr_, expected_, prec_Integer : 80] := Module[
   {diff = Quiet@N[expr - expected, prec]},
   If[NumericQ[diff],
-    assertTrue[name, diff === 0 || Chop[diff, 10^(-prec + 10)] === 0],
+    If[diff === 0 || Chop[diff, 10^(-prec + 10)] === 0,
+      assertTrue[name, True],
+      Print["  expr     = ", Quiet@N[expr, Min[prec, 40]]];
+      Print["  expected = ", Quiet@N[expected, Min[prec, 40]]];
+      Print["  diff     = ", Quiet@N[diff, Min[prec, 40]]];
+      assertTrue[name, False]
+    ],
     assertTrue[name, False]
   ]
 ];
@@ -65,6 +74,52 @@ nineJValidQ[a_, b_, c_, d_, e_, f_, g_, h_, i_] :=
 (* Factorial generalized to handle the half-integer workflow safely *)
 ClearAll[fac];
 fac[x_] := Gamma[x + 1];
+
+(* =========================
+   Paper-targeted checks
+   ========================= *)
+
+ClearAll[kTetra6j, genFuncFromK, sixJFromGenFuncCoeff];
+
+genFuncFromK[K_] := 1/Sqrt[Det[IdentityMatrix[Length[K]] - K]];
+
+(* Tetrahedral K matrix with 6 independent edge variables.
+
+   Edge/6j label mapping chosen to match the canonical 6j tetrahedron:
+
+     K12 = a, K13 = b, K14 = c,
+     K34 = d, K24 = e, K23 = f,
+
+   which corresponds to SixJSymbol[{a,b,c},{d,e,f}] in the usual convention.
+*)
+kTetra6j[a_, b_, c_, d_, e_, f_] := {
+  {0, a, b, c},
+  {-a, 0, f, e},
+  {-b, -f, 0, d},
+  {-c, -e, -d, 0}
+};
+
+sixJFromGenFuncCoeff[ja_, jb_, jc_, jd_, je_, jf_, prec_Integer : 80] := Module[
+  {a, b, c, d, e, f, K, G, coeff, norm},
+  K = kTetra6j[a, b, c, d, e, f];
+  G = genFuncFromK[K];
+  coeff = SeriesCoefficient[
+    G,
+    {a, 0, 2 ja}, {b, 0, 2 jb}, {c, 0, 2 jc},
+    {d, 0, 2 jd}, {e, 0, 2 je}, {f, 0, 2 jf}
+  ];
+  norm = fac[2 ja] fac[2 jb] fac[2 jc] fac[2 jd] fac[2 je] fac[2 jf];
+  Quiet@N[coeff/norm, prec]
+];
+
+(* Matching-count sanity checks for the paper’s Theorem 1 / 15j-chain example *)
+ClearAll[pathPerfectMatchingCount, pathTotalMatchingCount];
+
+(* Perfect matchings on a path graph P_n (n vertices): 1 if n even, else 0. *)
+pathPerfectMatchingCount[n_Integer?NonNegative] := If[EvenQ[n], 1, 0];
+
+(* Total matchings (not necessarily perfect) on a path graph P_n: Fibonacci(n+2). *)
+pathTotalMatchingCount[n_Integer?NonNegative] := Fibonacci[n + 2];
 
 (* Racah sum formula for 6j as an independent check *)
 ClearAll[deltaTri, racah6J];
@@ -223,6 +278,119 @@ Module[{cases9j},
       ]
     ],
     cases9j
+  ];
+];
+
+(* === Paper checks: Generating functional (Theorem "Universal Generating Functional") === *)
+
+If[runPaperChecks,
+  Module[{cases6jGen},
+    cases6jGen = {
+      (* Matches the half-integer example discussed later in the paper. *)
+      {1/2, 1/2, 1, 1/2, 1/2, 1},
+      (* A small integer case. *)
+      {1, 1, 1, 1, 1, 1},
+      (* Mixed with zeros to keep coefficient extraction light. *)
+      {1/2, 1/2, 0, 1/2, 1/2, 0}
+    };
+    Scan[
+      Function[{c},
+        Module[{ja, jb, jc, jd, je, jf, viaDet, built},
+          {ja, jb, jc, jd, je, jf} = c;
+          If[sixJValidQ[ja, jb, jc, jd, je, jf],
+            viaDet = sixJFromGenFuncCoeff[ja, jb, jc, jd, je, jf, 80];
+            built = N[SixJSymbol[{ja, jb, jc}, {jd, je, jf}], 80];
+            assertApprox[
+              "6j from coeff[1/Sqrt[Det(I-K)]] matches SixJSymbol for " <> ToString[c],
+              viaDet,
+              built,
+              60
+            ],
+            Print["[SKIP] invalid 6j gen-func case: ", c]
+          ]
+        ]
+      ],
+      cases6jGen
+    ];
+  ];
+];
+
+(* Paper's explicit 2-variable 6j generating function (as written in the LaTeX):
+
+   G(x,y) = 1/sqrt((1-xy-x-y)(1+xy-x+y)(1+xy+x-y)(1-xy+x+y)).
+
+   The paper does not provide the corresponding K(x,y). As a concrete consistency
+   check, we test whether the tetrahedral 6-variable determinant reduces to the
+   stated polynomial under a simple 2-parameter identification.
+*)
+
+If[runPaperChecks,
+  Module[{a, b, c, d, e, f, x, y, K, detTetra, detSpecial, detPaper},
+    K = kTetra6j[a, b, c, d, e, f];
+    detTetra = Det[IdentityMatrix[4] - K];
+    detSpecial = FullSimplify[detTetra /. {a -> x, b -> x, c -> x, d -> y, e -> y, f -> y}];
+    detPaper = Expand[(1 - x y - x - y) (1 + x y - x + y) (1 + x y + x - y) (1 - x y + x + y)];
+    assertTrue[
+      "6j det specialization (a=b=c=x, d=e=f=y) matches paper's 2-variable determinant",
+      FullSimplify[detSpecial == detPaper]
+    ];
+  ];
+];
+
+(* === Paper checks: Hypergeometric product theorem / matching claims === *)
+
+(* Theorem statement says deleting an edge from a connected trivalent graph yields two disjoint subgraphs.
+   Counterexample: K4 (tetrahedron graph) is connected and trivalent; deleting one edge leaves it connected.
+*)
+If[runPaperChecks,
+  Module[{g, gDel},
+    g = Graph[{1 <-> 2, 1 <-> 3, 1 <-> 4, 2 <-> 3, 2 <-> 4, 3 <-> 4}];
+    gDel = EdgeDelete[g, 1 <-> 2];
+    assertTrue[
+      "Theorem 1 claim 'edge deletion yields two disjoint subgraphs' (K4 counterexample)",
+      !ConnectedGraphQ[gDel]
+    ];
+  ];
+];
+
+(* Example claim: cutting a chain splits into paths whose matching counts are consecutive Fibonacci numbers.
+   If interpreted as PERFECT matchings (as in Theorem 1), paths have 0 or 1 perfect matching only.
+   We check both notions explicitly for small path sizes.
+*)
+If[runPaperChecks,
+  Module[{nVals},
+    nVals = Range[1, 10];
+    assertTrue[
+      "Path perfect-matching counts are NOT Fibonacci (reveals perfect vs total matching ambiguity)",
+      AnyTrue[nVals, pathPerfectMatchingCount[#] =!= Fibonacci[#] &]
+    ];
+    assertTrue[
+      "Path total-matching counts follow Fibonacci(n+2)",
+      AllTrue[nVals, pathTotalMatchingCount[#] === Fibonacci[# + 2] &]
+    ];
+  ];
+];
+
+(* === Paper checks: Finite recurrence identity as written === *)
+
+(* Using the tetrahedral K, take k as edge 'a' connecting vertices {1,2}.
+
+   Delta0^(a) = Det(I-K) |_{a=0}
+   Delta1^(a) = Det(I-K) with rows/cols of the edge removed.
+
+   The theorem states: Delta0(x_{!=a}) G(x) = a^2 Delta1(x_{!=a}) G(x).
+   Cancelling G suggests Delta0 = a^2 Delta1, which we test directly.
+*)
+If[runPaperChecks,
+  Module[{a, b, c, d, e, f, K, M, delta0, delta1},
+    K = kTetra6j[a, b, c, d, e, f];
+    M = IdentityMatrix[4] - K;
+    delta0 = Det[M] /. a -> 0;
+    delta1 = Det[M[[{3, 4}, {3, 4}]]];
+    assertTrue[
+      "Finite recurrence determinant identity (tetrahedron, edge a) holds as written",
+      FullSimplify[delta0 == a^2 delta1]
+    ];
   ];
 ];
 

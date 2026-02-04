@@ -1970,3 +1970,32 @@ Implemented an independent Wolfram verification path (as Claude suggested) in th
 - It exits nonzero if anything fails (good for CI/hooks later).
 <!-- ------ -->
 ---
+Implemented “paper-theorem” verification blocks in the Wolfram harness, using the *exact* theorem statements present in your LaTeX and focusing on the graph-general/determinant claims.
+
+**What changed**
+- Extended the Wolfram harness: verify_wolfram.wls
+  - Adds paper-targeted checks for:
+    - Generating functional claim $G=1/\sqrt{\det(I-K)}$ + coefficient-extraction corollary (tested against 6j/tetrahedron labeling).
+    - Consistency of the paper’s “6j, two edge variables” explicit example vs a natural 2-parameter specialization of a tetrahedral $K$.
+    - Theorem 1’s “delete edge → two disjoint subgraphs” claim (explicit counterexample with $K_4$).
+    - 15j-chain Fibonacci claim: distinguishes **perfect matchings** vs **all matchings** on paths.
+    - Finite recurrence determinant identity as written (tested on tetrahedral edge-minor interpretation).
+  - Adds diagnostics on numeric mismatches (prints expr/expected/diff).
+  - Adds flag: `--baseline-only` to run just the foundational Wigner/Racah/9j checks.
+- Updated docs: README.md includes the new flag.
+
+**How to run**
+- Baseline checks only (should pass):  
+  `wolframscript -file verify_wolfram.wls --baseline-only`
+- Full run (includes theorem checks, currently fails on several paper claims):  
+  `wolframscript -file scripts/verify_wolfram.wls`
+
+**Current results (full run)**
+- Baseline cross-checks: PASS.
+- Paper-targeted checks: several FAIL, notably:
+  - Coefficient extraction from `1/Sqrt[Det(I-K)]` (with a straightforward tetrahedral antisymmetric adjacency `K`) does **not** reproduce `SixJSymbol` for small cases.
+  - Theorem 1’s edge-deletion “two disjoint subgraphs” statement fails for the tetrahedron graph (edge deletion leaves it connected).
+  - The recurrence determinant identity fails under the natural “remove the incident vertices” interpretation.
+  - The 15j-chain Fibonacci statement is only consistent if “matching counts” means **total matchings**, not **perfect matchings** (your Theorem 1 explicitly says perfect).
+<!-- ------ -->
+---

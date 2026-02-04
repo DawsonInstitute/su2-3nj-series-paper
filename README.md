@@ -22,7 +22,8 @@ The authoritative implementations remain in their respective repos:
 
 ## Wolfram symbolic checks
 
-- Run the independent Wolfram verification harness: `wolframscript -file scripts/verify_wolfram.wls`
+- Run the full Wolfram verification harness (includes paper-targeted theorem checks): `wolframscript -file scripts/verify_wolfram.wls`
+- Run baseline-only checks (Wigner symbols / Racah / 9j definitions): `wolframscript -file scripts/verify_wolfram.wls --baseline-only`
 
 ## Current Status
 
