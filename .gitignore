@@ -30,6 +30,7 @@ papers/**/*.png
 papers/**/*Zone.Identifier
 papers/**/author_config.tex
 papers/**/*Notes.bib
+!papers/paper/su2-3nj-unified-representations.pdf
 
 # Test build directories
 papers/test-arxiv-build/
