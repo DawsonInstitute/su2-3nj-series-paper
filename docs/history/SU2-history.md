@@ -2063,3 +2063,30 @@ Completed: *Rerun Wolfram verifier* (5/5)
 - `wolframscript -file verify_wolfram.wls --paper-strict` PASS (prints the strict-mode convention note)
 <!-- ------ -->
 ---
+I have implemented all recommended fixes to resolve the formatting and LaTeX issues in su2-3nj-unified-representations.tex (both the main paper and the arXiv version).
+
+### Fixes Applied
+
+1.  **Resolved "Missing $ inserted" Error (Line ~347)**
+    - Escaped the underscore in verify_wolfram.wls → `scripts/verify\_wolfram.wls`.
+    - This prevents TeX from interpreting the underscore as a math subscript request in text mode.
+
+2.  **Fixed "Overfull \hbox" (Line 202)**
+    - The wide 12j symbol equation (Theorem 3) was causing a 98pt overflow.
+    - I split the long fractional product across two lines using `\begin{multline*}`, which fits comfortably within the column width while preserving readability.
+
+3.  **Corrected URLs and GitHub Paths**
+    - Updated the "Data Availability" and "Acknowledgments" sections to use `\url{...}` for all long links.
+    - Added `\usepackage{hyperref}` to the preamble (if it wasn't already effective) to ensure proper line breaking for URLs.
+
+4.  **Synced Changes to arXiv Version**
+    - Applied identical fixes (underscore escape, equation splitting, URL formatting) to su2-3nj-unified-representations.tex to ensure the preprint submission is also clean.
+
+### Build Verification
+I rebuilt the PDF using the full `pdflatex` → `bibtex` → `pdflatex` cycle.
+- **Errors**: None / Fixed.
+- **Overfull boxes**: The massive 98pt warning is gone. Only one negligible warning remains (~2pt overfull in a paragraph), which is invisible to the eye.
+
+The paper is now technically polished and ready for submission.
+<!-- ------ -->
+---

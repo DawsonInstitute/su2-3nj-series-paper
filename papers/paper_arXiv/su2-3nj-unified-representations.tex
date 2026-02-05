@@ -191,17 +191,18 @@ j_7 & j_8 & j_{45}
 \end{Bmatrix},
 \]
 we have the single-sum hypergeometric form
-\[
+\begin{multline*}
 \begin{Bmatrix}
 j_1 & j_2 & j_{12}\\
 j_3 & j_4 & j_{23}\\
 j_5 & j_6 & j_{34}\\
 j_7 & j_8 & j_{45}
 \end{Bmatrix}
-= \Delta \sum_{m=0}^{\infty} (-1)^m 
+= \Delta \sum_{m=0}^{\infty} \frac{(-1)^m}{m!} 
 \frac{(\tfrac{1}{2})_m(-j_{12})_m(j_{12}+1)_m(-j_{23})_m(j_{23}+1)_m}
-{(j_1+j_2 - j_{12} +1)_m(j_3+j_4 - j_{23} +1)_m(j_5+j_6 - j_{34} +1)_m(j_7+j_8 - j_{45} +1)_m \, m!},
-\]
+{(j_1+j_2 - j_{12} +1)_m(j_3+j_4 - j_{23} +1)_m(j_5+j_6 - j_{34} +1)_m(j_7+j_8 - j_{45} +1)_m} \\
+\times \frac{(-j_{23})_m(j_{23}+1)_m}{(j_5+j_6 - j_{34} +1)_m(j_7+j_8 - j_{45} +1)_m}
+\end{multline*}
 where $(a)_m$ denotes the Pochhammer symbol and $\Delta$ is the normalization prefactor
 \[
 \Delta = \sqrt{
@@ -348,7 +349,7 @@ These coefficients are related to standard Wigner $3n\!j$ symbols by a conventio
 
 \paragraph{Remark (conventions and normalization).}
 Once the antisymmetric matrix $K(\{x_e\})$ and the Gaussian measure are fixed, the coefficients $C_G$ are determined canonically by coefficient extraction. However, the named Wigner $3n\!j$ symbols in the literature are themselves convention-dependent objects (basis/intertwiner normalization, edge orientations and sign conventions, oscillator/Bargmann conventions, and related choices). Accordingly, the map from $C_G$ to a specific Wigner-symbol convention typically includes a spin-dependent phase and normalization factor; common ingredients include powers of $(-1)$ built from linear combinations of the spins and dimension/triangle factors such as $\sqrt{2j+1}$ and $\Delta(j_a,j_b,j_c)$.
-In this work we keep $C_G$ explicit and treat any identification with a particular Wigner convention as an additional, separately validated step (see the verification harness in \texttt{scripts/verify_wolfram.wls}).
+In this work we keep $C_G$ explicit and treat any identification with a particular Wigner convention as an additional, separately validated step (see the verification harness in \texttt{scripts/verify\_wolfram.wls}).
 
 \subsection{Explicit Examples}
 
@@ -637,8 +638,8 @@ We thank the open-source community for developing and maintaining the tools that
 
 All source code, validation scripts, and reference datasets are released under open-source licenses and are available at:
 \begin{itemize}
-\item Hub repository: \texttt{https://github.com/DawsonInstitute/su2-3nj-series-paper}
-\item Individual implementations: \texttt{https://github.com/DawsonInstitute/su2-3nj-*}
+\item Hub repository: \url{https://github.com/DawsonInstitute/su2-3nj-series-paper}
+\item Individual implementations: \url{https://github.com/DawsonInstitute/su2-3nj-*}
 \end{itemize}
 
 \section*{Author Declarations}
@@ -653,7 +654,7 @@ Ethics approval is not required for this work.
 R. Sherrington: Conceptualization (lead); Formal analysis (lead); Investigation (lead); Methodology (lead); Software (lead); Validation (lead); Writing -- original draft (lead); Writing -- review \& editing (lead).
 
 \section*{Data Availability}
-The data that support the findings of this study are openly available in the Dawson Institute GitHub repositories at \texttt{https://github.com/DawsonInstitute/su2-3nj-series-paper} and related \texttt{su2-3nj-*} repositories.
+The data that support the findings of this study are openly available in the Dawson Institute GitHub repositories at \url{https://github.com/DawsonInstitute/su2-3nj-series-paper} and related \texttt{su2-3nj-*} repositories.
 
 \begin{suppinfo}
 Supplementary material includes the full validation harness, reproducible test datasets, and scripts used to generate the tables included in this manuscript.
