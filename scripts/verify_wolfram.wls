@@ -306,6 +306,24 @@ If[runPaperChecks,
       Print["[NOTE] The paper defines the determinant-series coefficients C_G(j) but does not assert direct equality with SixJSymbol without an explicit convention/normalization map. Strict coefficient==SixJSymbol checks are therefore disabled."],
       Print["[NOTE] Skipping strict coefficient-level generating-functional checks (use --paper-strict to show the note)."]
     ];
+
+    (*
+      Optional: map canonical determinant-series coefficients to a specific Wigner 6j convention.
+
+      This is intentionally NOT asserted by default because the mapping depends on convention choices
+      (edge orientations/signs in K, intertwiner normalization, and oscillator/Bargmann conventions).
+
+      Scaffold (edit and validate numerically for your chosen convention):
+
+        ClearAll[mapCGToWigner6j];
+        mapCGToWigner6j[cg_, j1_, j2_, j3_, j4_, j5_, j6_] := cg;
+
+        extractedCG = sixJFromGenFuncCoeff[1/2, 1/2, 1, 1/2, 1/2, 1];
+        mapped = mapCGToWigner6j[extractedCG, 1/2, 1/2, 1, 1/2, 1/2, 1];
+        Print["Δ(mapped - SixJSymbol) = ", Chop[mapped - SixJSymbol[{1/2,1/2,1},{1/2,1/2,1}], 10^-40]];
+
+      Keep this as an exploratory tool unless/until the paper fixes a specific convention map.
+    *)
   ];
 ];
 

@@ -2031,6 +2031,7 @@ Implemented “paper-theorem” verification blocks in the Wolfram harness, usin
 **What I Changed**
 - Removed the over-strong claim that the Taylor coefficient (with only edge-factorial normalization) “equals the Wigner 3nj symbol” and replaced it with a convention-aware definition of coefficients $C_G(\{j_e\})$ that require an explicit normalization/phase map to identify with a specific Wigner-symbol convention.
 - Updated strict-mode behavior in the Wolfram harness so it no longer asserts the now-removed “coeff == `SixJSymbol`” identity.
+- Added a short conventions/normalization remark in the paper and a commented-out mapping scaffold in the Wolfram harness for optional exploration.
 
 **Where**
 - su2-3nj-series-paper:
@@ -2047,5 +2048,18 @@ Implemented “paper-theorem” verification blocks in the Wolfram harness, usin
 - The strict-mode failures you reported aren’t consistent with a simple global fix (phase or $\sqrt{2j+1}$ factors): the mismatch is spin-dependent in a way that doesn’t collapse to a small set of obvious prefactors. The safest “fix” is to stop claiming that the raw determinant-series coefficient is *already* the Wigner 6j.
 
 If you want to keep a coefficient→Wigner mapping in the paper, I can add a dedicated subsection that (a) defines $C_G$ precisely, (b) specifies a target Wigner convention, and (c) derives (or at least clearly states) the required normalization/phase map once you confirm which convention you want to match (Varshalovich/Wolfram/SymPy).
+<!-- ------ -->
+---
+Completed: *Rerun Wolfram verifier* (5/5)
+
+**Done**
+- Added a short “conventions and normalization” remark immediately after the $C_G$ corollary in both paper copies: su2-3nj-unified-representations.tex and su2-3nj-unified-representations.tex.
+- Added a commented-out mapping scaffold in the Wolfram harness (so you can explore a convention map without asserting it): scripts/verify_wolfram.wls.
+- Updated repo hygiene notes: docs/SU2-TODO.md and docs/history/SU2-history.md.
+- Updated the generating-functional README to explicitly define $C_G$ and state that mapping to “Wigner $3n\!j$” is convention-dependent: README.md.
+
+**Verification**
+- `wolframscript -file scripts/verify_wolfram.wls` PASS
+- `wolframscript -file verify_wolfram.wls --paper-strict` PASS (prints the strict-mode convention note)
 <!-- ------ -->
 ---

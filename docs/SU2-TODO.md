@@ -10,6 +10,7 @@
 - **Bibliography**: 17 entries verified; regge1959 properly formatted with `\bysame`; 2 minor bibtex warnings (expected).  
 - **Citation Evaluations**: All complete.  
 - **Code/Validation**: 100% (161+ tests pass).  
+- **Generating functional coefficients**: Defined convention-aware coefficients $C_G$ as the determinant-series output; strict coefficient==Wigner assertions are intentionally not made without an explicit convention map.  
 - **Status**: **Submission-ready**. PDF compiles without errors.
 
 ## Phase 3: Submission (Target: Submit by February 7, 2026)

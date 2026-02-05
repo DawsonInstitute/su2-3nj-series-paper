@@ -342,6 +342,10 @@ C_G(\{j_e\}) \;:=\; \frac{1}{\prod_e (2j_e)!}\,\left[\prod_e x_e^{2j_e}\right] G
 These coefficients are related to standard Wigner $3n\!j$ symbols by a convention-dependent normalization and phase map (choice of intertwiner normalization, edge orientations, and Schwinger-boson conventions). We therefore treat $C_G$ as the primary output of the determinant generating functional and only identify it with a specific Wigner-symbol convention after fixing those normalization choices explicitly.
 \end{corollary}
 
+\paragraph{Remark (conventions and normalization).}
+Once the antisymmetric matrix $K(\{x_e\})$ and the Gaussian measure are fixed, the coefficients $C_G$ are determined canonically by coefficient extraction. However, the named Wigner $3n\!j$ symbols in the literature are themselves convention-dependent objects (basis/intertwiner normalization, edge orientations and sign conventions, oscillator/Bargmann conventions, and related choices). Accordingly, the map from $C_G$ to a specific Wigner-symbol convention typically includes a spin-dependent phase and normalization factor; common ingredients include powers of $(-1)$ built from linear combinations of the spins and dimension/triangle factors such as $\sqrt{2j+1}$ and $\Delta(j_a,j_b,j_c)$.
+In this work we keep $C_G$ explicit and treat any identification with a particular Wigner convention as an additional, separately validated step (see the verification harness in \texttt{scripts/verify_wolfram.wls}).
+
 \subsection{Explicit Examples}
 
 \paragraph{6j symbols ($n=4$, two edge variables):}
