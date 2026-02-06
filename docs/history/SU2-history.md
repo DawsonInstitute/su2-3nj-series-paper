@@ -2090,3 +2090,21 @@ I rebuilt the PDF using the full `pdflatex` → `bibtex` → `pdflatex` cycle.
 The paper is now technically polished and ready for submission.
 <!-- ------ -->
 ---
+The "Supplementary Material" section has been successfully added to the manuscript. Here's what was done:
+
+### Changes Made
+- **Location**: Inserted the new section immediately after the Conclusions section and before Acknowledgments in su2-3nj-unified-representations.tex.
+- **Content**: Added the exact LaTeX block you specified:
+  ```latex
+  \section*{Supplementary Material}
+  See supplementary material for full validation scripts (Wolfram, Python), high-precision reference datasets (JSON/CSV for 9j/12j symbols and stability reports), and generation code. All materials are also available in the open-source repositories listed in the Data Availability Statement.
+  ```
+
+### PDF Rebuild
+- Ran the full LaTeX build cycle: `pdflatex` → `bibtex` → `pdflatex` → `pdflatex`.
+- **Result**: Build completed successfully with no errors or warnings related to the new section.
+- The PDF now includes the new section on its own page (as `\section*` typically does in RevTeX), providing a clear reference to the supplementary materials.
+
+The manuscript is now ready for submission with the supplementary material properly referenced. The `manuscript_supplementary.zip` (previously created) contains all the referenced files, so everything is aligned.
+<!-- ------ -->
+---
