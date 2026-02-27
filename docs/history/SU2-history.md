@@ -2108,3 +2108,30 @@ The "Supplementary Material" section has been successfully added to the manuscri
 The manuscript is now ready for submission with the supplementary material properly referenced. The `manuscript_supplementary.zip` (previously created) contains all the referenced files, so everything is aligned.
 <!-- ------ -->
 ---
+The paper is published successfully!  
+
+Completed: *Publish the node* (4/4)
+
+The paper is live on DeSci Nodes. Here's the summary:
+
+---
+
+**Published successfully to DeSci Nodes:**
+
+| Field | Value |
+|---|---|
+| **dPID** | 1028 |
+| **Node URL** | https://nodes.desci.com/node/NXpP8LNtumD5l3ppX1HcKwcPJ-Hbqc9gHY7TRXQznEk |
+| **dPID URL** | https://dpid.org/1028 |
+| **Manifest CID** | `bafkreibcno57wexxw22cxfdt2o4gtww646xoq35upewryov34g6xryzk34` |
+
+**Files uploaded:**
+- `su2-3nj-unified-representations.pdf` — main manuscript (JMP/RevTeX version)
+- manuscript_supplementary.zip — 12 files: 5 data files (JSON/CSV) + 7 scripts (Wolfram, Python, shell)
+
+**Metadata:**
+- Title: *Closed-Form Unified Representations of SU(2) 3nj Symbols: Generating Functionals, Recurrence Relations, and Series Expansions*
+- License: CC-BY-4.0
+- Research Fields: Mathematics, Pure Mathematics
+<!-- ------ -->
+---
