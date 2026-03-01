@@ -2148,3 +2148,14 @@ All done. Here's the summary of what was completed this session:
 **Git**: Committed (`7590810`) and pushed to `github.com:DawsonInstitute/su2-3nj-unified-framework.git` — 12 files changed, 689 insertions.
 <!-- ------ -->
 ---
+Done. Here's the state:
+
+**SU2-TODO.md** — **17 lines** (was 119). Only two open task groups:
+- `S1` — download `sigma.cls`, verify SIGMA keywords/MSC codes
+- `V3` — 15j/18j spot checks, N6+ extension, SymPy Pfaffian/Regge
+
+**SU2-TODO-completed.md** — **355 lines** (was 337). Added a "Phase 3 JMP Plan — Superseded" section so there's an audit trail for why that content was dropped rather than just silently deleted.
+
+The stale `su2-3nj-series-paper/docs/SU2-TODO.md` (the file your editor was showing) now just says "this is a stale copy, see `su2-3nj-unified-framework/`".
+<!-- ------ -->
+---

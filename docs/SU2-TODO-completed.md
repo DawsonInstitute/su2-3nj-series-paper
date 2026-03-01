@@ -341,3 +341,15 @@ Last updated: 2026-03-01
 - Created `scripts/stability.m`: condition-number sweep for recurrence transfer matrix K(j), j=1..50
 - Saves `scripts/recurrence_stability.fig`; prints PASS/WARN summary
 - Placeholder K matrix (`A'*A + j*I`) ready to be replaced with actual recurrence matrix from Theorem 4
+
+---
+
+## Phase 3 JMP Plan — Superseded (March 2026)
+
+The Phase 3 JMP/arXiv submission plan (added 2026-02-02) was superseded by
+the Phase 4 SIGMA reformat. Specific items retired:
+
+- RevTeX revert, AIP sections, PACS codes → replaced by `\documentclass[12pt]{article}` + SIGMA format (P1 ✅)
+- "Submit to JMP via Peer X-Press" → journal target changed to SIGMA (primary) / JPA (backup)
+- "Debug RevTeX compilation" → moot; clean build achieved under article class (B1 ✅)
+- Post-submission outreach → out of scope for repo/manuscript tracking
