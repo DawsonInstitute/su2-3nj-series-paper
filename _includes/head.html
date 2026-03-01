@@ -1,0 +1,41 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+<!-- Main Jekyll-processed CSS -->
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<!-- Fallback CSS paths for GitHub Pages -->
+<link rel="stylesheet" href="/su2-node-matrix-elements/assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/style.css">
+<style>
+/* Inline critical CSS for immediate display */
+body {
+  font-family: "Computer Modern", Georgia, serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: #fff;
+}
+.container {
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
