@@ -1,0 +1,2 @@
+{"task":"Test SU(2) 3nj generating functional against reference data","priority":"High"}
+{"task":"Cross-check 3nj symbol recursion relations via symbolic computation","priority":"Medium"}

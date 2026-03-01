@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "su2-3nj-generating-functional"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/venv": true,
+      "**/.pytest_cache": true,
+      "**/__pycache__": true,
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/.venv": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-vscode.cpptools",
+      "james-yu.latex-workshop"
+    ]
+  }
+}

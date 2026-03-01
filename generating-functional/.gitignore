@@ -1,0 +1,23 @@
+# setuptools / pip build artifacts
+*.egg-info/
+build/
+dist/
+
+# Editor files
+.vscode/
+*.swp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python caches
+__pycache__/
+*.py[cod]
+**/*.pyc

@@ -1,0 +1,4 @@
+{"task":"Quantify numerical error in determinant evaluation for G({x_e})","priority":"Medium"}
+{"task":"Perform local sensitivity analysis of 3nj symbol under rational perturbations of input spins","priority":"High"}
+{"task":"Compare rational (SymPy) vs float-based (NumPy) evaluations of G({x_e}) for benchmark configurations","priority":"Low"}
+{"task":"Compare rational (SymPy) vs float-based (NumPy) evaluations of G({x_e}) for benchmark configurations","priority":"Low"}
