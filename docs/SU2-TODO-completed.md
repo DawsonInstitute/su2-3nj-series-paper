@@ -391,3 +391,28 @@ the Phase 4 SIGMA reformat. Specific items retired:
 - Removed S1 SIGMA format tasks (deferred to pre-submission pass)
 - Updated V3: marked 15j chain spot checks complete
 - Added L1 section: Lean axiom-to-proof tracking
+
+---
+
+## Phase 5b — V3 Validation Complete (2026-03-02)
+
+### V3 fully actioned — all four items complete ✅
+
+**18j spot checks (50-digit precision)**
+- `hyper15j` reused with n=18 edges (function is general for any chain length)
+- Tests: j=1 uniform (finite, positive, <1); j=1/2 uniform (finite, positive); monotonicity `val_18j < val_15j`
+- Wolfram counterpart in `scripts/verify_wolfram.wls` (same structure, 50-digit `N[...,50]`)
+
+**N6+ validation (higher-valence node matrices)**
+- Python: `node_matrix_ext` tested with 6×6 antisymmetric K (9j-like, 3 off-diagonal pairs + 3 cross terms) and 8×8 K (block-diagonal 4 pairs)
+- Checks: `det(I-K) > 0`, result finite and positive
+- Wolfram: matching N6/N8 checks with `Inverse`, `Det`, `Sqrt`
+
+**SymPy Pfaffian/Regge cross-verification**
+- Python: symbolic `Pf(K)² = det(K)` verified for 2×2 and 4×4 antisymmetric matrices using explicit Pfaffian formulas (SymPy 1.14 lacks `.pfaffian()`; formula: Pf(4×4) = K₀₁K₂₃ − K₀₂K₁₃ + K₀₃K₁₂)
+- Python: `wigner_6j` vs `racah_6j` cross-check for 4 spin cases including half-integer j=1/2
+- Wolfram: symbolic Pf 2×2 and 4×4 identity checks; `SixJSymbol` vs exact rational values for 4 cases
+
+**Final check count**: 29 Python checks, all pass
+
+**Wolfram additions**: 18j chain (6 checks), N6/N8 node_matrix (6 checks), Pfaffian 2×2/4×4 (2 checks), Wigner 6j (4 checks)

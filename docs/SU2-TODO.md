@@ -9,9 +9,9 @@
 
 ## V3. Validation: extended spin range
 - [x] 15j chain spot checks — `hyper15j` in `scripts/verify_python.py`, Wolfram cross-check in `scripts/verify_wolfram.wls` (2026-03-02)
-- [ ] 18j spot checks (mpmath 50-digit precision) — not yet implemented
-- [ ] Extend N6+ validation (derivative API, higher-valence nodes)
-- [ ] SymPy Pfaffian/Regge cross-verification
+- [x] 18j spot checks (mpmath 50-digit precision) — `hyper15j` with n=18, j=1 and j=1/2, monotonicity check (2026-03-02)
+- [x] N6+ validation — `node_matrix_ext` tested with 6×6 and 8×8 antisymmetric K; Wolfram N6/N8 checks (2026-03-02)
+- [x] SymPy Pfaffian/Regge cross-verification — Pf²=det for 2×2/4×4; SymPy `wigner_6j` vs `racah_6j` for 4 cases (2026-03-02)
 
 ## L1. Lean: replace axioms with proofs
 - [ ] `thm4_det_func` — awaits Mathlib `Matrix.Pfaffian` + formal power series

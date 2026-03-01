@@ -506,4 +506,112 @@ If[runPaperChecks,
   ];
 ];
 
+(* ── 18j chain spot checks at 50-digit precision ─────────────────────────── *)
+Module[{fib, hyper18j, val18j_j1, val18j_half, val15j_ref},
+  fib[0] = 0; fib[1] = 1; fib[n_Integer /; n >= 2] := fib[n] = fib[n-1] + fib[n-2];
+
+  hyper18j[js_List] := Module[{n = Length[js]},
+    Product[
+      (1 / (2 js[[e]])!) *
+        Hypergeometric2F1[-2 js[[e]], 1/2, 1, -If[e == 1, 0, fib[e-1]/fib[e]]],
+      {e, 1, n}
+    ]
+  ];
+
+  (* j=1 uniform, 18 edges — finite & positive & < 1 *)
+  val18j_j1 = N[hyper18j[Table[1, {18}]], 50];
+  Print["18j chain hyper product (j=1, 50-digit): ", val18j_j1];
+  assertTrue["18j (j=1) product is finite",   NumericQ[val18j_j1]];
+  assertTrue["18j (j=1) product is positive", val18j_j1 > 0];
+  assertTrue["18j (j=1) product < 1",         val18j_j1 < 1];
+
+  (* j=1/2 uniform, 18 edges — finite & positive *)
+  val18j_half = N[hyper18j[Table[1/2, {18}]], 50];
+  Print["18j chain hyper product (j=1/2, 50-digit): ", val18j_half];
+  assertTrue["18j (j=1/2) product is finite",   NumericQ[val18j_half]];
+  assertTrue["18j (j=1/2) product is positive", val18j_half > 0];
+
+  (* Monotone in chain length: 18j < 15j for j=1 *)
+  val15j_ref = N[hyper18j[Table[1, {15}]], 50];
+  assertTrue["18j product < 15j product (monotone in n)", val18j_j1 < val15j_ref];
+  Print["Monotonicity 18j < 15j: PASS"];
+];
+
+(* ── N6+ validation: higher-valence antisymmetric K matrices ─────────────── *)
+Module[{K6, detK6, invK6, valN6, K8, detK8, invK8, J0, valN8},
+  (* 6×6 antisymmetric K (9j-like structure) *)
+  K6 = N[{
+    { 0,    0.10,  0,     0,     0.015, 0    },
+    {-0.10, 0,     0,     0.008, 0,     0    },
+    { 0,    0,     0,     0.15,  0,     0.012},
+    { 0,   -0.008,-0.15,  0,     0,     0    },
+    {-0.015,0,     0,     0,     0,     0.08 },
+    { 0,    0,    -0.012, 0,    -0.08,  0    }
+  }, 50];
+  detK6 = Det[IdentityMatrix[6] - K6];
+  assertTrue["N6 det(I-K) > 0", detK6 > 0];
+  invK6 = Inverse[IdentityMatrix[6] - K6];
+  J0 = Table[0, {6}];
+  valN6 = 1 / Sqrt[detK6] * Exp[0.5 * J0 . invK6 . J0];
+  assertTrue["N6 node_matrix_ext is finite",   NumericQ[N[valN6, 50]]];
+  assertTrue["N6 node_matrix_ext is positive", valN6 > 0];
+  Print["N6 node_matrix_ext (6x6 K, J=0): ", N[valN6, 15]];
+
+  (* 8×8 antisymmetric K (18j-like structure, block-diagonal 4 pairs) *)
+  K8 = SparseArray[{
+    {1,2}->0.05, {2,1}->-0.05,
+    {3,4}->0.08, {4,3}->-0.08,
+    {5,6}->0.04, {6,5}->-0.04,
+    {7,8}->0.06, {8,7}->-0.06
+  }, {8,8}] // Normal;
+  detK8 = Det[IdentityMatrix[8] - K8];
+  assertTrue["N8 det(I-K) > 0", detK8 > 0];
+  invK8 = Inverse[IdentityMatrix[8] - K8];
+  J0 = Table[0, {8}];
+  valN8 = 1 / Sqrt[detK8] * Exp[0.5 * J0 . invK8 . J0];
+  assertTrue["N8 node_matrix_ext is finite",   NumericQ[N[valN8, 50]]];
+  assertTrue["N8 node_matrix_ext is positive", valN8 > 0];
+  Print["N8 node_matrix_ext (8x8 K, J=0): ", N[valN8, 15]];
+];
+
+(* ── SymPy Pfaffian identity: Pf(K)^2 = det(K) ─────────────────────────── *)
+Module[{a, b, c, K2, pf2, K4, pf4},
+  {a, b, c} = {a, b, c} /. {a -> Symbol["a"], b -> Symbol["b"], c -> Symbol["c"]};
+
+  (* 2x2: Pf = a, det = a^2 *)
+  K2 = {{0, a}, {-a, 0}};
+  pf2 = a;
+  assertTrue["Pfaff 2x2: Pf(K)^2 = det(K)",
+    FullSimplify[pf2^2 - Det[K2]] === 0];
+  Print["Pfaff 2x2 PASS: Pf = ", pf2, ", det = ", Det[K2]];
+
+  (* 4x4: Pf = K01*K23 - K02*K13 + K03*K12 = a^2 + b^2 + c^2 *)
+  K4 = {{0, a, b, c}, {-a, 0, c, -b}, {-b, -c, 0, a}, {-c, b, -a, 0}};
+  pf4 = K4[[1,2]]*K4[[3,4]] - K4[[1,3]]*K4[[2,4]] + K4[[1,4]]*K4[[2,3]];
+  assertTrue["Pfaff 4x4: Pf(K)^2 = det(K)",
+    FullSimplify[pf4^2 - Det[K4]] === 0];
+  Print["Pfaff 4x4 PASS: Pf = ", FullSimplify[pf4], ", det = ", FullSimplify[Det[K4]]];
+];
+
+(* ── SymPy/Mathematica Wigner 6j cross-check ───────────────────────────── *)
+Module[{cases, j1, j2, j3, j4, j5, j6, mmaVal, expected},
+  cases = {
+    {{1, 1, 2, 1, 1, 2},   1/30},
+    {{2, 2, 2, 2, 2, 2},   -3/70},
+    {{1, 1, 0, 1, 1, 0},   1/3},
+    {{1/2, 1/2, 1, 1/2, 1/2, 1}, 1/6}
+  };
+  Do[
+    {j1,j2,j3,j4,j5,j6} = cs[[1]];
+    mmaVal = SixJSymbol[{j1,j2,j3},{j4,j5,j6}];
+    expected = cs[[2]];
+    assertTrue[
+      StringForm["Wigner 6j {``} vs exact ``", cs[[1]], expected],
+      Abs[N[mmaVal - expected, 50]] < 10^-40
+    ];
+  , {cs, cases}];
+  Print["Wigner 6j cross-check: all 4 cases PASS"];
+];
+
 reportSummary[];
+

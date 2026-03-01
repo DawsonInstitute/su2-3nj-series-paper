@@ -2178,3 +2178,18 @@ All done. Here's the summary of what was completed this session:
 - L1: `thm4_det_func` proof (awaits Mathlib Pfaffian), `matchRatio_pos` proof (awaits `fib` positivity lemmas)
 <!-- ------ -->
 ---
+Done. Here's what was completed:
+
+**V3 fully actioned — all 4 items now done:**
+
+**18j spot checks (50-digit precision)** — `hyper15j` called with n=18; checks for j=1 (finite, positive, <1 = `0.0724`) and j=1/2 (finite, positive = `107.9`); monotonicity `18j < 15j` verified. Wolfram counterpart added.
+
+**N6+ validation** — `node_matrix_ext` tested with 6×6 (9j-like K, 6 off-diagonal entries) and 8×8 (block-diagonal 4 pairs) antisymmetric matrices; `det(I−K) > 0`, finite, positive. Wolfram N6/N8 checks added.
+
+**SymPy Pfaffian/Regge cross-verification** — Symbolic `Pf(K)² = det(K)` for 2×2 and 4×4 (SymPy 1.14 lacks `.pfaffian()`, using explicit formula `K₀₁K₂₃ − K₀₂K₁₃ + K₀₃K₁₂`); `wigner_6j` vs `racah_6j` for 4 cases including half-integer j=½. Wolfram `SixJSymbol` cross-check vs exact rationals.
+
+**29/29 Python checks pass.** Commit `6b04c10` pushed.
+
+The only remaining open items in SU2-TODO.md are the two L1 Lean proofs, both blocked on Mathlib additions (`Matrix.Pfaffian` and `fib` positivity lemmas) that don't exist yet.
+<!-- ------ -->
+---

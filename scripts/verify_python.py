@@ -441,6 +441,105 @@ def run() -> int:
     val_zero = hyper15j(js_zero)
     assert_close("15j chain with all j=0 gives 1", val_zero, mp.mpf(1), tol)
 
+    # --- 18j chain spot checks at 50-digit precision ---
+    _old_prec = mp.prec
+    mp.prec = 167  # ≥ 50 decimal digits (log2(10^50) ≈ 166.1)
+
+    js18 = [mp.mpf(1)] * 18
+    val_18j = hyper15j(js18)  # hyper15j is general for any chain length n
+    assert mp.isfinite(val_18j), "18j hyper product (j=1) is not finite"
+    assert val_18j > 0, f"18j hyper product (j=1) is non-positive: {val_18j}"
+    assert val_18j < 1, f"18j hyper product (j=1) >= 1: {val_18j}"
+    print(f"[PASS] 18j chain hyper product (j=1, 50-digit): {mp.nstr(val_18j, 15)}")
+
+    js18_half = [mp.mpf("0.5")] * 18
+    val_18j_half = hyper15j(js18_half)
+    assert mp.isfinite(val_18j_half), "18j hyper product (j=1/2) is not finite"
+    assert val_18j_half > 0, f"18j hyper product (j=1/2) is non-positive: {val_18j_half}"
+    print(f"[PASS] 18j chain hyper product (j=1/2, 50-digit): {mp.nstr(val_18j_half, 15)}")
+
+    # Monotonicity: longer chain → smaller product (each factor < 1 for j > 0)
+    assert val_18j < val_15j, "18j product should be < 15j product (more factors)"
+    print("[PASS] 18j product < 15j product (monotone in chain length)")
+
+    mp.prec = _old_prec
+
+    # --- N6+ validation: larger antisymmetric K matrices ---
+    # 6×6 K representing a 9j-like node structure
+    K6 = _np.zeros((6, 6))
+    x6, y6, z6 = 0.10, 0.15, 0.08
+    K6[0, 1] = x6;  K6[1, 0] = -x6
+    K6[2, 3] = y6;  K6[3, 2] = -y6
+    K6[4, 5] = z6;  K6[5, 4] = -z6
+    K6[0, 4] = x6 * y6; K6[4, 0] = -x6 * y6
+    K6[1, 3] = x6 * z6; K6[3, 1] = -x6 * z6
+    K6[2, 5] = y6 * z6; K6[5, 2] = -y6 * z6
+    J6 = _np.zeros(6)
+    det6 = _np.linalg.det(_np.eye(6) - K6)
+    assert det6 > 0, f"N6 det(I-K) is non-positive: {det6}"
+    val_N6 = node_matrix_ext(K6, J6)
+    assert _np.isfinite(val_N6), "N6 node_matrix_ext is not finite"
+    assert val_N6 > 0, f"N6 node_matrix_ext is non-positive: {val_N6}"
+    print(f"[PASS] N6 node_matrix_ext (6×6 K, J=0): {val_N6:.10f}")
+
+    # 8×8 K representing 18j-like higher-valence structure (4 edge pairs)
+    K8 = _np.zeros((8, 8))
+    for _i, _p in enumerate([0.05, 0.08, 0.04, 0.06, 0.07, 0.03]):
+        _r, _c = (_i * 2) % 8, (_i * 2 + 1) % 8
+        if _r != _c:
+            K8[_r, _c] = _p; K8[_c, _r] = -_p
+    J8 = _np.zeros(8)
+    det8 = _np.linalg.det(_np.eye(8) - K8)
+    assert det8 > 0, f"N8 det(I-K) is non-positive: {det8}"
+    val_N8 = node_matrix_ext(K8, J8)
+    assert _np.isfinite(val_N8), "N8 node_matrix_ext is not finite"
+    assert val_N8 > 0, f"N8 node_matrix_ext is non-positive: {val_N8}"
+    print(f"[PASS] N8 node_matrix_ext (8×8 K, J=0): {val_N8:.10f}")
+
+    # --- SymPy Pfaffian / Regge cross-verification ---
+    import sympy as _sym
+    from sympy.physics.wigner import wigner_6j as _wigner_6j
+
+    # Pfaffian identity Pf(K)² = det(K) for symbolic antisymmetric matrices.
+    # SymPy 1.14 has no .pfaffian() method, so we use the explicit formulas:
+    #   2×2:  Pf([[0,a],[-a,0]]) = a
+    #   4×4:  Pf = K01·K23 − K02·K13 + K03·K12
+    _a, _b, _c = _sym.symbols("a b c", real=True)
+
+    _K2 = _sym.Matrix([[0, _a], [-_a, 0]])
+    _pf2 = _a  # analytic formula
+    assert _sym.simplify(_pf2 ** 2 - _K2.det()) == 0
+    print("[PASS] SymPy Pfaffian 2×2: Pf(K)² = det(K)")
+
+    _K4 = _sym.Matrix([
+        [ 0,  _a,  _b,  _c],
+        [-_a,  0,  _c, -_b],
+        [-_b, -_c,  0,  _a],
+        [-_c,  _b, -_a,  0],
+    ])
+    _pf4 = _K4[0, 1] * _K4[2, 3] - _K4[0, 2] * _K4[1, 3] + _K4[0, 3] * _K4[1, 2]
+    assert _sym.simplify(_pf4 ** 2 - _K4.det()) == 0
+    print("[PASS] SymPy Pfaffian 4×4: Pf(K)² = det(K)")
+
+    # SymPy wigner_6j cross-check against our racah_6j implementation.
+    # racah_6j takes doubled spins 2j; wigner_6j takes actual j values.
+    _cross_cases = [
+        # (2j1, 2j2, 2j3, 2j4, 2j5, 2j6),  (j1, j2, j3, j4, j5, j6)
+        ((2, 2, 4, 2, 2, 4),   (1, 1, 2, 1, 1, 2)),
+        ((4, 4, 4, 4, 4, 4),   (2, 2, 2, 2, 2, 2)),
+        ((2, 2, 0, 2, 2, 0),   (1, 1, 0, 1, 1, 0)),
+        ((1, 1, 2, 1, 1, 2),   (Fraction(1, 2), Fraction(1, 2), 1,
+                                 Fraction(1, 2), Fraction(1, 2), 1)),
+    ]
+    _tol_regge = mp.mpf("1e-12")
+    for _d2, _jvals in _cross_cases:
+        _our = racah_6j(*_d2)
+        _sym_val = float(_wigner_6j(*_jvals))
+        assert_close(
+            f"SymPy wigner_6j{_jvals} vs racah_6j{_d2}",
+            mp.mpf(_our), mp.mpf(_sym_val), _tol_regge,
+        )
+
     print("\nAll Python checks passed.")
     return 0
 
