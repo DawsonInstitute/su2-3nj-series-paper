@@ -1,0 +1,123 @@
+/* Main styling for the paper */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fdfdfd;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.author {
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.abstract {
+    font-style: italic;
+    margin: 20px 40px 40px 40px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.boxed {
+    border: 1px solid #000;
+    padding: 15px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    overflow-x: auto;
+}
+
+ol, ul {
+    padding-left: 25px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li p {
+    margin: 5px 0;
+}
+
+.bibliography {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eaecef;
+}
+
+.bibliography ol {
+    padding-left: 25px;
+}
+
+.bibliography li {
+    margin-bottom: 15px;
+}
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* MathJax specific styling */
+.MathJax_Display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+@media print {
+    body {
+        font-size: 12pt;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .abstract {
+        margin: 15px;
+    }
+}

@@ -1,0 +1,41 @@
+{  "folders": [
+    {
+      "path": ".",
+      "name": "su2-3nj-uniform-closed-form"
+    },
+    {
+      "path": "../su2-3nj-closedform",
+      "name": "su2-3nj-closedform"
+    },
+    {
+      "path": "../su2-3nj-recurrences",
+      "name": "su2-3nj-recurrences"
+    },
+    {
+      "path": "../su2-3nj-generating-functional",
+      "name": "su2-3nj-generating-functional"
+    },
+    {
+      "path": "../su2-node-matrix-elements",
+      "name": "su2-node-matrix-elements"
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-vscode.cpptools",
+      "james-yu.latex-workshop"
+    ]
+  },
+  "settings": {
+    "files.exclude": {
+      "**/.pytest_cache": true,
+      "**/node_modules": true,
+      "**/venv": true,
+      "**/.git": true,
+      "**/__pycache__": true,
+      "**/.venv": true
+    },
+    "powershell.cwd": "su2-3nj-uniform-closed-form"
+  }
+}

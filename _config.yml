@@ -1,0 +1,24 @@
+title: Universal Closed-Form Hypergeometric Representation of SU(2) 3nj Symbols
+description: Mathematical derivation of closed-form expressions for SU(2) 3nj symbols
+baseurl: "/su2-3nj-uniform-closed-form"
+url: ""
+
+# Build settings
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - "*.tex"
