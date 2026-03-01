@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed-Form Finite Recurrences for SU(2) 3nj Symbols</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .title {
+            text-align: center;
+        }
+        .author {
+            text-align: center;
+            font-style: italic;
+        }
+        .date {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .abstract {
+            font-style: italic;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .references {
+            border-top: 1px solid #ddd;
+            margin-top: 30px;
+            padding-top: 10px;
+        }
+        .references ol {
+            padding-left: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>Closed-Form Finite Recurrences for SU(2) 3nj Symbols</h1>
+    </div>
+    <div class="author">
+        <p>Dawson Institute</p>
+    </div>
+    <div class="date">
+        <p>May 25, 2025</p>
+    </div>
+
+    <div class="abstract">
+        <p><strong>Abstract.</strong> Building on the universal closed-form hypergeometric representation of SU(2) 3nj symbols <a href="https://arcticoder.github.io/su2-3nj-uniform-closed-form/">[1]</a>, we present a finite set of algebraic three-term recurrence relations in the spin labels \(j_k\), together with minimal boundary data, which uniquely determine any SU(2) \(3nj\) recoupling coefficient. These recurrences allow computation of all \(3nj\) symbols in closed form without nested sums of \(6j\) symbols.</p>
+    </div>
+
+    <h2>General Recurrence System</h2>
+    <p>
+        For each edge \(k\) in the coupling tree with Schwinger variable \(x_k\), define
+        \[
+        \Delta_0^{(k)} = \det\bigl(I - K(\mathbf x)\bigr)\big|_{x_k=0},
+        \quad
+        \Delta_1^{(k)} = \det\bigl(I - K(\mathbf x)\bigr)\bigl|_{\substack{\text{rows/cols of edge }k\\\text{removed}}},
+        \]
+        and let
+        \[
+        G(\mathbf x) = \sum_{\{j\}} T(j_1,\dots,j_E)\prod_{\ell=1}^E x_\ell^{2j_\ell}.
+        \]
+        The closed three-term recurrence in the label \(j_k\) follows from
+        \[
+        \Delta_0^{(k)}(\mathbf x_{\ne k})\,G(\mathbf x)
+        = x_k^2\,\Delta_1^{(k)}(\mathbf x_{\ne k})\,G(\mathbf x).
+        \]
+        Equating coefficients of \(\prod_\ell x_\ell^{2j_\ell}\) yields
+        \[
+        \sum_{\mu}a_{\mu}\,
+        T\bigl(j_k,\mathbf j_{\ne k}-\mu\bigr)
+        \;=\;
+        \sum_{\nu}b_{\nu}\,
+        T\bigl(j_k-1,\mathbf j_{\ne k}-\nu\bigr),
+        \]
+        where \(a_{\mu},b_{\nu}\) are the expansion coefficients of \(\Delta_0^{(k)}\) and \(\Delta_1^{(k)}\) in the other variables.
+    </p>
+
+    <h2>Seed Data</h2>
+    <p>
+        For each \(k\), the seed values
+        \[
+        T(0,\mathbf j_{\ne k})
+        \]
+        are given by the SU(2) \(3(n-1)j\) symbol on the tree with edge \(k\) removed, bottoming out at the Racah \(6j\) case. These seeds, together with the recurrences, uniquely determine every \(3nj\) coefficient.
+    </p>
+
+    <div class="references">
+        <h2>References</h2>
+        <ol>
+            <li id="dawsoninstitute2025">
+                Arcticoder,
+                <em>Universal Closed-Form Hypergeometric Representation of SU(2) 3nj Symbols</em>,
+                <a href="https://dawsoninstitute.github.io/su2-3nj-uniform-closed-form/">https://dawsoninstitute.github.io/su2-3nj-uniform-closed-form/</a>,
+                2025.
+            </li>
+        </ol>
+    </div>
+</body>
+</html>

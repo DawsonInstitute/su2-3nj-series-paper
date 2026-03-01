@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/su2_3nj_recur/__init__.py
+src/su2_3nj_recur/recurrence_engine.py
+src/su2_3nj_recur/wigner_6j_recurrence.py
+src/su2_3nj_recurrences.egg-info/PKG-INFO
+src/su2_3nj_recurrences.egg-info/SOURCES.txt
+src/su2_3nj_recurrences.egg-info/dependency_links.txt
+src/su2_3nj_recurrences.egg-info/requires.txt
+src/su2_3nj_recurrences.egg-info/top_level.txt
+tests/test_recurrence_engine.py
+tests/test_wigner_6j_recurrence.py
