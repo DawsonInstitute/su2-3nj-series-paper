@@ -1,0 +1,41 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "su2-node-matrix-elements"
+    },
+    {
+      "path": "../su2-3nj-closedform",
+      "name": "su2-3nj-closedform"
+    },
+    {
+      "path": "../su2-3nj-uniform-closed-form",
+      "name": "su2-3nj-uniform-closed-form"
+    },
+    {
+      "path": "../unified-lqg",
+      "name": "unified-lqg"
+    },
+    {
+      "path": "../unified-lqg-qft",
+      "name": "unified-lqg-qft"
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-vscode.cpptools",
+      "james-yu.latex-workshop"
+    ]
+  },
+  "settings": {
+    "files.exclude": {
+      "**/.pytest_cache": true,
+      "**/node_modules": true,
+      "**/venv": true,
+      "**/.git": true,
+      "**/__pycache__": true,
+      "**/.venv": true
+    }
+  }
+}

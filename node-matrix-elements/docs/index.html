@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closed-Form Matrix Elements for Arbitrary-Valence SU(2) Nodes via Generating Functionals | Closed-Form Matrix Elements for Arbitrary-Valence SU(2) Nodes via Generating Functionals</title>
+<!-- Main Jekyll-processed CSS -->
+<link rel="stylesheet" href="/su2-node-matrix-elements/assets/css/style.css">
+<!-- Fallback CSS paths for GitHub Pages -->
+<link rel="stylesheet" href="/su2-node-matrix-elements/assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/style.css">
+<style>
+/* Inline critical CSS for immediate display */
+body {
+  font-family: "Computer Modern", Georgia, serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: #fff;
+}
+.container {
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Closed-Form Matrix Elements for Arbitrary-Valence SU(2) Nodes via Generating Functionals</h1>
+      
+        <p>Research on SU(2) operator matrix elements using generating functionals</p>
+      
+    </header>
+    <main>
+      <p class="author">Dawson Institute</p>
+<p class="date">May 25, 2025</p>
+
+<div class="abstract">
+    <h2>Abstract</h2>
+    <p>We derive closed-form expressions for SU(2) operator matrix elements on arbitrary-valence nodes by
+                    extending the universal generating functional approach with source terms. Our central result is a
+                    determinant-based formula incorporating group-element dependence, which yields all matrix elements
+                    via a single Gaussian integral and hypergeometric expansion.</p>
+            </div>
+
+            <h2>Introduction</h2>
+            <p>The computation of SU(2) recoupling coefficients has seen recent advances:
+                uniform closed-form representation of 12j symbols <a
+                    href="https://dawsoninstitute.github.io/su2-3nj-uniform-closed-form/">[1]</a>, a universal generating
+                functional <a href="https://dawsoninstitute.github.io/su2-3nj-generating-functional/">[2]</a>, closed-form
+                finite recurrences <a href="https://arcticoder.github.io/su2-3nj-recurrences/">[3]</a>, and a
+                hypergeometric product formula <a href="https://arcticoder.github.io/su2-3nj-closedform/">[4]</a>. We
+                build on these to obtain operator matrix elements for any node valence and spin labels.</p>
+
+            <h2>Generating Functional with Sources</h2>
+            <p>Introduce source spinors \(J_v(g)\) for each vertex \(v\) to encode group-element dependence:</p>
+
+            $$
+            G(\{x_e\},g)
+            =\int\prod_v\frac{d^2w_v}{\pi}
+            \exp\Bigl[
+            -\sum_v\bar w_v w_v
+            +\sum_{e=(i,j)}x_e\,\epsilon(w_i,w_j)
+            +\sum_v(\bar w_v J_v+\overline J_v w_v)
+            \Bigr].
+            $$
+
+            <h2>Gaussian Integration</h2>
+            <p>Writing \(W=(w_v)\), \(J=(J_v)\), and \(M=I-K(\{x_e\})\), we have</p>
+
+            $$
+            \int dW\,\exp\bigl(-\tfrac12W^\dagger M W + W^\dagger J + J^\dagger W\bigr)
+            =\frac{(2\pi)^n}{\sqrt{\det M}}
+            \exp\!\bigl(\tfrac12 J^\dagger M^{-1}J\bigr).
+            $$
+
+            <p>Thus</p>
+
+            $$
+            G(\{x_e\},g)
+            =\frac{1}{\sqrt{\det(I-K(\{x_e\}))}}
+            \exp\!\Bigl(\tfrac12 J(g)^\dagger[I-K(\{x_e\})]^{-1}J(g)\Bigr).
+            $$
+
+            <h2>Extraction of Matrix Elements</h2>
+            <p>The coefficient of \(\prod_e x_e^{2j_e}\prod_vJ_v^{j_v+m_v}\overline J_v^{j_v+m'_v}\)
+                in the Taylor expansion of \(G(\{x_e\},g)\) yields
+                \(\langle\{j_v,m'_v\}|D(g)|\{j_v,m_v\}\rangle\).</p>
+
+            <h2>Charting the Kernel</h2>
+            <p>Assemble the matrix
+                \(\;K_{(\{j,m\}),(\{j',m'\})}(g)
+                =\langle\{j',m'\}|D(g)|\{j,m\}\rangle\)
+                for fixed valence and spins, then analyze or plot its entries.</p>
+
+            <h2>Conclusion</h2>
+            <p>We have obtained truly closed-form matrix elements for arbitrary-valence SU(2) nodes.
+                This opens the way to chart and study operator kernels in spin networks and related models.</p>
+
+            <div class="bibliography">
+                <h2>References</h2>
+                <ol>
+                    <li>Dawson Institute, <em>Uniform Closed-Form Representation of SU(2) 12j Symbols</em>, May 25, 2025.
+                        Available: <a
+                            href="https://arcticoder.github.io/su2-3nj-uniform-closed-form/">https://arcticoder.github.io/su2-3nj-uniform-closed-form/</a>
+                    </li>
+                    <li>A. Arcticoder, <em>A Universal Generating Functional for SU(2) 3nj Symbols</em>, May 24, 2025.
+                        Available: <a
+                            href="https://arcticoder.github.io/su2-3nj-generating-functional/">https://arcticoder.github.io/su2-3nj-generating-functional/</a>
+                    </li>
+                    <li>A. Arcticoder, <em>Closed-Form Finite Recurrences for SU(2) 3nj Symbols</em>, May 25, 2025.
+                        Available: <a
+                            href="https://arcticoder.github.io/su2-3nj-recurrences/">https://arcticoder.github.io/su2-3nj-recurrences/</a>
+                    </li>
+                    <li>A. Arcticoder, <em>A Closed-Form Hypergeometric Product Formula for General SU(2) 3nj Recoupling
+                            Coefficients</em>, May 25, 2025. Available: <a
+                            href="https://arcticoder.github.io/su2-3nj-closedform/">https://arcticoder.github.io/su2-3nj-closedform/</a>
+                    </li>
+                    <li>P. Jordan, "Der Zusammenhang der symmetrischen und linearen Gruppen und das Mehrkörperproblem,"
+                        <em>Zeitschrift für Physik</em>, vol. 94, no. 7–8, pp. 531–535, 1935.</li>
+                    <li>J. Schwinger, "On Angular Momentum," unpublished report, Harvard Univ., Report NYO-3071, Jan.
+                        26, 1952.</li>
+                </ol>
+            </div>
+    </main>
+  </div>
+</body>
+</html>

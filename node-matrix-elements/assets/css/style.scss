@@ -1,0 +1,111 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Custom styles for SU(2) Matrix Elements paper */
+body {
+  font-family: "Computer Modern", Georgia, serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: #fff;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+header, footer {
+  text-align: center;
+  margin: 20px 0;
+}
+
+h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.author, .date {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.date {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.abstract {
+  font-style: italic;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  border-left: 5px solid #ddd;
+}
+
+.bibliography {
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.bibliography ol {
+  padding-left: 25px;
+}
+
+.bibliography li {
+  margin-bottom: 10px;
+}
+
+code {
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Enhance links styling */
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Math display styling */
+.MathJax {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Improved readability for equations */
+p {
+  text-align: justify;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+}
