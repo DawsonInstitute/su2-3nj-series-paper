@@ -1,43 +1,61 @@
-# SU(2) 3n-j Series — Integration & Publication Hub
+# SU(2) 3n-j Unified Framework
 
-This repository serves as the central hub for integrating, validating, and publishing work across the SU(2) 3nj recoupling series.
+Unified representations for SU(2) 3n-j recoupling coefficients: hypergeometric
+products, uniform sums, finite recurrences, generating functionals, and
+node-matrix elements.
 
-**Target**: 2–3 paper series or single comprehensive JMP-style paper (Q2 2026 submission).
+**Core novelty**: First closed-form product over matching ratios for arbitrary
+trivalent graphs (Theorem 1); determinant-based functional yielding convention-
+independent coefficients $C_G$ (Theorem 4).
 
-## Source Repositories
+**Paper**: *Unified Closed-Form Representations and Generating Functionals for
+SU(2) 3n-j Recoupling Coefficients* — targeting SIGMA (primary), JPA (backup).
 
-The authoritative implementations remain in their respective repos:
-- [su2-3nj-closedform](https://github.com/DawsonInstitute/su2-3nj-closedform) — 27 tests ✓
-- [su2-3nj-uniform-closed-form](https://github.com/DawsonInstitute/su2-3nj-uniform-closed-form) — 45 tests ✓
-- [su2-3nj-recurrences](https://github.com/DawsonInstitute/su2-3nj-recurrences) — 18 tests ✓
-- [su2-3nj-generating-functional](https://github.com/DawsonInstitute/su2-3nj-generating-functional) — 43 tests ✓
-- [su2-node-matrix-elements](https://github.com/DawsonInstitute/su2-node-matrix-elements) — 15 tests ✓
+**Validation**: 161+ pytest tests; Wolfram verification: `wolframscript -file scripts/verify_wolfram.wls --paper-strict` (all pass).
 
-## Hub Contents
+## Subdirectories
 
-- **[docs/SU2-TODO.md](docs/SU2-TODO.md)**: Active cross-repo execution plan
-- **papers/latex/**: Master LaTeX bundle (coming soon)
-- **papers/related/**: Local literature archive (ignored by git)
-- **scripts/**: Cross-repo integration scripts (coming soon)
+All implementations are now included directly in this repository:
 
-## Wolfram symbolic checks
+| Directory | Description | Tests |
+|-----------|-------------|-------|
+| [`generating-functional/`](generating-functional/) | Det(I−K) implementation — Theorem 4 | 43 ✓ |
+| [`uniform-closed-form/`](uniform-closed-form/) | Single-sum ₅F₄ for 12j — Theorem 2 | 45 ✓ |
+| [`node-matrix-elements/`](node-matrix-elements/) | Operator matrix elements — Theorem 5 | 24 ✓ |
+| [`closedform/`](closedform/) | Hypergeometric product — Theorem 1 | 27 ✓ |
+| [`recurrences/`](recurrences/) | Three-term recurrences — Theorem 3 | 18 ✓ |
+| [`lean/`](lean/) | Lean 4 formal support for Theorems 1 & 4 | — |
+| [`papers/paper/`](papers/paper/) | LaTeX source for the unified paper | — |
+| [`scripts/`](scripts/) | Validation scripts (Wolfram, Python, MATLAB) | — |
 
-- Run the full Wolfram verification harness (includes paper-targeted theorem checks): `wolframscript -file scripts/verify_wolfram.wls`
-- Run baseline-only checks (Wigner symbols / Racah / 9j definitions): `wolframscript -file scripts/verify_wolfram.wls --baseline-only`
+## Quick start
 
-## Python numerical checks (mpmath)
+```bash
+# Cross-repo Python validation
+python scripts/run_integration_tests.py
 
-- Run the Python verification harness (independent 3j + 6j via Racah and a 3j-definition sum for small spins): `python scripts/verify_python.py`
-- Increase precision (optional): `python scripts/verify_python.py --dps 120`
+# Wolfram verification
+wolframscript -file scripts/verify_wolfram.wls --paper-strict
 
-## Current Status
+# Build paper PDF
+cd papers/paper && make
+```
 
-**Phase 1 (core implementations)**: ✅ Complete — all 5 repos have pytest + validation harnesses
+## Lean 4 formal proofs
 
-**Phase 2 (integration + publication prep)**: 🔄 In progress
-- ✅ Import fixes (generating-functional)
-- ✅ Test conversions (uniform-closed-form: +31 tests)
-- ⚠️  Cross-repo integration harness: Pending
-- ⚠️  Master LaTeX bundle: Pending
+The `lean/` directory contains Lean 4 formalization support for the key theorems,
+using Mathlib 4.27.0. Theorem 1 is stated formally; supporting lemmas are proved.
 
-Last updated: 2026-01-18
+```bash
+cd lean && lake build
+```
+
+## Status (2026-03-01)
+
+| Component | Status |
+|-----------|--------|
+| All 5 implementations | ✅ 161+ tests pass |
+| Paper (SIGMA format) | ✅ Compiles cleanly |
+| Lean formal support | ✅ Builds (lake build) |
+| arXiv upload | ⬜ Pending |
+| Journal submission (SIGMA) | ⬜ Pending |

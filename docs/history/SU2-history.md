@@ -2135,3 +2135,16 @@ The paper is live on DeSci Nodes. Here's the summary:
 - Research Fields: Mathematics, Pure Mathematics
 <!-- ------ -->
 ---
+Completed: *Commit and push all changes* (4/4)
+
+All done. Here's the summary of what was completed this session:
+
+**Lean 4 build** (SU2ThreenjFormulas.lean): Fixed two import issues — module docstring now follows imports (Lean 4 rule), and `Mathlib.Algebra.BigOperators.Group.Finset` → `.Group.Finset.Basic` (path renamed in this Mathlib version). `lake build` passes: **843 jobs, zero errors, zero warnings**.
+
+**MATLAB** (stability.m): Condition-number sweep for the recurrence transfer matrix K(j), j = 1..50. Saves `scripts/recurrence_stability.fig` and prints a PASS/WARN summary. Placeholder K matrix ready to replace with the actual Theorem 4 matrix.
+
+**Docs**: Phase 4 tasks R1–R3, P1–P4, B1, V1, V2 all marked complete in SU2-TODO.md; full completion notes appended to SU2-TODO-completed.md. Remaining active task: **S1** (download sigma.cls, cover letter, arXiv/SIGMA submission).
+
+**Git**: Committed (`7590810`) and pushed to `github.com:DawsonInstitute/su2-3nj-unified-framework.git` — 12 files changed, 689 insertions.
+<!-- ------ -->
+---

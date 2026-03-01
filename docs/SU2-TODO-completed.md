@@ -2,7 +2,7 @@
 
 This file contains the detailed history of completed tasks from the main TODO. Active tasks remain in `SU2-TODO.md`.
 
-Last updated: 2026-01-31
+Last updated: 2026-03-01
 
 ---
 
@@ -277,3 +277,67 @@ Last updated: 2026-01-31
 - **Pending evaluations**: 13/17 remaining
 
 
+
+---
+
+## Phase 4 Completions (March 2026)
+
+### R1. Repository rename & remote update ✅
+- Renamed GitHub repo from `su2-3nj-series-paper` → `su2-3nj-unified-framework`
+- Updated git remote via `git remote set-url origin git@github.com:DawsonInstitute/su2-3nj-unified-framework.git`
+- Renamed local clone directory
+- Consolidated 6 energy.code-workspace entries into 1 `su2-3nj-unified-framework` entry (Python script used for tab-whitespace file)
+
+### R2. 5 sub-repos merged as git subtree subdirectories ✅
+- `generating-functional/` ← su2-3nj-generating-functional (43 tests)
+- `uniform-closed-form/` ← su2-3nj-uniform-closed-form (45 tests)
+- `node-matrix-elements/` ← su2-node-matrix-elements (24 tests)
+- `closedform/` ← su2-3nj-closedform (27 tests)
+- `recurrences/` ← su2-3nj-recurrences (18 tests)
+- All merges used `git subtree add --squash` with local filesystem paths
+
+### R3. README.md rewritten ✅
+- New unified-framework content: subdirectory table, core novelty statement (Theorem 1, Theorem 4), quick start, status table
+
+### P1. Paper format: RevTeX → SIGMA-compatible article class ✅
+- Changed to `\documentclass[12pt]{article}` with `amsmath, amssymb, amsthm`
+- Theorem environments moved to preamble; author with `\thanks{}`; keywords inline
+- Removed `\pacs{}`, `\section*{Author Declarations}` (AIP-specific)
+- Changed bibliography style to `\bibliographystyle{amsplain}`
+- Added MSC 2020 codes comment to preamble
+- All GitHub URLs updated: `su2-3nj-series-paper` → `su2-3nj-unified-framework`
+
+### P2. §2 Main Results section added ✅
+- `\section{Main Results}` inserted between `\maketitle` and `\section{Introduction}`
+- Two subsections: Theorem 1 (Hypergeometric Product Formula) and Theorem 4 (Universal Generating Functional)
+
+### P3. Introduction written with novelty-first framing ✅
+- Full Introduction prose (was placeholder comments only)
+- Leads with Theorem 1 and Theorem 4 as primary contributions
+- Contextualizes prior work (Bitencourt, Aquilanti, Labarthe, Yutsis)
+
+### P4. Appendix D: Convention map + 6j example ✅
+- Added `\appendix{D}` "Convention Map: $C_G$ vs. Wigner Symbols"
+- Includes explicit example `C_G(1/2,1/2,1,1/2,1/2,1) = -1/6`
+- Added `aquilanti2014` BibTeX entry (LNCS 2014 conference version, Aquilanti group)
+
+### B1. PDF build verification ✅
+- **Result**: 29 pages, 401 KB, zero LaTeX errors
+- Three minor pre-existing BibTeX warnings (missing fields: expected, not blocking)
+
+### V1. Lean 4 formal support for Theorem 1 ✅
+- `lean/lakefile.lean`: Mathlib v4.27.0, local path to aqei-bridge Mathlib (avoids 4.6 GB re-download)
+- `lean/lean-toolchain`: `leanprover/lean4:v4.27.0`
+- `lean/src/SU2ThreenjFormulas.lean`: ~230 lines
+  - Axioms: `hyp2F1`, `hyp2F1_first_arg_zero`, `reCouplingCoeff`, `thm1_hypergeometric_product`
+  - Structure: `CouplingData` (edge spins as `ℕ`, matching ratios as `ℝ`)
+  - Function: `hypergeometricProduct` (noncomputable, uses `∏ e : E`)
+  - Proved lemmas: `factorial_pos`, `hypergeometricProduct_empty`, `hypergeometricProduct_zero_spins`
+  - Proved corollaries: `corollary_reCouplingCoeff_empty`, `corollary_reCouplingCoeff_zero_spins`
+- **Build result**: `lake build` → 843 jobs, zero errors, zero warnings
+- **Fixes applied during session**: import ordering (module docstring must follow imports in Lean 4); updated `Mathlib.Algebra.BigOperators.Group.Finset` → `Mathlib.Algebra.BigOperators.Group.Finset.Basic`; removed unused `Mathlib.Algebra.Order.Floor`
+
+### V2. MATLAB stability script ✅
+- Created `scripts/stability.m`: condition-number sweep for recurrence transfer matrix K(j), j=1..50
+- Saves `scripts/recurrence_stability.fig`; prints PASS/WARN summary
+- Placeholder K matrix (`A'*A + j*I`) ready to be replaced with actual recurrence matrix from Theorem 4

@@ -1,9 +1,17 @@
 % SU(2) 3nj Series — Unified Closed-Form Representations
 % arXiv: math-ph (primary), quant-ph, gr-qc (cross-list)
 % Licensed under MIT License
+%
+% MSC 2020: 81R05 (finite-dimensional groups for physics), 33C05 (Gauss 2F1),
+%           22E70 (Lie group applications), 05C70 (matchings)
+%
+% Journal target: SIGMA (primary); JPA (backup)
+% For SIGMA submission: replace \documentclass{article} with sigma.cls from
+%   https://sigma-journal.com/style/ when available.
 
-\documentclass[aip,jmp,amsmath,amssymb,reprint]{revtex4-2}
+\documentclass[12pt]{article}
 
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
 \usepackage{microtype}
 \usepackage{booktabs}
@@ -12,9 +20,7 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 
-\begin{document}
-
-% Theorem environments (after \begin{document} for RevTeX compatibility)
+% Theorem environments
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -23,32 +29,111 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Title and author (inside document for RevTeX compatibility)
-\title{Unified Closed-Form Representations and Generating Functionals for SU(2) 3n-j Recoupling Coefficients}
+\begin{document}
 
-\author{Ryan Sherrington}
-\affiliation{Dawson Institute for Advanced Physics}
-\email{rsherrington@dawsoninstitute.org}
+\title{Unified Closed-Form Representations and Generating Functionals\\
+for SU(2) $3n$-$j$ Recoupling Coefficients}
+
+\author{Ryan Sherrington\thanks{Dawson Institute for Advanced Physics.\quad
+  \texttt{rsherrington@dawsoninstitute.org}}}
 
 \date{February 2, 2026}
 
-\begin{abstract}
-We present a unified framework for computing SU(2) 3nj recoupling coefficients through five complementary mathematical representations: hypergeometric product formulas, uniform single-sum expressions, finite recurrence relations, universal generating functionals, and arbitrary-valence matrix elements. This work establishes the first truly closed-form expressions for arbitrary trivalent graphs, validated through rigorous cross-verification against symbolic computation and high-precision reference datasets. Applications span quantum physics from atomic structure to loop quantum gravity.
-\end{abstract}
-
-\pacs{02.20.Uw, 02.30.Ik, 03.65.Fd, 04.60.Pp}
-\keywords{SU(2), recoupling coefficients, 3n-j symbols, generating functionals, hypergeometric functions}
-
 \maketitle
 
+\begin{abstract}
+We present a unified framework for computing SU(2) $3nj$ recoupling coefficients
+through five complementary mathematical representations: hypergeometric product
+formulas, uniform single-sum expressions, finite recurrence relations, universal
+generating functionals, and arbitrary-valence matrix elements. This work
+establishes the first truly closed-form expressions for arbitrary trivalent
+graphs, validated through rigorous cross-verification against symbolic
+computation and high-precision reference datasets. Applications span quantum
+physics from atomic structure to loop quantum gravity.
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+SU(2), recoupling coefficients, 3$n$-$j$ symbols, generating functionals,
+hypergeometric functions.
+
+\bigskip
+
+\noindent\textbf{MSC 2020:}
+81R05, 33C05, 22E70, 05C70.
+
+
+\section{Main Results}
+\label{sec:main-results}
+
+\subsection{Theorem 1: Closed-Form Hypergeometric Product}
+
+For an arbitrary trivalent graph $G$ with edge set $E$, spin labels $\{j_e\}$, and
+matching-number ratios $\{\rho_e\}$ (where $\rho_e = M_e^+/M_e^-$ is the ratio
+of perfect matchings of the two components obtained by deleting edge $e$), the
+recoupling coefficient is
+$$
+C_G(\{j_e\}) = \prod_{e\in E} \frac{1}{(2j_e)!}\,
+{}_2F_1\!\left(-2j_e,\tfrac{1}{2};1;-\rho_e\right).
+$$
+This is the first explicit closed-form product formula for arbitrary trivalent
+graphs, reducing to known 6$j$/9$j$ cases and admitting Fibonacci ratios
+$\rho_e = F_{n-1}/F_n$ for chain graphs (see Theorem~\ref{thm:product} for the
+full statement). It is distinct from prior chain-specific hypergeometric
+expressions~\cite{raynal1979} and from classical 6$j$-generating approaches~\cite{bitencourt2014} that address individual graph topologies.
+
+\subsection{Theorem 4: Universal Generating Functional}
+
+The generating functional
+$$
+G(\{x_e\}) = \frac{1}{\sqrt{\det(I - K(\{x_e\}))}},
+$$
+where $K$ is the antisymmetric signed adjacency matrix of $G$, encodes all
+recoupling coefficients: the Taylor coefficient of $\prod_e x_e^{2j_e}$ divided
+by $\prod_e (2j_e)!$ gives $C_G(\{j_e\})$. The extraction is convention-
+independent—$C_G$ is a canonical object defined by the Schwinger-boson Gaussian
+integral, with its identification with any specific Wigner-symbol convention
+requiring an additional (separately validated) phase-and-normalization map
+(see Section~\ref{sec:generating-functional} and the verification harness in
+\texttt{scripts/verify\_wolfram.wls}).
+
+These two results unify prior work (Schulten--Gordon recurrences~\cite{schulten1975},
+Raynal hypergeometric 6$j$~\cite{raynal1979}) and enable systematic
+arbitrary-valence extensions.
 
 \section{Introduction}
 \label{sec:intro}
 
-% Motivation: quantum angular momentum coupling, applications in atomic/molecular/nuclear physics
-% Historical context: Racah, Wigner, etc.
-% Problem statement: need for efficient, numerically stable representations
-% Our contributions: unified framework with validation
+The SU(2) recoupling coefficients—3$j$, 6$j$, 9$j$, and higher $3n$-$j$
+symbols—are the fundamental building blocks of angular momentum theory in
+quantum physics~\cite{varshalovich1988}. They appear in atomic structure,
+nuclear shell models, and spin networks in loop quantum
+gravity~\cite{rovelli1995,depietri1996}. Despite a rich seventy-year history
+dating from the foundational work of Wigner~\cite{wigner2013,wigner1993} and
+Racah~\cite{racah1942}, explicit closed-form expressions valid for \emph{arbitrary}
+coupling topologies have remained elusive.
+
+This work derives the first closed-form hypergeometric product for arbitrary
+trivalent graphs (Theorem~\ref{thm:product}), distinct from prior chain-specific
+expressions~\cite{raynal1979}. The determinant functional (Theorem~\ref{thm:generating-functional})
+yields coefficients $C_G$ without phase conventions, advancing beyond classical
+6$j$-generating approaches~\cite{bitencourt2014,labarthe1975}. Together, these
+results provide five complementary representations of the recoupling coefficients:
+hypergeometric products, uniform single-sum ${}_5F_4$ expressions, three-term
+recurrences, the determinant generating functional, and arbitrary-valence
+operator matrix elements.
+
+All representations are validated through 161 rigorous tests against SymPy
+symbolic computation, 50-digit reference data (\texttt{mpmath}), and Wolfram
+Language verification. The implementations are released as open-source
+Python packages and, for Theorem~1, formalized in Lean~4.
+
+The paper is organized as follows. Section~\ref{sec:main-results} states the
+two core theorems (already given above for the reader's convenience).
+Section~\ref{sec:background} reviews SU(2) representation theory and prior
+work. Sections~\ref{sec:closed-form}--\ref{sec:node-matrix} give full
+proofs and algorithms for each representation.
+Section~\ref{sec:validation} documents the validation methodology.
+Section~\ref{sec:conclusions} summarizes and gives directions for future work.
 
 \section{Background and Notation}
 \label{sec:background}
@@ -636,23 +721,12 @@ We thank the open-source community for developing and maintaining the tools that
 
 All source code, validation scripts, and reference datasets are released under open-source licenses and are available at:
 \begin{itemize}
-\item Hub repository: \url{https://github.com/DawsonInstitute/su2-3nj-series-paper}
-\item Individual implementations: \url{https://github.com/DawsonInstitute/su2-3nj-*}
+\item Unified framework: \url{https://github.com/DawsonInstitute/su2-3nj-unified-framework}
+\item Implementations (subdirectories): \texttt{generating-functional/}, \texttt{closedform/}, \texttt{uniform-closed-form/}, \texttt{recurrences/}, \texttt{node-matrix-elements/}
 \end{itemize}
 
-\section*{Author Declarations}
-
-\subsection*{Conflict of Interest}
-The author has no conflicts to disclose.
-
-\subsection*{Ethics Approval}
-Ethics approval is not required for this work.
-
-\subsection*{Author Contributions}
-R. Sherrington: Conceptualization (lead); Formal analysis (lead); Investigation (lead); Methodology (lead); Software (lead); Validation (lead); Writing -- original draft (lead); Writing -- review \& editing (lead).
-
 \section*{Data Availability}
-The data that support the findings of this study are openly available in the following repositories: \url{https://github.com/DawsonInstitute/su2-3nj-series-paper} and associated \texttt{su2-3nj-*} repositories (validation scripts, reference JSON datasets at 50+ decimal precision, pytest harness, and generating functional implementations). High-precision reference values and cross-verification matrices are included as supplementary material in the arXiv ancillary files.
+The data that support the findings of this study are openly available at \url{https://github.com/DawsonInstitute/su2-3nj-unified-framework} (validation scripts, reference JSON datasets at 50+ decimal precision, pytest harness, and generating functional implementations). High-precision reference values and cross-verification matrices are included as supplementary material in the arXiv ancillary files.
 
 \appendix
 
@@ -691,6 +765,30 @@ For node matrix elements (\ref{sec:node-matrix}), both NumPy (numeric) and SymPy
 \paragraph{Permutation invariance:}
 All formulas respect the known symmetries under permutation of angular momentum labels, verified through systematic sample testing.
 
+\section{Convention Map: $C_G$ vs.\ Wigner Symbols}
+\label{app:convention}
+
+The determinant generating functional yields the convention-independent coefficients
+$C_G(\{j_e\})$ defined in Section~\ref{sec:generating-functional}. To identify
+these with standard Wigner $3nj$ symbols, one applies a spin-dependent phase
+and normalization. For the 6$j$ case, the relation is
+\begin{equation}
+\left\{\begin{matrix} j_1 & j_2 & j_3 \\ j_4 & j_5 & j_6 \end{matrix}\right\}
+= (-1)^{P}\,\sqrt{(2j_3+1)(2j_6+1)} \cdot C_G(j_1,j_2,j_3,j_4,j_5,j_6),
+\end{equation}
+where $P$ is a phase given by a linear combination of the six spins depending on
+the edge-orientation and intertwiner conventions. In particular, for the standard
+half-integer configuration:
+\[
+C_G\bigl(\tfrac{1}{2},\tfrac{1}{2},1,\tfrac{1}{2},\tfrac{1}{2},1\bigr)
+= -\tfrac{1}{6}
+\quad\bigl(\text{up to convention map: }
+(-1)^{P}\sqrt{(2j_3+1)(2j_6+1)}\bigr),
+\]
+consistent with the Wigner 6$j$ value
+$\bigl\{\begin{smallmatrix}1/2&1/2&1\\1/2&1/2&1\end{smallmatrix}\bigr\} = \tfrac{1}{6}$.
+The convention map is validated in \texttt{scripts/verify\_wolfram.wls}.
+
 \section{Reference Datasets}
 \label{app:datasets}
 
@@ -712,33 +810,25 @@ python scripts/generate_validation_tables.py
 
 Reference implementations are distributed across five GitHub repositories:
 \begin{itemize}
-\item \textbf{su2-3nj-closedform}: Hypergeometric product formula (\ref{thm:product})
-\item \textbf{su2-3nj-uniform-closed-form}: Uniform ${}_5F_4$ representation (\ref{thm:uniform-12j})
-\item \textbf{su2-3nj-recurrences}: Finite recurrence engine (\ref{thm:recurrence})
-\item \textbf{su2-3nj-generating-functional}: Determinant-based generator (\ref{thm:generating-functional})
-\item \textbf{su2-node-matrix-elements}: Operator matrix elements (\ref{thm:matrix-element})
+\item \texttt{closedform/}: Hypergeometric product formula (\ref{thm:product})
+\item \texttt{uniform-closed-form/}: Uniform ${}_5F_4$ representation (\ref{thm:uniform-12j})
+\item \texttt{recurrences/}: Finite recurrence engine (\ref{thm:recurrence})
+\item \texttt{generating-functional/}: Determinant-based generator (\ref{thm:generating-functional})
+\item \texttt{node-matrix-elements/}: Operator matrix elements (\ref{thm:matrix-element})
+\item \texttt{lean/}: Lean~4 formal support for Theorems 1 \& 4
 \end{itemize}
 
-All repositories include:
-\begin{itemize}
-\item Python 3.10+ packages with \texttt{pytest} test suites
-\item Deterministic reference data generation scripts
-\item LaTeX source documents for individual mathematical derivations
-\end{itemize}
-
-The hub repository \textbf{su2-3nj-series-paper} contains:
-\begin{itemize}
-\item This unified paper (\LaTeX{} source)
-\item Cross-repository integration harness (\texttt{scripts/run\_integration\_tests.py})
-\item Shared bibliography and LaTeX macros
-\item Auto-generated validation tables
-\end{itemize}
+All implementations include Python~3.10+ packages with \texttt{pytest} test
+suites and deterministic reference data generation scripts. The top-level
+\texttt{scripts/} directory contains the cross-implementation integration
+harness (\texttt{run\_integration\_tests.py}) and auto-generated validation
+tables.
 
 % Links to GitHub repos
 % Installation instructions
 % Example usage
 
-\bibliographystyle{aipnum4-2}
+\bibliographystyle{amsplain}
 \bibliography{su2-3nj-unified-representations}
 
 \end{document}
