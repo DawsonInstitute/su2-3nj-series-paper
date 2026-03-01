@@ -2193,3 +2193,19 @@ Done. Here's what was completed:
 The only remaining open items in SU2-TODO.md are the two L1 Lean proofs, both blocked on Mathlib additions (`Matrix.Pfaffian` and `fib` positivity lemmas) that don't exist yet.
 <!-- ------ -->
 ---
+All clean. Summary of what was fixed, commit `816b4ca` pushed:
+
+**Lean** — was already clean (1652 jobs, one expected `sorry` warning, zero errors)
+
+**Wolfram** (verify_wolfram.wls) — 3 issues fixed:
+- `[FAIL] 9j det`: wrong path-chain K6 replaced with three independent 2×2 blocks → `det(I-K) = (1+x²)(1+y²)(1+z²)` ✓
+- `Module::lvsym`: Wolfram parses `_` in symbol names as Blank patterns; `val18j_j1` etc. renamed to camelCase
+- All `N::precsm` warnings: `N[..., 50]` raised to `N[..., 80]` throughout; Wigner tolerance tightened to `10^-60`
+- Result: `=== Summary === All checks passed.` with zero warnings
+
+**MATLAB** (verify.m, stability.m) — 3 issues fixed:
+- `hypergeom` requires Symbolic Toolbox (not available); replaced with inline `hyp2f1_neg_int()` local function implementing the finite `2F1(-n, 0.5; 1; z)` Pochhammer series
+- Both scripts had wrong K6 matrix (path-chain with `a+b+c` entry); fixed to block-diagonal
+- stability.m Part 2 `savefig` hung in headless batch mode; removed second figure, keeping the numeric `[PASS]` output
+<!-- ------ -->
+---

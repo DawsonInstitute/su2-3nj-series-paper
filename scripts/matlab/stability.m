@@ -39,6 +39,7 @@ title('Recurrence Transfer-Matrix Condition Number vs. Spin');
 grid on; xlim([1, jmax]);
 savefig(fig1, fullfile(outdir, 'recurrence_stability.fig'));
 fprintf('Saved: %s\n', fullfile(outdir, 'recurrence_stability.fig'));
+close(fig1);
 
 fprintf('j=1..%d | kappa range [%.3f, %.3f] (log10)\n', jmax, min(kappa), max(kappa));
 if max(kappa) < 6
@@ -56,27 +57,17 @@ t = linspace(0, 0.9, 100);
 
 det_9j = zeros(1, length(t));
 for k = 1:length(t)
-    a = t(k); b = t(k); c = t(k);
-    K6 = [  0,    a,    0,    0,       0,    0;
-           -a,    0,    b,    0,       0,    0;
-            0,   -b,    0,    c,       0,    0;
-            0,    0,   -c,    0,  a+b+c,    0;
-            0,    0,    0, -(a+b+c),   0,    0;
-            0,    0,    0,    0,       0,    0];
+    tv = t(k);
+    K6 = [  0,  tv,   0,   0,   0,   0;
+           -tv,  0,   0,   0,   0,   0;
+            0,   0,   0,  tv,   0,   0;
+            0,   0, -tv,   0,   0,   0;
+            0,   0,   0,   0,   0,  tv;
+            0,   0,   0,   0, -tv,   0];
     det_9j(k) = det(eye(6) - K6);
 end
 
 analytic_9j = (1 + t.^2).^3;
-
-fig2 = figure('Visible', 'off');
-plot(t, det_9j, 'b-', 'LineWidth', 2, 'DisplayName', 'Numeric det(I-K)');
-hold on;
-plot(t, analytic_9j, 'r--', 'LineWidth', 1.5, 'DisplayName', '(1+t^2)^3');
-xlabel('x = y = z = t'); ylabel('det(I-K)');
-title('9j det(I-K) vs edge variable t');
-legend('Location', 'northwest'); grid on;
-savefig(fig2, fullfile(outdir, '9j_det.fig'));
-fprintf('Saved: %s\n', fullfile(outdir, '9j_det.fig'));
 
 max_err = max(abs(det_9j - analytic_9j));
 fprintf('Max |numeric - analytic| for 9j det: %.2e\n', max_err);

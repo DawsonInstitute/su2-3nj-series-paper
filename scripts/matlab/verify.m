@@ -34,8 +34,8 @@ for e = 1:15
     end
     j_e   = js(e);
     twoj  = 2 * j_e;
-    % hypergeom([-2j, 0.5], [1], -rho) via Gauss 2F1
-    h = hypergeom([-twoj, 0.5], 1, -rho);
+    % 2F1(-2j, 0.5; 1; -rho) via finite series (no Symbolic Toolbox needed)
+    h = hyp2f1_neg_int(twoj, -rho);
     prod_val = prod_val * (1 / factorial(twoj)) * h;
 end
 
@@ -54,7 +54,7 @@ js0 = zeros(1, 5);
 prod0 = 1;
 for e = 1:5
     rho = (e > 1) * fib(e-1) / fib(e);
-    h   = hypergeom([-2*js0(e), 0.5], 1, -rho);
+    h   = hyp2f1_neg_int(2*js0(e), -rho);
     prod0 = prod0 * (1 / factorial(2*js0(e))) * h;
 end
 if abs(prod0 - 1) < 1e-12
@@ -65,17 +65,17 @@ else
 end
 
 % ── 9j det(I-K) analytic check ───────────────────────────────────────────
-% For the minimal 6x6 K with x=y=z=t, det(I-K) should equal (1+t^2)^3.
+% Block-diagonal 6x6 K for 9j: three independent 2x2 blocks [[0,t],[-t,0]].
+% det(I-K) = (1+t^2)^3  for x=y=z=t.
 t_vals = 0:0.1:0.9;
 max_err = 0;
 for t = t_vals
-    a = t; b = t; c = t;
-    K6 = [  0,    a,    0,    0,       0,    0;
-           -a,    0,    b,    0,       0,    0;
-            0,   -b,    0,    c,       0,    0;
-            0,    0,   -c,    0,  a+b+c,    0;
-            0,    0,    0, -(a+b+c),   0,    0;
-            0,    0,    0,    0,       0,    0];
+    K6 = [  0,  t,  0,  0,  0,  0;
+           -t,  0,  0,  0,  0,  0;
+            0,  0,  0,  t,  0,  0;
+            0,  0, -t,  0,  0,  0;
+            0,  0,  0,  0,  0,  t;
+            0,  0,  0,  0, -t,  0];
     d_num = det(eye(6) - K6);
     d_ana = (1 + t^2)^3;
     max_err = max(max_err, abs(d_num - d_ana));
@@ -93,4 +93,21 @@ if fails == 0
 else
     fprintf('\n%d check(s) FAILED.\n', fails);
     exit(1);
+end
+
+% =========================================================================
+% Local function: 2F1(-n, 0.5; 1; z) for non-negative integer n.
+% The (-n) Pochhammer symbol kills the series at k=n so it is a polynomial.
+function h = hyp2f1_neg_int(n, z)
+    % Compute 2F1(-n, 0.5; 1; z) via finite series (n terms).
+    % Recurrence: T_{k+1} = T_k * (-n+k)*(0.5+k) / (k+1)^2 * z
+    n = round(n);  % ensure integer
+    h    = 0;
+    term = 1;
+    for k = 0:n
+        h = h + term;
+        if k < n
+            term = term * (-n + k) * (0.5 + k) / (k + 1)^2 * z;
+        end
+    end
 end

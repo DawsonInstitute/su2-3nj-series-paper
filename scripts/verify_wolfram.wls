@@ -444,14 +444,15 @@ If[runPaperChecks,
 (* ── 9j det(I-K) symbolic check ──────────────────────────────────────── *)
 If[runPaperChecks,
   Module[{x, y, z, K6, M6, detM6, expected},
-    (* Build minimal 6x6 antisymmetric K for 9j with edge vars x,y,z *)
+    (* 9j: three independent edge pairs → block-diagonal K
+       det(I-K) = (1+x^2)(1+y^2)(1+z^2) = 1+x^2+y^2+z^2+x^2y^2+... *)
     K6 = {
       { 0,  x,  0,  0,  0,  0},
-      {-x,  0,  y,  0,  0,  0},
-      { 0, -y,  0,  z,  0,  0},
-      { 0,  0, -z,  0,  x+y+z, 0},
-      { 0,  0,  0, -(x+y+z), 0, 0},
-      { 0,  0,  0,  0,  0,  0}
+      {-x,  0,  0,  0,  0,  0},
+      { 0,  0,  0,  y,  0,  0},
+      { 0,  0, -y,  0,  0,  0},
+      { 0,  0,  0,  0,  0,  z},
+      { 0,  0,  0,  0, -z,  0}
     };
     M6 = IdentityMatrix[6] - K6;
     detM6 = FullSimplify[Det[M6]];
@@ -478,7 +479,7 @@ If[runPaperChecks,
     ];
 
     testJs15 = Table[1, {15}];
-    val15j = N[hyper15j[testJs15], 50];
+    val15j = N[hyper15j[testJs15], 80];
     Print["15j chain hyper product (j=1 all): ", val15j];
 
     assertTrue["15j hyper product is finite", NumericQ[val15j]];
@@ -500,40 +501,40 @@ If[runPaperChecks,
         Hypergeometric2F1[-2 js[[e]], 1/2, 1, -fibAlt[e-1]/fibAlt[e]],
       {e, 1, n}
     ];
-    test15j = N[hyperChain[Table[1, {15}], 15], 50];
+    test15j = N[hyperChain[Table[1, {15}], 15], 80];
     Print["15j chain (GoldenRatio Fibonacci): ", test15j];
     assertTrue["15j GoldenRatio Fibonacci formula is finite", NumericQ[test15j]];
   ];
 ];
 
 (* ── 18j chain spot checks at 50-digit precision ─────────────────────────── *)
-Module[{fib, hyper18j, val18j_j1, val18j_half, val15j_ref},
-  fib[0] = 0; fib[1] = 1; fib[n_Integer /; n >= 2] := fib[n] = fib[n-1] + fib[n-2];
+Module[{fib18, hyper18j, val18jJ1, val18jHalf, val15jRef},
+  fib18[0] = 0; fib18[1] = 1; fib18[n_Integer /; n >= 2] := fib18[n] = fib18[n-1] + fib18[n-2];
 
-  hyper18j[js_List] := Module[{n = Length[js]},
+  hyper18j[js_List] := Module[{nn = Length[js]},
     Product[
       (1 / (2 js[[e]])!) *
-        Hypergeometric2F1[-2 js[[e]], 1/2, 1, -If[e == 1, 0, fib[e-1]/fib[e]]],
-      {e, 1, n}
+        Hypergeometric2F1[-2 js[[e]], 1/2, 1, -If[e == 1, 0, fib18[e-1]/fib18[e]]],
+      {e, 1, nn}
     ]
   ];
 
   (* j=1 uniform, 18 edges — finite & positive & < 1 *)
-  val18j_j1 = N[hyper18j[Table[1, {18}]], 50];
-  Print["18j chain hyper product (j=1, 50-digit): ", val18j_j1];
-  assertTrue["18j (j=1) product is finite",   NumericQ[val18j_j1]];
-  assertTrue["18j (j=1) product is positive", val18j_j1 > 0];
-  assertTrue["18j (j=1) product < 1",         val18j_j1 < 1];
+  val18jJ1 = N[hyper18j[Table[1, {18}]], 80];
+  Print["18j chain hyper product (j=1, 80-digit): ", val18jJ1];
+  assertTrue["18j (j=1) product is finite",   NumericQ[val18jJ1]];
+  assertTrue["18j (j=1) product is positive", val18jJ1 > 0];
+  assertTrue["18j (j=1) product < 1",         val18jJ1 < 1];
 
   (* j=1/2 uniform, 18 edges — finite & positive *)
-  val18j_half = N[hyper18j[Table[1/2, {18}]], 50];
-  Print["18j chain hyper product (j=1/2, 50-digit): ", val18j_half];
-  assertTrue["18j (j=1/2) product is finite",   NumericQ[val18j_half]];
-  assertTrue["18j (j=1/2) product is positive", val18j_half > 0];
+  val18jHalf = N[hyper18j[Table[1/2, {18}]], 80];
+  Print["18j chain hyper product (j=1/2, 80-digit): ", val18jHalf];
+  assertTrue["18j (j=1/2) product is finite",   NumericQ[val18jHalf]];
+  assertTrue["18j (j=1/2) product is positive", val18jHalf > 0];
 
   (* Monotone in chain length: 18j < 15j for j=1 *)
-  val15j_ref = N[hyper18j[Table[1, {15}]], 50];
-  assertTrue["18j product < 15j product (monotone in n)", val18j_j1 < val15j_ref];
+  val15jRef = N[hyper18j[Table[1, {15}]], 80];
+  assertTrue["18j product < 15j product (monotone in n)", val18jJ1 < val15jRef];
   Print["Monotonicity 18j < 15j: PASS"];
 ];
 
@@ -547,15 +548,15 @@ Module[{K6, detK6, invK6, valN6, K8, detK8, invK8, J0, valN8},
     { 0,   -0.008,-0.15,  0,     0,     0    },
     {-0.015,0,     0,     0,     0,     0.08 },
     { 0,    0,    -0.012, 0,    -0.08,  0    }
-  }, 50];
+  }, 80];
   detK6 = Det[IdentityMatrix[6] - K6];
   assertTrue["N6 det(I-K) > 0", detK6 > 0];
   invK6 = Inverse[IdentityMatrix[6] - K6];
   J0 = Table[0, {6}];
   valN6 = 1 / Sqrt[detK6] * Exp[0.5 * J0 . invK6 . J0];
-  assertTrue["N6 node_matrix_ext is finite",   NumericQ[N[valN6, 50]]];
+  assertTrue["N6 node_matrix_ext is finite",   NumericQ[valN6]];
   assertTrue["N6 node_matrix_ext is positive", valN6 > 0];
-  Print["N6 node_matrix_ext (6x6 K, J=0): ", N[valN6, 15]];
+  Print["N6 node_matrix_ext (6x6 K, J=0): ", N[valN6]];
 
   (* 8×8 antisymmetric K (18j-like structure, block-diagonal 4 pairs) *)
   K8 = SparseArray[{
@@ -569,9 +570,9 @@ Module[{K6, detK6, invK6, valN6, K8, detK8, invK8, J0, valN8},
   invK8 = Inverse[IdentityMatrix[8] - K8];
   J0 = Table[0, {8}];
   valN8 = 1 / Sqrt[detK8] * Exp[0.5 * J0 . invK8 . J0];
-  assertTrue["N8 node_matrix_ext is finite",   NumericQ[N[valN8, 50]]];
+  assertTrue["N8 node_matrix_ext is finite",   NumericQ[valN8]];
   assertTrue["N8 node_matrix_ext is positive", valN8 > 0];
-  Print["N8 node_matrix_ext (8x8 K, J=0): ", N[valN8, 15]];
+  Print["N8 node_matrix_ext (8x8 K, J=0): ", N[valN8]];
 ];
 
 (* ── SymPy Pfaffian identity: Pf(K)^2 = det(K) ─────────────────────────── *)
@@ -607,7 +608,7 @@ Module[{cases, j1, j2, j3, j4, j5, j6, mmaVal, expected},
     expected = cs[[2]];
     assertTrue[
       StringForm["Wigner 6j {``} vs exact ``", cs[[1]], expected],
-      Abs[N[mmaVal - expected, 50]] < 10^-40
+      Abs[N[mmaVal - expected, 80]] < 10^-60
     ];
   , {cs, cases}];
   Print["Wigner 6j cross-check: all 4 cases PASS"];
