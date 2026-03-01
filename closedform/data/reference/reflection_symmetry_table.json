@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "edge_count": 7,
+    "precision": 50,
+    "tolerance": 1e-08,
+    "version": "1.0"
+  },
+  "symmetry_checks": [
+    {
+      "j": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "is_symmetric": true,
+      "difference": "4.5324044950002770512705509947071615982339366011671e-19",
+      "difference_float": 4.532404495000277e-19,
+      "is_palindromic": false
+    },
+    {
+      "j": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "is_symmetric": true,
+      "difference": "0.0",
+      "difference_float": 0.0,
+      "is_palindromic": true
+    },
+    {
+      "j": [
+        2,
+        3,
+        1,
+        4,
+        2,
+        1,
+        3
+      ],
+      "is_symmetric": true,
+      "difference": "0.00000000013783436312100080010758321938410539733564427102952",
+      "difference_float": 1.378343631210008e-10,
+      "is_palindromic": false
+    },
+    {
+      "j": [
+        1,
+        2,
+        3,
+        4,
+        3,
+        2,
+        1
+      ],
+      "is_symmetric": true,
+      "difference": "0.0",
+      "difference_float": 0.0,
+      "is_palindromic": true
+    },
+    {
+      "j": [
+        0.5,
+        1.5,
+        2.5,
+        1.5,
+        0.5,
+        0,
+        0
+      ],
+      "is_symmetric": false,
+      "difference": "0.00017153982835619295515005069068231781197340910345985",
+      "difference_float": 0.00017153982835619295,
+      "is_palindromic": false
+    }
+  ]
+}

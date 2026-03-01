@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/su2_3nj_closedform/__init__.py
+src/su2_3nj_closedform/coefficient_calculator.py
+src/su2_3nj_closedform/symmetry.py
+src/su2_3nj_closedform.egg-info/PKG-INFO
+src/su2_3nj_closedform.egg-info/SOURCES.txt
+src/su2_3nj_closedform.egg-info/dependency_links.txt
+src/su2_3nj_closedform.egg-info/requires.txt
+src/su2_3nj_closedform.egg-info/top_level.txt
+tests/test_coefficient_calculator.py
+tests/test_symmetry.py

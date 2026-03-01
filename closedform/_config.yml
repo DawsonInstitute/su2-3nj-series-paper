@@ -1,0 +1,20 @@
+title: "A Closed-Form Hypergeometric Product Formula for General SU(2) 3nj Recoupling Coefficients"
+description: "A mathematical physics paper on SU(2) 3nj recoupling coefficients"
+author: "Arcticoder"
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+
+# GitHub Pages settings
+github:
+  is_project_page: true
+  repository_url: https://github.com/DawsonInstitute/su2-3nj-closedform
+
+# Other settings
+permalink: pretty
+exclude: ["README.md", "Gemfile", "Gemfile.lock", "*.tex", "*.aux", "*.log", "index.html"]
