@@ -1,17 +1,18 @@
 # SU(2) 3n-j Series — Active TODO
 
-**Last updated**: 2026-03-01  
+**Last updated**: 2026-03-02  
 **Status**: Phase 4 complete. Repo consolidated at `su2-3nj-unified-framework`.  
-**Target journal**: SIGMA (primary), JPA (backup).
+**Target journal**: SIGMA (primary), JPA (backup).  
+*(SIGMA format tasks deferred to pre-submission pass.)*
 
 ---
 
-## S1. Paper: SIGMA format finalisation
-- [ ] Download `sigma.cls` (not in TeX Live; add to `papers/paper/` before final submission)
-  - Source: https://www.emis.de/journals/SIGMA/tex/sigma.zip
-- [ ] Verify keywords and MSC 2020 codes (81R05, 33C05, 22E70, 05C70) against SIGMA author guidelines
-
 ## V3. Validation: extended spin range
-- [ ] Add 15j/18j spot checks (mpmath 50-digit precision)
+- [x] 15j chain spot checks — `hyper15j` in `scripts/verify_python.py`, Wolfram cross-check in `scripts/verify_wolfram.wls` (2026-03-02)
+- [ ] 18j spot checks (mpmath 50-digit precision) — not yet implemented
 - [ ] Extend N6+ validation (derivative API, higher-valence nodes)
 - [ ] SymPy Pfaffian/Regge cross-verification
+
+## L1. Lean: replace axioms with proofs
+- [ ] `thm4_det_func` — awaits Mathlib `Matrix.Pfaffian` + formal power series
+- [ ] `chainCouplingData.matchRatio_pos` — awaits `fib` positivity lemmas in Mathlib

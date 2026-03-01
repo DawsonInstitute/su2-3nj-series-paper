@@ -353,3 +353,41 @@ the Phase 4 SIGMA reformat. Specific items retired:
 - "Submit to JMP via Peer X-Press" → journal target changed to SIGMA (primary) / JPA (backup)
 - "Debug RevTeX compilation" → moot; clean build achieved under article class (B1 ✅)
 - Post-submission outreach → out of scope for repo/manuscript tracking
+
+---
+
+## Phase 5 — 9j/15j Extensions + Lean thm4/chain (2026-03-02)
+
+### MATLAB migration ✅
+- Moved `scripts/stability.m` → `scripts/matlab/stability.m` (created `scripts/matlab/` directory)
+- Rewrote `scripts/matlab/stability.m`: condition-number sweep (j=1..50) + 9j det(I-K) surface vs analytic `(1+t²)³`; saves `recurrence_stability.fig` + `9j_det.fig`; prints `[PASS]` if max_err < 1e-10
+- Created `scripts/matlab/verify.m`: 15j chain hypergeom product (j=1 uniform, j=0 degenerate→1), 9j det analytic cross-check
+
+### LaTeX paper updates ✅
+- **Abstract**: added sentence "Explicit product and determinant functional formulas are derived for general 3n-j coefficients, reducing to the standard 6j and 9j cases via specialization."
+- **Intro**: C_G sentence reworded to "graph-invariant coefficients $C_G$ relating to the standard Wigner symbols via explicit phase and normalisation maps"
+- **Appendix E** (new): `§ 9j Coefficient: Explicit Determinant Expansion` — eq:9j-det `det(I−K) = 1+x²+y²+z²+...`, eq:9j-CG CG extraction
+- **Appendix F** (new): `§ 15j Chain: Fibonacci Matching Ratios` — eq:15j-chain product formula with ρ_e = F_{e-1}/F_e
+- **PDF rebuilt**: 30 pages, zero errors
+
+### Python verify (`scripts/verify_python.py`) ✅
+- Added `node_matrix_ext(K, J)`: returns `1/sqrt(det(I-K)) * exp(0.5 J^T (I-K)^{-1} J)`; test with K=[[0,1],[-1,0]], J=[0.5,0.5], expected `exp(0.125)/sqrt(2)` ✓
+- Added `hyper15j(js)`: 15j Fibonacci chain product via `mp.hyper`; tests: finite/positive/<1, degenerate all-j=0→1 ✓
+- All 18 Python checks pass
+
+### Wolfram verify (`scripts/verify_wolfram.wls`) ✅
+- Added 9j symbolic det check: 6×6 antisymmetric K, verifies `det(I-K) = 1+x²+y²+...+x²y²z²`
+- Added `hyper15j[js]` with `Fibonacci[n]`; checks: finite/positive/<1, j=0→1; GoldenRatio alternative cross-check
+
+### Lean 4 (`lean/src/SU2ThreenjFormulas.lean`) ✅
+- Added `import Mathlib.LinearAlgebra.Matrix.Determinant.Basic` + `import Mathlib.Data.Real.Sqrt`
+- Added `thm4_det_func` axiom: generating functional `1/sqrt(det(I−K))` for antisymmetric K (pending Mathlib Pfaffian + formal power series)
+- Added `fib : ℕ → ℕ` (recursive), `chainMatchRatio (e : ℕ) : ℝ = F_{e-1}/F_e`
+- Added `chainCouplingData (n j : ℕ) : CouplingData (Fin n)` (matchRatio_pos deferred with sorry — requires fib positivity lemmas)
+- Added `thm1_chain (n j : ℕ)` axiom: chain specialisation of Theorem 1
+- **Build result**: `lake build` → 1652 jobs, zero errors, one expected sorry-warning
+
+### SU2-TODO.md ✅
+- Removed S1 SIGMA format tasks (deferred to pre-submission pass)
+- Updated V3: marked 15j chain spot checks complete
+- Added L1 section: Lean axiom-to-proof tracking

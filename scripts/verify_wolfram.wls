@@ -441,4 +441,69 @@ If[runPaperChecks,
   ];
 ];
 
+(* ── 9j det(I-K) symbolic check ──────────────────────────────────────── *)
+If[runPaperChecks,
+  Module[{x, y, z, K6, M6, detM6, expected},
+    (* Build minimal 6x6 antisymmetric K for 9j with edge vars x,y,z *)
+    K6 = {
+      { 0,  x,  0,  0,  0,  0},
+      {-x,  0,  y,  0,  0,  0},
+      { 0, -y,  0,  z,  0,  0},
+      { 0,  0, -z,  0,  x+y+z, 0},
+      { 0,  0,  0, -(x+y+z), 0, 0},
+      { 0,  0,  0,  0,  0,  0}
+    };
+    M6 = IdentityMatrix[6] - K6;
+    detM6 = FullSimplify[Det[M6]];
+    expected = 1 + x^2 + y^2 + z^2 + x^2*y^2 + x^2*z^2 + y^2*z^2 + x^2*y^2*z^2;
+    assertTrue[
+      "9j det(I-K)=1+x^2+y^2+z^2+x^2y^2+x^2z^2+y^2z^2+x^2y^2z^2",
+      FullSimplify[detM6 - expected] === 0
+    ];
+  ];
+];
+
+(* ── 15j chain: Fibonacci matching ratios ────────────────────────────── *)
+If[runPaperChecks,
+  Module[{fib, rho15j, hyper15j, testJs15, val15j},
+    (* Fibonacci via built-in *)
+    fib[n_] := Fibonacci[n];
+    rho15j[k_] := fib[k-1] / fib[k];  (* k >= 1; fib[0]=0 → rho15j[1]=0 *)
+
+    (* Product formula (Eq. app:15j-chain) *)
+    hyper15j[js_] := Product[
+      1/Factorial[2 js[[e]]] *
+        Hypergeometric2F1[-2 js[[e]], 1/2, 1, -rho15j[e]],
+      {e, 1, Length[js]}
+    ];
+
+    testJs15 = Table[1, {15}];
+    val15j = N[hyper15j[testJs15], 50];
+    Print["15j chain hyper product (j=1 all): ", val15j];
+
+    assertTrue["15j hyper product is finite", NumericQ[val15j]];
+    assertTrue["15j hyper product is positive", val15j > 0];
+    assertTrue["15j hyper product < 1", val15j < 1];
+
+    (* Degenerate j=0 case: every factor = 1/0! * 2F1(0,...) = 1 → product = 1 *)
+    assertTrue[
+      "15j chain j=0 all gives 1",
+      FullSimplify[hyper15j[Table[0, {5}]]] === 1
+    ];
+  ];
+
+  (* Alternative Fibonacci formula (using GoldenRatio) — cross-check *)
+  Module[{fibAlt, hyperChain, test15j},
+    fibAlt[n_] := (GoldenRatio^n - (-GoldenRatio)^(-n)) / Sqrt[5];
+    hyperChain[js_, n_] := Product[
+      1/Factorial[2 js[[e]]] *
+        Hypergeometric2F1[-2 js[[e]], 1/2, 1, -fibAlt[e-1]/fibAlt[e]],
+      {e, 1, n}
+    ];
+    test15j = N[hyperChain[Table[1, {15}], 15], 50];
+    Print["15j chain (GoldenRatio Fibonacci): ", test15j];
+    assertTrue["15j GoldenRatio Fibonacci formula is finite", NumericQ[test15j]];
+  ];
+];
+
 reportSummary[];

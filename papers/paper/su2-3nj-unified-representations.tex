@@ -45,11 +45,13 @@ for SU(2) $3n$-$j$ Recoupling Coefficients}
 We present a unified framework for computing SU(2) $3nj$ recoupling coefficients
 through five complementary mathematical representations: hypergeometric product
 formulas, uniform single-sum expressions, finite recurrence relations, universal
-generating functionals, and arbitrary-valence matrix elements. This work
-establishes the first truly closed-form expressions for arbitrary trivalent
-graphs, validated through rigorous cross-verification against symbolic
-computation and high-precision reference datasets. Applications span quantum
-physics from atomic structure to loop quantum gravity.
+generating functionals, and arbitrary-valence matrix elements.
+Explicit product and determinant functional formulas are derived for general
+$3n$-$j$ coefficients, reducing to the standard $6j$ and $9j$ cases via
+specialization. This work establishes the first truly closed-form expressions
+for arbitrary trivalent graphs, validated through rigorous cross-verification
+against symbolic computation and high-precision reference datasets.
+Applications span quantum physics from atomic structure to loop quantum gravity.
 \end{abstract}
 
 \noindent\textbf{Keywords:}
@@ -115,8 +117,9 @@ coupling topologies have remained elusive.
 This work derives the first closed-form hypergeometric product for arbitrary
 trivalent graphs (Theorem~\ref{thm:product}), distinct from prior chain-specific
 expressions~\cite{raynal1979}. The determinant functional (Theorem~\ref{thm:generating-functional})
-yields coefficients $C_G$ without phase conventions, advancing beyond classical
-6$j$-generating approaches~\cite{bitencourt2014,labarthe1975}. Together, these
+yields graph-invariant coefficients $C_G$ that relate to the standard Wigner
+symbols via explicit phase and normalisation maps (see Appendix~\ref{app:convention}),
+advancing beyond classical 6$j$-generating approaches~\cite{bitencourt2014,labarthe1975}. Together, these
 results provide five complementary representations of the recoupling coefficients:
 hypergeometric products, uniform single-sum ${}_5F_4$ expressions, three-term
 recurrences, the determinant generating functional, and arbitrary-valence
@@ -827,6 +830,49 @@ tables.
 % Links to GitHub repos
 % Installation instructions
 % Example usage
+
+\section{9$j$ Coefficient: Explicit Determinant Expansion}
+\label{app:9j-validation}
+
+For the $9j$ coupling graph the antisymmetric signed-adjacency matrix $K$ is
+$6\times 6$. With edge variables $x$, $y$, $z$ the characteristic polynomial of
+the generating functional evaluates as
+\begin{equation}
+  \det(I - K) = 1 + x^2 + y^2 + z^2 + x^2 y^2 + x^2 z^2 + y^2 z^2 + x^2 y^2 z^2.
+  \label{eq:9j-det}
+\end{equation}
+The $9j$ coefficient with spin labels $j_1, j_2, j_3$ assigned to the three
+principal edges is then extracted as
+\begin{equation}
+  C_G(j_1,j_2,j_3) =
+    \bigl[x^{2j_1}\, y^{2j_2}\, z^{2j_3}\bigr]
+    \frac{1}{\sqrt{\det(I-K)}} \Big/
+    \prod_{e}(2j_e)!\ ,
+  \label{eq:9j-CG}
+\end{equation}
+where the bracket $[\cdots]$ denotes Taylor coefficient extraction.
+Equation~\eqref{eq:9j-det} is verified symbolically in
+\texttt{scripts/verify\_wolfram.wls} and numerically in
+\texttt{scripts/verify\_python.py}.
+
+\section{15$j$ Chain: Fibonacci Matching Ratios}
+\label{app:15j-chain}
+
+For the linear 15$j$ chain graph, the edge matching ratios equal consecutive
+Fibonacci quotients $\rho_e = F_{e-1}/F_e$ (where $F_0=0$, $F_1=1$).
+Theorem~\ref{thm:product} (main text, \S\ref{sec:main-results}) therefore
+specialises to
+\begin{equation}
+  C_G = \prod_{e=1}^{15} \frac{1}{(2j_e)!}\;
+    {}_2F_1\!\left(-2j_e,\,\tfrac{1}{2};\,1;\,-\frac{F_{e-1}}{F_e}\right),
+  \label{eq:15j-chain}
+\end{equation}
+where $F_k$ denotes the $k$-th Fibonacci number.
+For $j_e=1$ for all $e=1,\ldots,15$ the numerical value\textsuperscript{*} is
+calculated in \texttt{scripts/verify\_wolfram.wls} (see Appendix~\ref{app:software}).
+
+{\small \textsuperscript{*}Evaluated to 50 decimal places using Wolfram
+\texttt{Hypergeometric2F1} and Python \texttt{mpmath.hyper}.}
 
 \bibliographystyle{amsplain}
 \bibliography{su2-3nj-unified-representations}

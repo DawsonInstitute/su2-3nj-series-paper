@@ -372,6 +372,75 @@ def run() -> int:
     rhs = racah_6j(b2, a2, c2, e2, d2, f2)
     assert_close("6j symmetry swap (a<->b, d<->e)", lhs, rhs, tol)
 
+    # ── Node-matrix extended generating functional ────────────────────────
+    # For K antisymmetric 2x2: K = [[0,1],[-1,0]], det(I-K) = 1+1 = 2,
+    # so 1/sqrt(det(I-K)) = 1/sqrt(2).  With J=[0.5,0.5]:
+    #   exp(0.5 * J^T (I-K)^{-1} J) / sqrt(det(I-K))
+    # (I-K)^{-1} = [[1,-1],[1,1]]/2, J^T (I-K)^{-1} J = (0.25-0.25+0.25+0.25)/2 = 0.25
+    # => exp(0.125) / sqrt(2)
+
+    import numpy as _np
+
+    def node_matrix_ext(K: "_np.ndarray", J: "_np.ndarray") -> "_np.ndarray":
+        """Schwinger-boson node generating functional (real, small matrices).
+
+        Returns  1/sqrt(det(I-K)) * exp(0.5 * J^T (I-K)^{-1} J).
+        Ref: §6 of the companion paper.
+        """
+        n = len(K)
+        ImK = _np.eye(n) - K
+        d = _np.linalg.det(ImK)
+        inv = _np.linalg.inv(ImK)
+        return (1.0 / _np.sqrt(d)) * _np.exp(0.5 * J @ inv @ J)
+
+    K_test = _np.array([[0.0, 1.0], [-1.0, 0.0]])
+    J_test = _np.array([0.5, 0.5])
+    nm_val = node_matrix_ext(K_test, J_test)
+    nm_expected = _np.exp(0.125) / _np.sqrt(2.0)
+    assert abs(nm_val - nm_expected) < 1e-12, (
+        f"node_matrix_ext: got {nm_val}, expected {nm_expected}"
+    )
+    print(f"[PASS] node_matrix_ext(K_test, J_test) = {nm_val:.10f} (expected {nm_expected:.10f})")
+
+    # ── 15j chain: Fibonacci matching ratios ──────────────────────────────
+    # C_G = prod_{e=1}^{15}  1/(2j_e)! * 2F1(-2j_e, 1/2; 1; -F_{e-1}/F_e)
+    # For j_e=1 all e: each factor = 1/2! * 2F1(-2, 1/2; 1; -F_{e-1}/F_e)
+    # 2F1(-2, 1/2; 1; z) = 1 - z + z^2/4 (truncated at a=-2).
+    # Verified to 50 dps in verify_wolfram.wls.
+
+    phi = mp.mpf("1.6180339887498948482045868343656381177203091798058")
+
+    def fib_mp(n: int) -> mp.mpf:
+        """Golden-ratio Fibonacci (exact for integer n >= 0)."""
+        if n == 0:
+            return mp.mpf(0)
+        return (phi ** n - (-phi) ** (-n)) / mp.sqrt(5)
+
+    def hyper15j(js: list) -> mp.mpf:
+        """Hypergeometric product formula for the 15j chain (Eq. (app:15j-chain))."""
+        prod = mp.mpf(1)
+        for idx, j in enumerate(js, start=1):  # e = 1..len(js)
+            rho = fib_mp(idx - 1) / fib_mp(idx)
+            twoj = int(round(2 * j))
+            factor = mp.mpf(1) / mp.factorial(twoj) * mp.hyper(
+                [-mp.mpf(twoj), mp.mpf("0.5")], [mp.mpf(1)], -rho
+            )
+            prod *= factor
+        return prod
+
+    js15 = [mp.mpf(1)] * 15
+    val_15j = hyper15j(js15)
+    # Basic sanity checks: value must be finite, positive, and < 1
+    assert mp.isfinite(val_15j), "15j hyper product is not finite"
+    assert val_15j > 0, f"15j hyper product is non-positive: {val_15j}"
+    assert val_15j < 1, f"15j hyper product >= 1: {val_15j}"
+    print(f"[PASS] 15j chain hyper product (j=1 all): {mp.nstr(val_15j, 15)}")
+
+    # Degenerate case: j=0 for all → each 2F1(-0,...) = 1, factorial = 1 → product = 1
+    js_zero = [mp.mpf(0)] * 5
+    val_zero = hyper15j(js_zero)
+    assert_close("15j chain with all j=0 gives 1", val_zero, mp.mpf(1), tol)
+
     print("\nAll Python checks passed.")
     return 0
 

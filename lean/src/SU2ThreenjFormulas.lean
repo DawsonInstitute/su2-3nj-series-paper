@@ -1,8 +1,10 @@
--- SU(2) 3nj Unified Framework — Lean 4 formal support for Theorem 1
+-- SU(2) 3nj Unified Framework — Lean 4 formal support for Theorems 1 & 4
 -- imports MUST precede the module docstring in Lean 4
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Factorial.Basic
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.Data.Real.Sqrt
 import Mathlib.Data.Fintype.Basic
 
 /-!
@@ -207,5 +209,91 @@ theorem corollary_reCouplingCoeff_zero_spins {E : Type*} [Fintype E]
       matchRatio_pos := hρ } = 1 := by
   rw [thm1_hypergeometric_product]
   exact hypergeometricProduct_zero_spins ρ hρ
+
+end SU2ThreenjFormulas
+
+/-!
+## Theorem 4 — Determinant Generating Functional (stub)
+
+**Theorem 4** (Universal Generating Functional). For a trivalent graph $G$
+with antisymmetric signed-adjacency matrix $K(\{x_e\})$:
+$$
+G(\{x_e\}) = \frac{1}{\sqrt{\det(I - K(\{x_e\}))}}
+$$
+and the recoupling coefficient is the Taylor coefficient extraction of
+$G$ at $\prod_e x_e^{2j_e}$.
+
+The Lean proof requires formalizing:
+1. The Schwinger-boson Gaussian integral over $\mathbb{C}^2$-valued spinors.
+2. The Pfaffian identity $\text{Pf}(K)^2 = \det(K)$ for antisymmetric $K$.
+3. Taylor coefficient extraction from a formal power series in $\{x_e\}$.
+
+These depend on Mathlib additions not yet available (Pfaffian, formal multivariate
+power series).  The theorem is therefore stated as an axiom pending those additions.
+-/
+namespace SU2ThreenjFormulas
+
+open Matrix in
+/-- The generating functional axiom: for the antisymmetric adjacency matrix `K`
+    (depending on edge variables), the Schwinger-boson integral gives
+    `1 / sqrt(det(I - K))`.
+
+    **Lean TODO**: Replace axiom with proof once Mathlib formalizes
+    - `Matrix.Pfaffian` and the identity `Pf(K)^2 = det(K)`.
+    - Formal multivariate power series with coefficient extraction.
+
+    Analytic proof: companion paper §5 (Gaussian spinor integral over $\mathbb{C}^2$). -/
+axiom thm4_det_func {n : ℕ} (K : Matrix (Fin n) (Fin n) ℝ)
+    (h_antisym : ∀ i j, K i j = -K j i) :
+    ∃ (gen_func : (Fin n → ℝ) → ℝ),
+      ∀ x, gen_func x = 1 / Real.sqrt ((1 - K).det)
+
+/-!
+## Theorem 1, Chain Specialisation (stub)
+
+For the **linear $n$-chain graph**, the matching ratios are Fibonacci quotients
+$\rho_e = F_{e-1}/F_e$ (with $F_0=0$, $F_1=1$).
+Theorem~1 therefore specialises to
+$$
+C_G = \prod_{e=1}^{n} \frac{1}{(2j_e)!}
+  \cdot {}_2F_1\!\left(-2j_e,\,\tfrac{1}{2};\,1;\,-\frac{F_{e-1}}{F_e}\right).
+$$
+-/
+
+/-- Fibonacci numbers (0-indexed: `fib 0 = 0`, `fib 1 = 1`). -/
+def fib : ℕ → ℕ
+  | 0 => 0
+  | 1 => 1
+  | (n + 2) => fib (n + 1) + fib n
+
+/-- Matching ratio for the chain graph at edge `e` (1-indexed):
+    `ρ_e = F_{e-1} / F_e` as a real number.
+    For `e = 1` this is `0 / 1 = 0`. -/
+noncomputable def chainMatchRatio (e : ℕ) : ℝ :=
+  (fib (e - 1) : ℝ) / (fib e : ℝ)
+
+/-- Chain coupling data for an `n`-edge linear graph with uniform spins `j`. -/
+noncomputable def chainCouplingData (n : ℕ) (j : ℕ) : CouplingData (Fin n) where
+  twiceSpin  := fun _ => 2 * j
+  matchRatio := fun e => chainMatchRatio (e.val + 1)
+  matchRatio_pos := by
+    intro ⟨e, _he⟩
+    -- chainMatchRatio (e.val + 1) = fib e.val / fib (e.val + 1).
+    -- Positivity requires fib(k) > 0 for k ≥ 1 (fib(0) = 0 is handled by
+    -- the denominator fib(e.val+1) ≥ 1).  Deferred pending fib lemmas.
+    sorry
+
+/-- **Theorem 1 — Chain case**: The recoupling coefficient for the linear
+    $n$-chain graph with uniform spin $j$ is the product of hypergeometric
+    factors with Fibonacci matching ratios.
+
+    This is the specialisation of `thm1_hypergeometric_product` (Theorem 1)
+    to the chain graph.  The proof is `thm1_hypergeometric_product` applied
+    to `chainCouplingData`, pending the positivity sorry above. -/
+axiom thm1_chain (n : ℕ) (j : ℕ) :
+    reCouplingCoeff (chainCouplingData n j) =
+    ∏ e : Fin n,
+      (1 / (Nat.factorial (2 * j) : ℝ)) *
+      hyp2F1 (-(2 * j : ℝ)) (1 / 2 : ℝ) 1 (-chainMatchRatio (e.val + 1))
 
 end SU2ThreenjFormulas

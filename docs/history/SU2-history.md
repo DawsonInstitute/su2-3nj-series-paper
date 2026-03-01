@@ -2159,3 +2159,22 @@ Done. Here's the state:
 The stale `su2-3nj-series-paper/docs/SU2-TODO.md` (the file your editor was showing) now just says "this is a stale copy, see `su2-3nj-unified-framework/`".
 <!-- ------ -->
 ---
+All done. Here's the summary of what was completed this session:
+
+**Lean** — Fixed build (`import Mathlib.Data.Real.Sqrt` added, unused `simp` removed). Clean: 1652 jobs, zero errors, one expected `sorry` warning.
+
+**LaTeX PDF** — Rebuilt clean, 30 pages. New appendices (9j det expansion, 15j Fibonacci chain) + abstract/intro updates visible.
+
+**Python** — 18 checks pass, including new `node_matrix_ext` and `hyper15j` functions.
+
+**docs/SU2-TODO.md** — S1 SIGMA tasks removed. V3 updated (15j done). New L1 section tracks Lean axiom→proof work.
+
+**docs/SU2-TODO-completed.md** — Phase 5 block appended.
+
+**Commit `1617aa8`** pushed: 10 files changed, 506 insertions, 72 deletions.
+
+**Remaining open items** (in SU2-TODO.md):
+- V3: 18j spot checks, N6+ validation, SymPy Pfaffian cross-check
+- L1: `thm4_det_func` proof (awaits Mathlib Pfaffian), `matchRatio_pos` proof (awaits `fib` positivity lemmas)
+<!-- ------ -->
+---
