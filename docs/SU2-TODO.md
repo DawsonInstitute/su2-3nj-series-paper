@@ -1,7 +1,87 @@
 # SU(2) 3n-j Series — Submission-Ready TODO
 
-**Date Added/Last Major Update**: 2026-02-02  
-**Objective**: Immediate arXiv upload and JMP submission via Peer X-Press. Use status for UBC applications.
+**Date Added/Last Major Update**: 2026-03-01 (repo renamed to su2-3nj-unified-framework)
+**Objective**: arXiv upload and journal submission (SIGMA primary, JPA backup). Repo consolidated.
+
+---
+
+## Phase 4: Consolidation & SIGMA Submission (Added 2026-03-01)
+
+### R1. Repository rename & remote update
+- [x] GitHub repo renamed from `su2-3nj-series-paper` → `su2-3nj-unified-framework`
+- [ ] Update git remote: `git remote set-url origin git@github.com:DawsonInstitute/su2-3nj-unified-framework.git`
+- [ ] Rename local clone: `mv su2-3nj-series-paper su2-3nj-unified-framework`
+- [ ] Update energy.code-workspace: path & name entries for this repo + remove merged sub-repo entries
+
+### R2. Merge 5 sub-repos as subdirectories (preserve history via git subtree)
+```bash
+# From su2-3nj-unified-framework/:
+git subtree add --prefix=generating-functional /home/echo_/Code/asciimath/su2-3nj-generating-functional main --squash
+git subtree add --prefix=uniform-closed-form   /home/echo_/Code/asciimath/su2-3nj-uniform-closed-form   main --squash
+git subtree add --prefix=node-matrix-elements  /home/echo_/Code/asciimath/su2-node-matrix-elements       main --squash
+git subtree add --prefix=closedform            /home/echo_/Code/asciimath/su2-3nj-closedform             main --squash
+git subtree add --prefix=recurrences           /home/echo_/Code/asciimath/su2-3nj-recurrences            main --squash
+```
+- [ ] Run above; verify each subtree compiles independently
+
+### R3. Update README.md (unified framework description)
+- [ ] Replace repo description with unified-framework wording (see §1 of specification)
+- [ ] List subdirectories: generating-functional, uniform-closed-form, node-matrix-elements, closedform, recurrences
+
+### P1. Switch paper format from AIP/JMP RevTeX → standard article (SIGMA-compatible)
+- [ ] Change `\documentclass[aip,jmp,amsmath,amssymb,reprint]{revtex4-2}` → `\documentclass[12pt]{article}`
+- [ ] Add `\usepackage{amsmath,amssymb,amsthm}`, move theorem envs to preamble
+- [ ] Remove `\pacs{}`, `\affiliation{}`, `\email{}`; rewrite author line with `\thanks{}`
+- [ ] Change `\bibliographystyle{aipnum4-2}` → `\bibliographystyle{amsplain}`
+- [ ] Add `% MSC 2020: 81R05, 33C05, 22E70, 05C70` comment to preamble
+- [ ] Remove `\section*{Author Declarations}` block (not required by SIGMA)
+- [ ] Update GitHub URLs: `su2-3nj-series-paper` → `su2-3nj-unified-framework`
+
+### P2. Add Main Results section (after \maketitle, before Introduction)
+```latex
+\section{Main Results}
+\subsection{Theorem 1: Closed-Form Hypergeometric Product}
+...
+\subsection{Theorem 4: Universal Generating Functional}
+...
+```
+- [ ] Insert as specified in §3 of request
+
+### P3. Rewrite Introduction with novelty focus
+- [ ] Replace comment-only placeholder with full Introduction prose
+- [ ] Lead with Theorem 1 + Theorem 4 novelty statement
+- [ ] Include new `\cite{aquilanti2014}` reference (add to .bib)
+
+### P4. Add 6j convention example §(C_G vs Wigner)
+```latex
+C_G(1/2,1/2,1,1/2,1/2,1) = -1/6  (up to convention map: (-1)^{phase} sqrt{(2j3+1)(2j6+1)})
+```
+- [ ] Add to Appendix (after cross-verification)
+- [ ] Add `aquilanti2014` to bib
+
+### V1. Lean 4 formal support for Theorem 1
+- [ ] Create `lean/` directory in unified framework; add `lakefile.lean` (Mathlib v4.27.0)
+- [ ] Write `lean/src/SU2ThreenjFormulas.lean`: types, axioms, proved lemmas (no sorry, no warnings)
+- [ ] `lake build` should succeed
+
+### V2. MATLAB stability script
+- [ ] Create `scripts/stability.m` (recurrence condition-number sweep, j=1..50)
+- [ ] Run `matlab -batch "stability"` or equivalent; save figures
+
+### B1. Build verification
+- [ ] `cd papers/paper && pdflatex + bibtex + pdflatex × 2`; check for errors
+- [ ] Verify PDF: ~17 pages, Main Results section present, SIGMA-compatible format
+
+### S1. Journal target update (JMP → SIGMA)
+- [ ] Revise all "JMP" mentions in TODO and cover letter template
+- [ ] Primary: SIGMA (Symmetry, Integrability and Geometry: Methods and Applications)
+- [ ] Backup: Journal of Physics A (IOP, no APC)
+- [ ] Download sigma.cls when available (currently not in TeX Live on this machine)
+
+---
+
+**Date Added/Last Major Update (original)**: 2026-02-02  
+**Objective (original)**: Immediate arXiv upload and JMP submission via Peer X-Press. Use status for UBC applications.
 
 ## Current Status Summary (2026-02-02 Final Update)
 
