@@ -1,0 +1,6 @@
+{"task":"Numeric validation of hypergeometric closed-form SU(2) 3nj","priority":"High","depends_on":"C:\\Users\\%USERNAME%\\Code\\asciimath\\su2-3nj-generating-functional\\VnV-TODO.ndson"}
+{"task":"Regression test against reference hypergeometric data","priority":"High","depends_on":"C:\\Users\\%USERNAME%\\Code\\asciimath\\su2-3nj-generating-functional\\VnV-TODO.ndson"}
+{"task":"Symmetry relation checks for closed-form representation","priority":"Medium"}
+{"task":"Domain validation of hypergeometric parameters","priority":"Low"}
+{"task":"Performance benchmark vs generating functional","priority":"Medium","depends_on":"C:\\Users\\%USERNAME%\\Code\\asciimath\\su2-3nj-generating-functional\\VnV-TODO.ndson"}
+{"task":"Recursion relation cross-check for closed form","priority":"Medium","depends_on":"C:\\Users\\%USERNAME%\\Code\\asciimath\\su2-3nj-generating-functional\\VnV-TODO.ndson"}

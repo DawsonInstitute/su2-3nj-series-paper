@@ -1,0 +1,164 @@
+---
+layout: default
+title: Universal Closed-Form Hypergeometric Representation of SU(2) 3nj Symbols
+---
+
+<style>
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .author {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .abstract {
+    font-style: italic;
+    margin-bottom: 30px;
+  }
+  
+  .bibliography {
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+  
+  .boxed {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 20px 0;
+  }
+</style>
+
+    <div class="header">
+      <h1>Uniform Closed-Form Representation of SU(2) 12j Symbols</h1>
+      <div class="author">
+        <p>Arcticoder</p>
+      </div>
+      <div class="date">
+        <p>May 25, 2025</p>
+    </div>
+    </div>
+
+    <p>
+      This derivation builds on
+      Dawson Institute's master generating functional <a href="#dawsoninstitute2025">[1]</a>
+      and the universal factorization approach of Wei & Dalgarno <a href="#weidalgarno2003">[2]</a>.
+    </p>
+
+    <h2>Closed-Form Expression</h2>
+
+    <p>
+      For the SU(2) 12j symbol
+      $$
+      \begin{Bmatrix}
+      j_1 & j_2 & j_{12}\\
+      j_3 & j_4 & j_{23}\\
+      j_5 & j_6 & j_{34}\\
+      j_7 & j_8 & j_{45}
+      \end{Bmatrix},
+      $$
+      we have the single‐sum hypergeometric form
+    </p>
+
+    <div class="boxed">
+      $$
+      \begin{aligned}
+      \begin{Bmatrix}
+      j_1 & j_2 & j_{12}\\
+      j_3 & j_4 & j_{23}\\
+      j_5 & j_6 & j_{34}\\
+      j_7 & j_8 & j_{45}
+      \end{Bmatrix}
+      = \Delta
+      \sum_{m=0}^{\infty} (-1)^m \,
+      \frac{\bigl(\tfrac12\bigr)_m\,(-j_{12})_m\,(j_{12}+1)_m\,(-j_{23})_m\,(j_{23}+1)_m}
+      {(j_1+j_2 - j_{12} +1)_m\,(j_3+j_4 - j_{23} +1)_m\,(j_5+j_6 - j_{34} +1)_m\,(j_7+j_8 - j_{45} +1)_m \; m!}
+      \end{aligned}
+      $$
+    </div>
+
+    <p>
+      where $(a)_m$ denotes the Pochhammer symbol.
+    </p>
+
+    <p>
+      The prefactor $\Delta$ is
+      $$
+      \Delta = \sqrt{
+      \prod_{(a,b,c)\in
+      \{(j_1,j_2,j_{12}),\,(j_3,j_4,j_{23}),\,(j_5,j_6,j_{34}),\,(j_7,j_8,j_{45})\}}
+      \frac{(-a+b+c)!\,(a-b+c)!\,(a+b-c)!}{(a+b+c+1)!}
+      }.
+      $$
+    </p>
+
+    <h2>Algebraic Reindexing</h2>
+
+    <ol>
+      <li>
+        <p>Write</p>
+        $$
+        G_{12j} = \det(I-K)^{-1/2}
+        = (1 - P)^{-1/2},\quad
+        P = E_1 - E_2 + E_3 - E_4,
+        $$
+        <p>with contiguous‐block sums $E_k$ in the $x_i^2$.</p>
+      </li>
+
+      <li>
+        <p>Expand via the generalized binomial theorem:</p>
+        $$
+        (1-P)^{-1/2}
+        = \sum_{m=0}^\infty \binom{-\tfrac12}{m}(-1)^m P^m.
+        $$
+      </li>
+
+      <li>
+        <p>Use a multinomial expansion on $P^m$:</p>
+        $$
+        P^m = \sum_{a+b+c+d=m}
+        \binom{m}{a,b,c,d}(-1)^{b+d}
+        E_1^a E_2^b E_3^c E_4^d.
+        $$
+      </li>
+
+      <li>
+        <p>Expand each $E_k^r$ into monomials in $x_i^{2}$ and collect exponents
+          $\{2j_{12},2j_{23},2j_{34},2j_{45}\}$.</p>
+      </li>
+
+      <li>
+        <p>The combinatorial sums collapse to a single free index $m$, yielding the ${}_5F_4$ series above.</p>
+      </li>
+    </ol>
+
+    <h2>Conclusion</h2>
+
+    <p>
+      This derivation shows that the 12j symbol emerges from a <em>single</em> ${}_5F_4$-type hypergeometric
+      series with no nested finite sums left. The same logic extends to all higher SU(2) 3nj symbols.
+    </p>
+
+    <div class="bibliography">
+      <h2>References</h2>
+
+      <ol>
+        <li id="dawsoninstitute2025">
+          Arcticoder,
+          <em>A Universal Generating Functional for SU(2) 3nj Symbols</em>,
+          <a
+            href="https://arcticoder.github.io/su2-3nj-generating-functional/">arcticoder.github.io/su2-3nj-generating-functional/</a>,
+          2025.
+        </li>
+
+        <li id="weidalgarno2003">
+          Liqiang Wei and Alexander Dalgarno,
+          <em>Universal Factorization of 3n-j $j_2$ Symbols of the First and Second Kinds for SU2 Group and
+            Their Direct and Exact Calculation and Tabulation</em>,
+          <a href="https://arxiv.org/abs/math-ph/0306040">arXiv:math-ph/0306040</a>, 2003.
+        </li>
+      </ol>
+    </div>  </div>

@@ -1,0 +1,31 @@
+# Jekyll site
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler files
+.bundle/
+vendor/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Compiled LaTeX files
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+.github/instructions/copilot-instructions.md
+
+.github/
+
+**/*.pyc
