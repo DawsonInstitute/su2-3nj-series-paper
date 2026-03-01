@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "precision": 50,
+    "num_trials_per_config": 5,
+    "description": "Timing analysis for varying edge counts and spin magnitudes"
+  },
+  "edge_count_scaling": [
+    {
+      "edge_count": 3,
+      "j": [
+        1,
+        1,
+        1
+      ],
+      "mean_time_ms": 0.3815614036284387,
+      "min_time_ms": 0.10062998626381159,
+      "max_time_ms": 1.3953709858469665,
+      "num_trials": 5
+    },
+    {
+      "edge_count": 5,
+      "j": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean_time_ms": 0.19924999214708805,
+      "min_time_ms": 0.13335095718502998,
+      "max_time_ms": 0.2819820074364543,
+      "num_trials": 5
+    },
+    {
+      "edge_count": 7,
+      "j": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean_time_ms": 0.21100620506331325,
+      "min_time_ms": 0.1859010080806911,
+      "max_time_ms": 0.25227601872757077,
+      "num_trials": 5
+    },
+    {
+      "edge_count": 9,
+      "j": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean_time_ms": 0.2645705942995846,
+      "min_time_ms": 0.2352629671804607,
+      "max_time_ms": 0.2932429779320955,
+      "num_trials": 5
+    },
+    {
+      "edge_count": 11,
+      "j": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean_time_ms": 0.39059638511389494,
+      "min_time_ms": 0.28545799432322383,
+      "max_time_ms": 0.47229096526280046,
+      "num_trials": 5
+    }
+  ],
+  "spin_magnitude_scaling": [
+    {
+      "max_j": 1,
+      "j": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mean_time_ms": 0.29796179151162505,
+      "min_time_ms": 0.20242203027009964,
+      "max_time_ms": 0.46529696555808187,
+      "num_trials": 5
+    },
+    {
+      "max_j": 2,
+      "j": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "mean_time_ms": 0.23565239971503615,
+      "min_time_ms": 0.21119799930602312,
+      "max_time_ms": 0.2824029652401805,
+      "num_trials": 5
+    },
+    {
+      "max_j": 5,
+      "j": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "mean_time_ms": 0.24414379149675372,
+      "min_time_ms": 0.21531496895477176,
+      "max_time_ms": 0.32574398210272193,
+      "num_trials": 5
+    },
+    {
+      "max_j": 10,
+      "j": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "mean_time_ms": 0.3304489771835506,
+      "min_time_ms": 0.2921510022133589,
+      "max_time_ms": 0.3761089756153524,
+      "num_trials": 5
+    },
+    {
+      "max_j": 15,
+      "j": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ],
+      "mean_time_ms": 0.36746879341080785,
+      "min_time_ms": 0.277993967756629,
+      "max_time_ms": 0.5009849555790424,
+      "num_trials": 5
+    }
+  ]
+}

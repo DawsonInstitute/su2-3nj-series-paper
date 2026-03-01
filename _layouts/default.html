@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Times New Roman", Times, serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1, h2, h3 {
+        font-family: "Times New Roman", Times, serif;
+        margin-top: 1.5em;
+      }
+      .abstract {
+        font-style: italic;
+        border-left: 4px solid #ccc;
+        padding-left: 15px;
+        margin: 20px 0;
+      }
+      .bibliography {
+        margin-top: 30px;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+      }
+      .bibliography p {
+        text-indent: -2em;
+        padding-left: 2em;
+        margin-bottom: 10px;
+      }
+    </style>
+</head>
+<body>
+    {{ content }}
+</body>
+</html>

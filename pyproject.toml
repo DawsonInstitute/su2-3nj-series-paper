@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "su2_3nj_closedform"
+version = "0.1.0"
+description = "Closed-form hypergeometric product formula for SU(2) 3nj symbols"
+authors = [
+  { name="Arcticoder" }
+]
+readme = "README.md"
+license = { text = "Unlicense" }
+dependencies = [
+  "mpmath>=1.2",
+  "pandas>=1.5",
+  "sympy>=1.10"
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["su2_3nj_closedform*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
