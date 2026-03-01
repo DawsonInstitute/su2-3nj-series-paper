@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "name": "su2-3nj-recurrences",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/venv": true,
+      "**/__pycache__": true,
+      "**/.git": true,
+      "**/.pytest_cache": true,
+      "**/.venv": true,
+      "**/node_modules": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-vscode.cpptools",
+      "james-yu.latex-workshop"
+    ]
+  }
+}
