@@ -1,0 +1,24 @@
+name: "Pentagon Identity ∑(−1)^(J+x)(2x+1)… = …"
+
+on:
+  push:
+    paths:
+      # only when the generating-functional code or this test file changes
+      - 'src/su2_3nj_gen/generating_functional.py'
+      - 'tests/test_biedenharn_elliott_identity.py'
+  workflow_dispatch: {}
+  
+jobs:
+  pentagon:
+    name: "Verify Pentagon Identity"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with: { python-version: "3.x" }
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install pytest
+      - name: Run pentagon identity test
+        run: pytest tests/test_biedenharn_elliott_identity.py -vv -s

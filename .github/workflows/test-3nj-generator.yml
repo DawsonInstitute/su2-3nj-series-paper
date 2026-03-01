@@ -1,0 +1,24 @@
+name: "3nj Generator vs Reference Dataset"
+
+on:
+  push:
+    paths:
+      - 'src/su2_3nj_gen/generating_functional.py'
+      - 'tests/reference_3nj.json'
+      - 'tests/test_generate_3nj.py'
+  workflow_dispatch: {}
+
+jobs:
+  three_nj:
+    name: "Verify 3nj Generator vs Reference"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with: { python-version: "3.x" }
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install pytest
+      - name: Run 3nj generator test
+        run: pytest tests/test_generate_3nj.py -vv -s
