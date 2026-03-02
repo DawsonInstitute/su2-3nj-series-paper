@@ -38,3 +38,5 @@ papers/**/test-build/
 
 Supplementary_Material_JMP26-AR-00306.zip
 papers/paper/Cover_Letter_JMP26-AR-00306.pdf.docx
+
+scripts/matlab/external/**/*
