@@ -15,4 +15,4 @@
 
 ## L1. Lean: replace axioms with proofs
 - [ ] `thm4_det_func` — awaits Mathlib `Matrix.Pfaffian` + formal power series
-- [ ] `chainCouplingData.matchRatio_pos` — awaits `fib` positivity lemmas in Mathlib
+- [x] `chainCouplingData.matchRatio_nonneg` — discharged by weakening the coupling-data assumption to `0 ≤ ρ` (chain has `ρ₁ = 0`)

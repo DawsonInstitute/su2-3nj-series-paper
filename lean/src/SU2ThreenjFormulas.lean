@@ -2,6 +2,7 @@
 -- imports MUST precede the module docstring in Lean 4
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Factorial.Basic
+import Mathlib.Data.Nat.Fib.Basic
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Data.Real.Sqrt
@@ -102,8 +103,12 @@ structure CouplingData (E : Type*) [Fintype E] where
   twiceSpin  : E → ℕ
   /-- Matching ratio $\rho_e = M_e^+ / M_e^- \in \mathbb{R}$. -/
   matchRatio : E → ℝ
-  /-- Matching ratios are positive (both components have at least one matching). -/
-  matchRatio_pos : ∀ e, 0 < matchRatio e
+  /-- Matching ratios are nonnegative.
+
+  This is the minimal analytic assumption needed for the terminating
+  hypergeometric factors in Theorem 1. (In particular, for the chain
+  specialisation one has \(\rho_1 = 0\), so strict positivity is false.) -/
+  matchRatio_nonneg : ∀ e, 0 ≤ matchRatio e
 
 /-!
 ## The Hypergeometric Product (RHS of Theorem 1)
@@ -145,11 +150,11 @@ theorem hypergeometricProduct_empty (d : CouplingData (Fin 0)) :
     Proof: $(2 \cdot 0)! = 0! = 1$ and ${}_2F_1(0, 1/2; 1; -\rho) = 1$
     by `hyp2F1_first_arg_zero`, so every factor is $1 \cdot 1 = 1$. -/
 theorem hypergeometricProduct_zero_spins {E : Type*} [Fintype E]
-    (ρ : E → ℝ) (hρ : ∀ e, 0 < ρ e) :
+    (ρ : E → ℝ) (hρ : ∀ e, 0 ≤ ρ e) :
     hypergeometricProduct {
       twiceSpin  := fun _ => 0,
       matchRatio := ρ,
-      matchRatio_pos := hρ } = 1 := by
+      matchRatio_nonneg := hρ } = 1 := by
   simp [hypergeometricProduct, hyp2F1_first_arg_zero]
 
 /-!
@@ -202,11 +207,11 @@ theorem corollary_reCouplingCoeff_empty (d : CouplingData (Fin 0)) :
 /-- **Corollary**: For any graph with all spins zero, the recoupling coefficient
     equals 1 (trivial coupling: no recoupling needed). -/
 theorem corollary_reCouplingCoeff_zero_spins {E : Type*} [Fintype E]
-    (ρ : E → ℝ) (hρ : ∀ e, 0 < ρ e) :
+    (ρ : E → ℝ) (hρ : ∀ e, 0 ≤ ρ e) :
     reCouplingCoeff (E := E) {
       twiceSpin  := fun _ => 0,
       matchRatio := ρ,
-      matchRatio_pos := hρ } = 1 := by
+      matchRatio_nonneg := hρ } = 1 := by
   rw [thm1_hypergeometric_product]
   exact hypergeometricProduct_zero_spins ρ hρ
 
@@ -259,29 +264,27 @@ C_G = \prod_{e=1}^{n} \frac{1}{(2j_e)!}
   \cdot {}_2F_1\!\left(-2j_e,\,\tfrac{1}{2};\,1;\,-\frac{F_{e-1}}{F_e}\right).
 $$
 -/
-
-/-- Fibonacci numbers (0-indexed: `fib 0 = 0`, `fib 1 = 1`). -/
-def fib : ℕ → ℕ
-  | 0 => 0
-  | 1 => 1
-  | (n + 2) => fib (n + 1) + fib n
-
 /-- Matching ratio for the chain graph at edge `e` (1-indexed):
     `ρ_e = F_{e-1} / F_e` as a real number.
     For `e = 1` this is `0 / 1 = 0`. -/
 noncomputable def chainMatchRatio (e : ℕ) : ℝ :=
-  (fib (e - 1) : ℝ) / (fib e : ℝ)
+  (Nat.fib (e - 1) : ℝ) / (Nat.fib e : ℝ)
 
 /-- Chain coupling data for an `n`-edge linear graph with uniform spins `j`. -/
 noncomputable def chainCouplingData (n : ℕ) (j : ℕ) : CouplingData (Fin n) where
   twiceSpin  := fun _ => 2 * j
   matchRatio := fun e => chainMatchRatio (e.val + 1)
-  matchRatio_pos := by
+  matchRatio_nonneg := by
     intro ⟨e, _he⟩
-    -- chainMatchRatio (e.val + 1) = fib e.val / fib (e.val + 1).
-    -- Positivity requires fib(k) > 0 for k ≥ 1 (fib(0) = 0 is handled by
-    -- the denominator fib(e.val+1) ≥ 1).  Deferred pending fib lemmas.
-    sorry
+    -- For the chain specialisation we always have nonnegative Fibonacci values,
+    -- hence the ratio is nonnegative (even at `e = 0`, where it is `0/1 = 0`).
+    dsimp [chainMatchRatio]
+    exact div_nonneg
+      (by
+        -- `Nat.fib (e + 1 - 1)` is a natural number.
+        exact_mod_cast (Nat.zero_le (Nat.fib (e + 1 - 1))))
+      (by
+        exact_mod_cast (Nat.zero_le (Nat.fib (e + 1))))
 
 /-- **Theorem 1 — Chain case**: The recoupling coefficient for the linear
     $n$-chain graph with uniform spin $j$ is the product of hypergeometric

@@ -2204,8 +2204,28 @@ All clean. Summary of what was fixed, commit `816b4ca` pushed:
 - Result: `=== Summary === All checks passed.` with zero warnings
 
 **MATLAB** (verify.m, stability.m) — 3 issues fixed:
-- `hypergeom` requires Symbolic Toolbox (not available); replaced with inline `hyp2f1_neg_int()` local function implementing the finite `2F1(-n, 0.5; 1; z)` Pochhammer series
+- `hypergeom` originally tripped a Symbolic Toolbox dependency; kept a toolbox-free inline `hyp2f1_neg_int()` (finite `2F1(-n, 0.5; 1; z)` Pochhammer series) for portability even when Symbolic is installed
 - Both scripts had wrong K6 matrix (path-chain with `a+b+c` entry); fixed to block-diagonal
 - stability.m Part 2 `savefig` hung in headless batch mode; removed second figure, keeping the numeric `[PASS]` output
+<!-- ------ -->
+---
+**Done in this repo (unblocked Lean L1 item)**
+
+- Fixed the `chainCouplingData` blocker by correcting the *assumption*, not by waiting on Mathlib: the chain has \(\rho_1 = 0\), so strict positivity (`0 < ρ`) is false. `CouplingData` now requires `0 ≤ ρ`, which makes the chain specialization provable and removes the last `sorry`.
+- Switched the chain specialization to Mathlib’s Fibonacci (`Nat.fib`) instead of a local `fib` definition.
+- Verified: `lake build` now completes successfully (1653 jobs).
+
+Changes are in:
+- SU2ThreenjFormulas.lean
+- SU2-TODO.md (marked the chain item done; only `thm4_det_func` remains)
+- SU2-history.md (corrected the “Symbolic Toolbox not available” note; kept the portability rationale)
+
+**About “create Matrix.Pfaffian / power series / fib positivity in Mathlib”**
+
+- Fibonacci positivity lemmas already exist in your Mathlib fork (e.g. `Nat.fib_pos` in Basic.lean).
+- Formal multivariate power series infrastructure already exists (`MvPowerSeries` and friends).
+- What’s genuinely missing is `Matrix.Pfaffian` (I found no `Pfaffian` hits in Mathlib).
+
+Also: even if `Matrix.Pfaffian` existed tomorrow, it **still wouldn’t** magically discharge `thm4_det_func` (you’d still need to formalize the Gaussian/spinor integral path to `1 / sqrt(det(I-K))`).
 <!-- ------ -->
 ---
