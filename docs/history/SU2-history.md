@@ -2229,3 +2229,20 @@ Changes are in:
 Also: even if `Matrix.Pfaffian` existed tomorrow, it **still wouldn’t** magically discharge `thm4_det_func` (you’d still need to formalize the Gaussian/spinor integral path to `1 / sqrt(det(I-K))`).
 <!-- ------ -->
 ---
+Completed: *Commit and push all changes* (7/7)
+
+Phase 5 pushed to `main` (`8f66ea8..0b354ac`). Here's the summary of what was done:
+
+**Lean** — `chainCouplingData` and `thm1_chain` generalized from uniform spin `j : ℕ` to per-edge `js : Fin n → ℕ`; `chainCouplingDataUniform` wrapper retained for backward compatibility. Build: 1653 jobs, 0 errors, 0 sorry.
+
+**MATLAB** — verify.m switched from the portable `hyp2f1_neg_int` series to `hypergeom()` (Symbolic Math Toolbox R2025b) as the primary path. The fallback is kept as a commented block. All 3 checks still pass.
+
+**Paper** — Both su2-3nj-unified-representations.tex and the arXiv copy already had the correct wording from the previous session:  
+- Abstract: *"Explicit product and det functional formulas are given for general $3n$-$j$ coefficients, reducing to the $6j$ and $9j$ cases via specialization."*  
+- Intro: *"$C_G$ provides graph-invariant coefficients, relating to the standard Wigner symbols via explicit normalization maps."*
+
+**All tests green**: Python 29/29, Wolfram all PASS, MATLAB verify 3/3, MATLAB stability 2/2.
+
+**Only open item remaining**: `thm4_det_func` — blocked on `Matrix.Pfaffian` not yet being in Mathlib.
+<!-- ------ -->
+---

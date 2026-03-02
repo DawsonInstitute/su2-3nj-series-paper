@@ -1,9 +1,21 @@
 # SU(2) 3n-j Series — Active TODO
 
-**Last updated**: 2026-03-02  
-**Status**: Phase 4 complete. Repo consolidated at `su2-3nj-unified-framework`.  
+**Last updated**: 2026-03-01  
+**Status**: Phase 5 complete. Lean generalized, MATLAB on Symbolic Toolbox, paper wording finalized.  
 **Target journal**: SIGMA (primary), JPA (backup).  
 *(SIGMA format tasks deferred to pre-submission pass.)*
+
+---
+
+## P1. Paper wording (Phase 5)
+- [x] Abstract: updated to "Explicit product and det functional formulas are given for general $3n$-$j$ coefficients, reducing to the $6j$ and $9j$ cases via specialization." (2026-03-01)
+- [x] Intro: standalone sentence added — "$C_G$ provides graph-invariant coefficients, relating to the standard Wigner symbols via explicit normalization maps (see Appendix~\ref{app:convention})." (2026-03-01)
+
+## L2. Lean: generalize thm1_chain to per-edge spins
+- [x] `chainCouplingData` now takes `js : Fin n → ℕ`; `thm1_chain` axiom updated to per-edge; `chainCouplingDataUniform` convenience wrapper preserved; `lake build` clean 1653 jobs 0 errors 0 sorry (2026-03-01)
+
+## M1. MATLAB: restore hypergeom now Symbolic Toolbox confirmed available
+- [x] `scripts/matlab/verify.m` updated: `hypergeom` (Symbolic Math Toolbox R2025b) is now the primary path; `hyp2f1_neg_int` retained as a commented portability fallback; all 3 MATLAB checks pass (2026-03-01)
 
 ---
 

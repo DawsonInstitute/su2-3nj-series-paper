@@ -254,15 +254,16 @@ axiom thm4_det_func {n : ℕ} (K : Matrix (Fin n) (Fin n) ℝ)
       ∀ x, gen_func x = 1 / Real.sqrt ((1 - K).det)
 
 /-!
-## Theorem 1, Chain Specialisation (stub)
+## Theorem 1, Chain Specialisation
 
 For the **linear $n$-chain graph**, the matching ratios are Fibonacci quotients
 $\rho_e = F_{e-1}/F_e$ (with $F_0=0$, $F_1=1$).
 Theorem~1 therefore specialises to
 $$
 C_G = \prod_{e=1}^{n} \frac{1}{(2j_e)!}
-  \cdot {}_2F_1\!\left(-2j_e,\,\tfrac{1}{2};\,1;\,-\frac{F_{e-1}}{F_e}\right).
+  \cdot {}_2F_1\!\left(-2j_e,\,\tfrac{1}{2};\,1;\,-\frac{F_{e-1}}{F_e}\right),
 $$
+where each edge $e$ may carry a **different** spin $j_e$.
 -/
 /-- Matching ratio for the chain graph at edge `e` (1-indexed):
     `ρ_e = F_{e-1} / F_e` as a real number.
@@ -270,33 +271,43 @@ $$
 noncomputable def chainMatchRatio (e : ℕ) : ℝ :=
   (Nat.fib (e - 1) : ℝ) / (Nat.fib e : ℝ)
 
-/-- Chain coupling data for an `n`-edge linear graph with uniform spins `j`. -/
-noncomputable def chainCouplingData (n : ℕ) (j : ℕ) : CouplingData (Fin n) where
-  twiceSpin  := fun _ => 2 * j
+/-- Chain coupling data for an `n`-edge linear graph with
+    **per-edge** twice-spin assignments `js : Fin n → ℕ`.
+
+    `js e = 2 * j_e` for each edge `e`. -/
+noncomputable def chainCouplingData (n : ℕ) (js : Fin n → ℕ) : CouplingData (Fin n) where
+  twiceSpin  := js
   matchRatio := fun e => chainMatchRatio (e.val + 1)
   matchRatio_nonneg := by
     intro ⟨e, _he⟩
-    -- For the chain specialisation we always have nonnegative Fibonacci values,
-    -- hence the ratio is nonnegative (even at `e = 0`, where it is `0/1 = 0`).
+    -- Fibonacci values are natural numbers, hence nonneg.
+    -- At e = 0 the numerator is Nat.fib 0 = 0 → ratio is 0 (≥ 0 is fine).
     dsimp [chainMatchRatio]
     exact div_nonneg
-      (by
-        -- `Nat.fib (e + 1 - 1)` is a natural number.
-        exact_mod_cast (Nat.zero_le (Nat.fib (e + 1 - 1))))
-      (by
-        exact_mod_cast (Nat.zero_le (Nat.fib (e + 1))))
+      (by exact_mod_cast (Nat.zero_le (Nat.fib (e + 1 - 1))))
+      (by exact_mod_cast (Nat.zero_le (Nat.fib (e + 1))))
 
-/-- **Theorem 1 — Chain case**: The recoupling coefficient for the linear
-    $n$-chain graph with uniform spin $j$ is the product of hypergeometric
+/-- Convenience: chain coupling data with **uniform** spin `j` on every edge.
+
+    This is `chainCouplingData n (fun _ => 2 * j)`.
+    Retained for backward compatibility with prior formalisations. -/
+noncomputable def chainCouplingDataUniform (n : ℕ) (j : ℕ) : CouplingData (Fin n) :=
+  chainCouplingData n (fun _ => 2 * j)
+
+/-- **Theorem 1 — Chain case (per-edge spins)**:
+    The recoupling coefficient for the linear $n$-chain graph with per-edge
+    twice-spin assignments `js : Fin n → ℕ` is the product of hypergeometric
     factors with Fibonacci matching ratios.
 
-    This is the specialisation of `thm1_hypergeometric_product` (Theorem 1)
-    to the chain graph.  The proof is `thm1_hypergeometric_product` applied
-    to `chainCouplingData`, pending the positivity sorry above. -/
-axiom thm1_chain (n : ℕ) (j : ℕ) :
-    reCouplingCoeff (chainCouplingData n j) =
+    This is the full-generality specialisation of `thm1_hypergeometric_product`
+    to the chain graph; individual edge spins `j_e = js e / 2` may differ.
+
+    **Lean TODO**: Replace axiom with proof once `thm1_hypergeometric_product`
+    is promoted from axiom to theorem (requires Mathlib hypergeometric library). -/
+axiom thm1_chain (n : ℕ) (js : Fin n → ℕ) :
+    reCouplingCoeff (chainCouplingData n js) =
     ∏ e : Fin n,
-      (1 / (Nat.factorial (2 * j) : ℝ)) *
-      hyp2F1 (-(2 * j : ℝ)) (1 / 2 : ℝ) 1 (-chainMatchRatio (e.val + 1))
+      (1 / (Nat.factorial (js e) : ℝ)) *
+      hyp2F1 (-(js e : ℝ)) (1 / 2 : ℝ) 1 (-chainMatchRatio (e.val + 1))
 
 end SU2ThreenjFormulas

@@ -6,6 +6,10 @@
 %
 % where F_k is the k-th Fibonacci number.
 %
+% Requires Symbolic Math Toolbox (R2025b) for hypergeom().
+% A toolbox-free fallback hyp2f1_neg_int() is retained for portability
+% reference but is no longer the primary path.
+%
 % Reference: Appendix F of:
 %   "Unified Closed-Form Representations and Generating Functionals
 %    for SU(2) 3n-j Recoupling Coefficients"
@@ -34,8 +38,8 @@ for e = 1:15
     end
     j_e   = js(e);
     twoj  = 2 * j_e;
-    % 2F1(-2j, 0.5; 1; -rho) via finite series (no Symbolic Toolbox needed)
-    h = hyp2f1_neg_int(twoj, -rho);
+    % Use Symbolic Math Toolbox hypergeom for accurate 2F1(-2j, 0.5; 1; -rho)
+    h = double(hypergeom([-twoj, 0.5], 1, -rho));
     prod_val = prod_val * (1 / factorial(twoj)) * h;
 end
 
@@ -54,7 +58,7 @@ js0 = zeros(1, 5);
 prod0 = 1;
 for e = 1:5
     rho = (e > 1) * fib(e-1) / fib(e);
-    h   = hyp2f1_neg_int(2*js0(e), -rho);
+    h   = double(hypergeom([-2*js0(e), 0.5], 1, -rho));
     prod0 = prod0 * (1 / factorial(2*js0(e))) * h;
 end
 if abs(prod0 - 1) < 1e-12
@@ -96,11 +100,12 @@ else
 end
 
 % =========================================================================
-% Local function: 2F1(-n, 0.5; 1; z) for non-negative integer n.
-% The (-n) Pochhammer symbol kills the series at k=n so it is a polynomial.
+% Portability fallback: 2F1(-n, 0.5; 1; z) for non-negative integer n.
+% Not used above (Symbolic Toolbox hypergeom is the primary path), but
+% retained here for environments without the Toolbox.
+% Usage: h = hyp2f1_neg_int(n, z)
 function h = hyp2f1_neg_int(n, z)
     % Compute 2F1(-n, 0.5; 1; z) via finite series (n terms).
-    % Recurrence: T_{k+1} = T_k * (-n+k)*(0.5+k) / (k+1)^2 * z
     n = round(n);  % ensure integer
     h    = 0;
     term = 1;
